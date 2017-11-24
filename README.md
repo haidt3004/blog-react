@@ -1,4 +1,4 @@
-# React Codebase
+# React Blog
 
 ## Introduction
 

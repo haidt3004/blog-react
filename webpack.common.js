@@ -1,21 +1,22 @@
-const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
+const path = require('path');
+const outputDir = path.resolve(__dirname, 'server', 'dist')
 
 module.exports = {
   entry: {
     app: './src/index.js'
   },
   output: {
-    path: path.resolve(__dirname, 'server', 'dist'),
+    path: outputDir,
     filename: 'bundle.js',
     publicPath: '/'
   },
   plugins: [
-    new CleanWebpackPlugin(['dist']),
+    new CleanWebpackPlugin([outputDir]),
     new HtmlWebpackPlugin({
-      title: 'React Codebase',
+      title: 'React Blog',
       favicon: './src/favicon.ico',
       template: './src/index.html'
     }),

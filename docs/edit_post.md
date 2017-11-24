@@ -1,0 +1,17 @@
+### Test case for feature edit post
+- when user click edit button in post list page, show post edit page
+  - show loading indicator
+  - send get post request to server
+      - if request fail
+          - show error message
+      - if request success
+          - display posts in the form
+- when user click save
+  - show loading indicator
+  - send save post request on server
+  - if request fail
+    - show error message
+    - show validation errors
+  - if request success
+    - show success alert
+    - go to post list page

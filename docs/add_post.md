@@ -1,0 +1,12 @@
+### Test case for feature add post
+- when user click add button in post list page, show post edit page
+- show post form with blank value
+- when user click save
+  - show loading indicator
+  - send save post request on server
+  - if request fail
+    - show error message
+    - show validation errors
+  - if request success
+    - show success alert
+    - go to post list page

@@ -22,3 +22,9 @@ This project perform the following tasks:
 - Automatically refresh browser on file change with `webpack-dev-server`
 
 ### Api server (ExpressJs)
+
+## Install
+
+``` bash
+npm install -g nodemon
+```

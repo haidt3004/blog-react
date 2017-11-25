@@ -4,8 +4,8 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 import 'font-awesome/css/font-awesome.min.css'
 
 import React, { Component } from 'react'
-import CrudDemo from './crud/CrudDemo'
+import Blog from './blog/Module'
 
-const App = () => (<CrudDemo/>)
+const App = () => (<Blog/>)
 
 export default App

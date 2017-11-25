@@ -14,7 +14,7 @@ import PostListPage from './containers/PostListPage'
 import PostEditPage from './containers/PostEditPage'
 import MainLayout from './components/MainLayout'
 
-const CrudDemo = () => (
+const Module = () => (
   <Provider store={store}>
     <Router history={browserHistory}>
       <MainLayout>
@@ -29,4 +29,4 @@ const CrudDemo = () => (
   </Provider>
 )
 
-export default CrudDemo
+export default Module

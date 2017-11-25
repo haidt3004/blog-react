@@ -11,7 +11,8 @@ http.interceptors.response.use(
         if (error.response) {
             // The request was made and the server responded with a status code
             // that falls out of the range of 2xx
-            error.message = response.data.message
+            let data = error.response.data
+            error.message = typeof data==='string' ? data : data.message
         } else if (error.request) {
             // The request was made but no response was received
             error.message = 'Error while connecting to server.'

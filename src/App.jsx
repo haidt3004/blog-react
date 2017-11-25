@@ -5,7 +5,8 @@ import 'font-awesome/css/font-awesome.min.css'
 
 import React, { Component } from 'react'
 import Blog from './blog/Module'
+import AuthExample from './auth/AuthExample'
 
-const App = () => (<Blog/>)
+const App = () => (<AuthExample/>)
 
 export default App

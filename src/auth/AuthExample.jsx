@@ -6,6 +6,9 @@ import {
   Redirect,
   withRouter
 } from 'react-router-dom'
+import user from './auth'
+import LoginPage from './LoginPage'
+import DashboardPage from './DashboardPage'
 
 ////////////////////////////////////////////////////////////
 // 1. Click the public page
@@ -15,115 +18,28 @@ import {
 
 const AuthExample = () => (
   <Router>
-    <div>
+    <div className="container">
       <AuthButton/>
       <ul>
         <li><Link to="/public">Public Page</Link></li>
-        <li><Link to="/protected">Protected Page</Link></li>
+        <li><Link to="/admin">Admin Page</Link></li>
       </ul>
       <Route path="/public" component={Public}/>
-      <Route path="/login" component={Login}/>
-      <PrivateRoute path="/protected" component={Protected}/>
+      <Route path="/login" component={LoginPage}/>
+      <Route path="/admin" component={DashboardPage}/>
     </div>
   </Router>
 )
 
-/*
-<Route path="/admin" component={AdminDashBoard} />
-const AdminDashBoard = () => <h3>Admin Dashboard</h3>
-export default authorizationRequired(AdminDashBoard, 'admin')
-function authorizationRequired(Component, role) {
-  user = fakeAuth
-  const render = props => {
-    if (user.isAuthenticated) {
-      return user.role===role ?
-        <Component {...props}/> :
-        <ErrorPage message="You don't have permissions to access this page" />
-      }}/>
-    } else {
-      return <Redirect to={{
-        pathname: '/login',
-        state: { from: props.location }
-      }}/>
-    }
-  }
-
-  return <Route {...rest} render={render}/>
-}
-*/
-
-const PrivateRoute = ({ component: Component, ...rest }) => {
-  const render = props => {
-    if (fakeAuth.isAuthenticated) {
-      return <Component {...props}/>
-    } else {
-      return <Redirect to={{
-        pathname: '/login',
-        state: { from: props.location }
-      }}/>
-    }
-  }
-
-  return <Route {...rest} render={render}/>
-}
-
-class Login extends React.Component {
-
-  constructor(props) {
-    super(props)
-    this.login = this.login.bind(this)
-    this.state = {
-      redirectToReferrer: false
-    }
-  }
-
-  login() {
-    fakeAuth.authenticate(() => {
-      this.setState({ redirectToReferrer: true })
-    })
-  }
-
-  render() {
-    const { from } = this.props.location.state || { from: { pathname: '/' } }
-    const { redirectToReferrer } = this.state
-
-    if (redirectToReferrer) {
-      return (
-        <Redirect to={from}/>
-      )
-    }
-
-    return (
-      <div>
-        <p>You must log in to view the page at {from.pathname}</p>
-        <button onClick={this.login}>Log in</button>
-      </div>
-    )
-  }
-}
-
-const fakeAuth = {
-  isAuthenticated: false,
-  role: 'guest',
-  authenticate(cb) {
-    this.isAuthenticated = true
-    setTimeout(cb, 100) // fake async
-  },
-  signout(cb) {
-    this.isAuthenticated = false
-    setTimeout(cb, 100)
-  }
-}
-
 const AuthButton = withRouter(({ history }) => (
-  fakeAuth.isAuthenticated ? (
+  user.isGuest() ? (
+    <p>You are not logged in.</p>
+  ): (
     <p>
-      Welcome! <button onClick={() => {
-        fakeAuth.signout(() => history.push('/'))
+      Welcome! {user.name} <button onClick={() => {
+        user.logout().then(() => history.push('/'))
       }}>Sign out</button>
     </p>
-  ) : (
-    <p>You are not logged in.</p>
   )
 ))
 

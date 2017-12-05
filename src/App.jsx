@@ -4,9 +4,8 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 import 'font-awesome/css/font-awesome.min.css'
 
 import React, { Component } from 'react'
-// import Blog from './blog/Module'
-import AuthExample from './auth/AuthExample'
+import ReactRouterRedux from './r3/ReactRouterRedux'
 
-const App = () => (<AuthExample/>)
+const App = () => (<ReactRouterRedux/>)
 
 export default App

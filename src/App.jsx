@@ -4,8 +4,8 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 import 'font-awesome/css/font-awesome.min.css'
 
 import React, { Component } from 'react'
-import ReactRouterRedux from './r3/ReactRouterRedux'
+import Demo from './router/Basic'
 
-const App = () => (<ReactRouterRedux/>)
+const App = () => (<Demo/>)
 
 export default App

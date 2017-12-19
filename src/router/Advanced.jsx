@@ -1,22 +1,18 @@
 import React from 'react'
 import { render } from 'react-dom'
-import { connect, Provider } from 'react-redux'
-import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
-
 import { createStore, applyMiddleware } from 'redux'
+import { connect, Provider } from 'react-redux'
+import { Route, Switch } from 'react-router'
+import { Link } from 'react-router-dom'
+import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
 
-import { Link } from 'react-router-dom'
-import { Route, Switch } from 'react-router'
-
 const history = createHistory()
-
 const store = createStore(
   routerReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
   applyMiddleware(routerMiddleware(history)),
 )
-
 
 const BaseHome = ({goAbout}) => (
   <div>
@@ -32,10 +28,9 @@ const Home = connect(null, dispatch => ({
   }
 }))(BaseHome)
 
-
 const BaseAbout = ({goHome}) => (
   <div>
-    <h1>About</h1>
+    <h1>About 1</h1>
     <p>
     <button type="button" onClick={goHome}>Home</button>
     </p>
@@ -47,8 +42,7 @@ const About = connect(null, dispatch => ({
   }
 }))(BaseAbout)
 
-
-const ReactRouterRedux = () => (
+const Advanced = () => (
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <Switch>
@@ -59,4 +53,4 @@ const ReactRouterRedux = () => (
   </Provider>
 )
 
-export default ReactRouterRedux
+export default Advanced

@@ -8,7 +8,8 @@ module.exports = merge(common, {
     historyApiFallback: true,
     proxy: {
       "/api": "http://localhost:1000"
-    }
+    },
+    port: 1002
   },
   devtool: 'inline-source-map',
   plugins: [

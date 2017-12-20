@@ -1,16 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
 
 const render = Component => {
-  ReactDOM.render(Component, document.getElementById('root'))
+  ReactDOM.render(<Component/>, document.getElementById('root'))
 }
 
-render(<App />)
+render(App)
 
 if (module.hot) {
   module.hot.accept('./App', () => {
-    let NewApp = require('./App').default()
+    let NewApp = require('./App').default
     render(NewApp)
   })
 }

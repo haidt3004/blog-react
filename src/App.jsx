@@ -1,11 +1,23 @@
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap/dist/css/bootstrap-theme.css'
-import 'bootstrap/dist/js/bootstrap.min.js'
-import 'font-awesome/css/font-awesome.min.css'
-
 import React, { Component } from 'react'
-import Demo from './router/Basic'
+import { Provider } from 'react-redux'
+import { Route, Switch } from 'react-router'
+import { ConnectedRouter } from 'react-router-redux'
+import createHistory from 'history/createBrowserHistory'
 
-const App = () => (<Demo/>)
+import store from './store'
+const history = createHistory()
+
+const Home = () => (<p>abc</p>)
+
+const App = () => (
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/about" component={Home} />
+      </Switch>
+    </ConnectedRouter>
+  </Provider>
+)
 
 export default App

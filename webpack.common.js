@@ -2,7 +2,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
-const outputDir = path.resolve(__dirname, 'server', 'dist')
+const outputDir = path.resolve(__dirname, 'server', 'pub')
 
 module.exports = {
   entry: {
@@ -29,13 +29,27 @@ module.exports = {
     new webpack.IgnorePlugin(/\.\/locale$/),
   ],
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
+    // add src directory for resolving module
+    modules: [
+      path.resolve(__dirname, "src"),
+      "node_modules"
+    ]
   },
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            // sourceMap not enabled by default because they expose a runtime overhead and increase in bundle size
+            // options: {
+            //   sourceMap: true
+            // }
+          }
+        ]
       },
       {
         test: /\.(png|svg|jpg|gif)$/,

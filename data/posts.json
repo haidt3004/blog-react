@@ -1,0 +1,23 @@
+[{
+	"_id": {
+		"$oid": "59afd51639363207cf0000aa"
+	},
+	"__v": 0,
+	"title": "post1",
+	"content": "post1 content",
+	"updatedAt": {
+		"$date": "2017-08-30T00:00:00.000Z"
+	}
+},
+{
+	"_id": {
+		"$oid": "59afd51639363207cf00003d"
+	},
+	"__v": 0,
+	"title": "post2",
+	"content": "post2 content",
+	"updatedAt": {
+		"$date": "2017-08-29T00:00:00.000Z"
+	}
+}]
+

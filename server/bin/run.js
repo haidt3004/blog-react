@@ -5,7 +5,7 @@
  */
 
 var app = require('../app');
-var { info } = require('../modules/common/helpers');
+var { logInfo } = require('../modules/common/helpers');
 var http = require('http');
 
 /**
@@ -86,5 +86,5 @@ function onListening() {
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
-  info('Web server listening on ' + bind);
+  logInfo('Web server listening on ' + bind);
 }

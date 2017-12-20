@@ -1,7 +1,7 @@
 {
-  "name": "express-crud",
+  "name": "react-blog-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Api server of react blog project",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,11 +11,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
     "debug": "^3.1.0",
     "dotenv": "^4.0.0",
-    "express": "^4.16.2",
+    "express": "*",
+    "jsonwebtoken": "^8.1.0",
+    "mongoose": "^4.13.7",
     "morgan": "^1.9.0",
+    "ms": "^2.1.1",
     "validate.js": "^0.11.1"
   }
 }

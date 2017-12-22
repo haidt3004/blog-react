@@ -20,20 +20,12 @@ class LoginPage extends Component {
 
   onSubmit(data) {
     this.props.login(data)
-      .then(response => this.setState({ isLogged: true }))
-      .catch(err => null)
-  }
-
-  componentDidMount() {
-    $('body').addClass('login-page')
-  }
-
-  componentWillUnmount() {
-    $('body').removeClass('login-page')
+      .then(() => this.setState({ isLogged: true }))
+      .catch(() => null)
   }
 
   render() {
-    const { data, errors, isLoading, login, setLoginData } = this.props
+    const { data, errors, isLoading, setLoginData } = this.props
 
     if (this.state.isLogged) {
       const from = getObjectValue(this.props, 'location.state.from', { pathname: '/' })
@@ -48,7 +40,7 @@ class LoginPage extends Component {
         <div className="login-box-body">
           <p className="login-box-msg">
             Sign in to start your session
-              {isLoading ? <Spinner /> : null}
+            {isLoading ? <Spinner /> : null}
           </p>
           <Alert />
           <LoginForm data={data} errors={errors} onSubmit={this.onSubmit} onChange={setLoginData} />

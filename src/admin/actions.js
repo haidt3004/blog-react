@@ -1,7 +1,7 @@
 import { createAction } from 'redux-actions'
 import * as common from '../common/actions'
 import { getObjectValue } from '../common/services/helper'
-import { validateLoginData, validateProfileData } from './services/helper'
+import { validateLoginData, validateProfileData } from './helpers'
 
 export const setLoginData = createAction('SET_LOGIN_DATA')
 export const setLoginErrors = createAction('SET_LOGIN_ERRORS')

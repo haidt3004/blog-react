@@ -7,7 +7,7 @@ import * as actions from '../actions'
 import { getObjectValue } from '../../common/services/helper'
 import Spinner from '../../common/widgets/Spinner'
 import Alert from '../../common/widgets/Alert'
-import BaseLayout from '../layouts/BaseLayout'
+import withBaseLayout from '../layouts/withBaseLayout'
 import LoginForm from '../widgets/LoginForm'
 
 class LoginPage extends Component {
@@ -41,21 +41,19 @@ class LoginPage extends Component {
     }
 
     return (
-      <BaseLayout>
-        <div className="login-box">
-          <div className="login-logo">
-            <a role="button"><strong>Notebook</strong></a>
-          </div>
-          <div className="login-box-body">
-            <p className="login-box-msg">
-              Sign in to start your session
-              { isLoading ? <Spinner/> : null }
-            </p>
-            <Alert/>
-            <LoginForm data={data} errors={errors} onSubmit={this.onSubmit} onChange={setLoginData} />
-          </div>
+      <div className="login-box">
+        <div className="login-logo">
+          <a role="button"><strong>Notebook</strong></a>
         </div>
-      </BaseLayout>
+        <div className="login-box-body">
+          <p className="login-box-msg">
+            Sign in to start your session
+              {isLoading ? <Spinner /> : null}
+          </p>
+          <Alert />
+          <LoginForm data={data} errors={errors} onSubmit={this.onSubmit} onChange={setLoginData} />
+        </div>
+      </div>
     )
   }
 }
@@ -75,7 +73,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(
+export default withBaseLayout(connect(
   mapStateToProps,
   mapDispatchToProps
-)(LoginPage)
+)(LoginPage))

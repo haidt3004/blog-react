@@ -5,16 +5,14 @@ import { ConnectedRouter } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
 
 import store from './store'
+import LoginPage from './admin/pages/LoginPage'
+
 const history = createHistory()
-
-const Home = () => (<p>abc</p>)
-
 const App = () => (
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/about" component={Home} />
+        <Route path="/admin/login" component={LoginPage} />
       </Switch>
     </ConnectedRouter>
   </Provider>

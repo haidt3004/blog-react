@@ -8,6 +8,7 @@ import 'admin-lte/dist/css/skins/skin-purple.min.css'
 import 'font-awesome/css/font-awesome.min.css'
 import 'admin-lte/dist/js/adminlte.min.js'
 import React, { Component } from 'react'
+import $ from 'jquery'
 
 function withBaseLayout(WrappedComponent) {
 

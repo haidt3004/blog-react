@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import $ from 'jquery'
 
 import * as actions from '../actions'
 import { getObjectValue } from '../../common/services/helper'

@@ -1,3 +1,5 @@
+image: node:8.9
+
 mocha:
   script:
     - npm run test --prefix=server

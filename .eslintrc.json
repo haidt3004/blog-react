@@ -30,6 +30,6 @@
         "semi": [
             "error",
             "never"
-        ],
+        ]
     }
 }

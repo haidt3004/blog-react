@@ -2,7 +2,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
-const outputDir = path.resolve(__dirname, 'server', 'pub')
+const outputDir = path.resolve(__dirname, 'build')
 
 module.exports = {
   entry: {

@@ -1,7 +1,5 @@
 image: node:8.9
 
-pull_policy: if-not-present
-
 services:
 - name: mongo:3.4.10
   alias: mymongo

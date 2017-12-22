@@ -1,11 +1,13 @@
 image: node:8.9
 
+pull_policy: "if-not-present"
+
 services:
 - name: mongo:3.4.10
   alias: mymongo
 
 variables:
-  DB_URI: "mongodb://mymongo:27017/rblog"
+  DB_URI: "mongodb://mymongo/rblog"
   PORT: "1000"
   DEBUG: "*,-express:*,-morgan,-send,-body-parser:*"
 

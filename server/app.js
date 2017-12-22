@@ -3,7 +3,10 @@ const express = require('express')
 const app = express()
 const { logError, notFoundExc, connectToDb } = require('./modules/common/helpers')
 
-connectToDb().catch(err => logError(err))
+connectToDb().catch(err => {
+  logError(err)
+  process.exit(1)
+})
 
 // enable parsing request boby with different content types
 const bodyParser = require('body-parser')

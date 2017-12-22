@@ -31,7 +31,7 @@ function connectToDb() {
   return new Promise((resolve, reject) => {
     mongoose.connect(config.db.uri, { useMongoClient: true }, (err) => {
       if (err) {
-        reject(new Error('Error while connecting to database'))
+        reject(new Error('Could not connect to database'))
       } else {
         resolve(1)
       }

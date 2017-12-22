@@ -4,7 +4,7 @@
   "description": "Api server of react blog project",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --exit",
     "start": "nodemon ./bin/run.js"
   },
   "keywords": [],

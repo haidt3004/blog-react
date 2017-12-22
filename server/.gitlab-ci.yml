@@ -1,0 +1,3 @@
+mocha:
+  script:
+    - npm run test --prefix=server

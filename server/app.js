@@ -5,24 +5,27 @@ const { logError, notFoundExc, connectToDb } = require('./modules/common/helpers
 
 connectToDb().catch(err => logError(err))
 
+// enable parsing request boby with different content types
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
 
+// log http request to console
 const morgan = require('morgan')
 app.use(morgan('tiny'))
 
 // add module's middlewares
 app.use('/api', [
+  require('./modules/common/routes'),
   require('./modules/admin/routes'),
 ])
 
 // Only serves static assets in production
 if (process.env.NODE_ENV === 'production') {
   const path = require('path')
-  let frontendBuildPath = 'dist'
+  let frontendBuildPath = path.resolve(__dirname, '..', 'build')
   app.use(express.static(frontendBuildPath))
   app.get('/*', function (req, res) {
-    res.sendFile(path.join(__dirname, frontendBuildPath, 'index.html'))
+    res.sendFile(path.resolve(frontendBuildPath, 'index.html'))
   })
 }
 

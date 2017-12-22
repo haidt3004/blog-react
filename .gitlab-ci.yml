@@ -1,5 +1,12 @@
 image: node:8.9
 
+services:
+- name: mongo:3.4.10
+  alias: mymongo
+
+variables:
+  DB_URI: "mongodb://mymongo:27017/rblog"
+
 stages:
   - test
 

@@ -40,21 +40,21 @@ function connectToDb() {
 }
 
 function hashPassword (value) {
-	return bcrypt.hashSync(value)
+  return bcrypt.hashSync(value)
 }
 
 function verifyPassword (value, hash) {
-	return bcrypt.compareSync(value, hash)
+  return bcrypt.compareSync(value, hash)
 }
 
 function createAccessToken(user, duration='1h') {
-	var expiredAt = new Date()
+  var expiredAt = new Date()
   expiredAt.setSeconds(expiredAt.getSeconds() + ms(duration) / 1000)
   var value = jwt.sign({ userId: user._id }, config.appSecret, { expiresIn: duration })
-	return {
-		value,
-		expiredAt
-	}
+  return {
+    value,
+    expiredAt
+  }
 }
 
 module.exports = {

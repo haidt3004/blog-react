@@ -1,12 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
-const { logError, notFoundExc, connectToDb } = require('./modules/common/helpers')
-
-connectToDb().catch(err => {
-  logError(err)
-  process.exit(1)
-})
+const { logError, notFoundExc } = require('./modules/common/helpers')
 
 // enable parsing request boby with different content types
 const bodyParser = require('body-parser')
@@ -38,7 +33,7 @@ app.use(function (req, res, next) {
 })
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use(function (err, req, res) {
   // errors thrown by app
   if (err.status) {
     let { status, ...data } = err

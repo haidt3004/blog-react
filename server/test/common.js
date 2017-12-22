@@ -1,8 +1,8 @@
 const chai = require('chai')
 const expect = chai.expect
-const app = require('../app')
+const server = require('../index')
 const supertest = require('supertest')
-const request = supertest(app)
+const request = supertest(server)
 
 describe("api/test", function () {
 

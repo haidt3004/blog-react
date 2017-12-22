@@ -3,6 +3,9 @@
     "es6": true,
     "node": true
   },
+  "parserOptions": {
+    "ecmaVersion": 2017
+  },
   "extends": "eslint:recommended",
   "rules": {
     "indent": [
@@ -10,7 +13,7 @@
       2
     ],
     "linebreak-style": [
-      "error",
+      "off",
       "windows"
     ],
     "quotes": [

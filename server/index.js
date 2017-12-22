@@ -1,3 +1,4 @@
+require('dotenv').config()
 var http = require('http')
 var app = require('./app')
 var server = http.createServer(app)

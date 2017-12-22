@@ -1,4 +1,3 @@
-require('dotenv').config()
 const express = require('express')
 const app = express()
 const { logError, notFoundExc } = require('./modules/common/helpers')

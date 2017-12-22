@@ -6,6 +6,8 @@ services:
 
 variables:
   DB_URI: "mongodb://mymongo:27017/rblog"
+  PORT: "1000"
+  DEBUG: "*,-express:*,-morgan,-send,-body-parser:*"
 
 stages:
   - test

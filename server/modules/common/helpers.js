@@ -26,6 +26,7 @@ function validationExc(message, errors) {
 }
 
 function connectToDb() {
+  logInfo(config.db.uri)
   mongoose.set('debug', config.db.debug)
   mongoose.Promise = global.Promise
   return new Promise((resolve, reject) => {

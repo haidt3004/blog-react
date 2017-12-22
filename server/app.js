@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const { logError, notFoundExc } = require('./modules/common/helpers')
+const { logError,  notFoundExc } = require('./modules/common/helpers')
 
 // enable parsing request boby with different content types
 const bodyParser = require('body-parser')

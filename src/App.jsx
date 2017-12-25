@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Provider } from 'react-redux'
 import { Route, Switch } from 'react-router'
 import { ConnectedRouter } from 'react-router-redux'
@@ -6,6 +6,7 @@ import createHistory from 'history/createBrowserHistory'
 
 import store from './store'
 import LoginPage from './admin/pages/LoginPage'
+import ProfilePage from './admin/pages/ProfilePage'
 
 const history = createHistory()
 const App = () => (
@@ -13,6 +14,7 @@ const App = () => (
     <ConnectedRouter history={history}>
       <Switch>
         <Route path="/admin/login" component={LoginPage} />
+        <Route path="/admin/profile" component={ProfilePage} />
       </Switch>
     </ConnectedRouter>
   </Provider>

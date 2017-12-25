@@ -10,9 +10,9 @@ import 'admin-lte/dist/js/adminlte.min.js'
 import React, { Component } from 'react'
 import $ from 'jquery'
 
-function withBaseLayout(WrappedComponent) {
+function BaseLayout(WrappedComponent) {
 
-  class BaseLayout extends Component {
+  class LayoutComponent extends Component {
     constructor(props) {
       super(props)
       this.state = { hasError: false }
@@ -31,7 +31,7 @@ function withBaseLayout(WrappedComponent) {
       // TODO: log error to sentry
     }
 
-    renderErrorPage() {
+    errorPage() {
       // TODO: render sentry feedback form
       return (
         <div className="login-box">
@@ -47,16 +47,14 @@ function withBaseLayout(WrappedComponent) {
 
     render() {
       if (this.state.hasError)
-        return this.renderErrorPage()
+        return this.errorPage()
 
-      var { ...passThroughProps } = this.props
-      return <WrappedComponent {...passThroughProps} />
+      return <WrappedComponent {...this.props} />
     }
   }
 
-  BaseLayout.displayName = 'BaseLayout'
-
-  return BaseLayout
+  LayoutComponent.displayName = 'BaseLayout'
+  return LayoutComponent
 }
 
-export default withBaseLayout
+export default BaseLayout

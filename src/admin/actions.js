@@ -16,7 +16,7 @@ export const login = data => {
     }
 
     return dispatch(common.request({
-      url: 'users/login',
+      url: 'account/session',
       method: 'post',
       data
     })).then(response => {
@@ -39,7 +39,7 @@ export const loadProfile = () => {
       method: 'get',
     })).then(response => {
       dispatch(setProfile(response.data))
-    }).catch(err => null)
+    }).catch(() => null)
   }
 }
 

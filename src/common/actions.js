@@ -45,29 +45,29 @@ export const request = config => {
     dispatch(setError(''))
 
     return axios(axiosCfg)
-    .then(response => {
-      dispatch(setLoading(false))
-      return response
-    }).catch(error => {
-      dispatch(setLoading(false))
-      // display error message
-      var message = 'An error occurred while processing your request'
-      if (error.response) {
+      .then(response => {
+        dispatch(setLoading(false))
+        return response
+      }).catch(error => {
+        dispatch(setLoading(false))
+        // display error message
+        var message = 'An error occurred while processing your request'
+        if (error.response) {
           // The request was made and the server responded with a status code
           // that falls out of the range of 2xx
           var data = error.response.data
           message = typeof data==='string' ? data : data.message
-      } else if (error.request) {
+        } else if (error.request) {
           // The request was made but no response was received
           message = 'Error while connecting to server.'
-      }
-      dispatch(setError(message))
+        }
+        dispatch(setError(message))
 
-      // handle 401 unauthorized response
-      if  (error.response && error.response.status===401)
-        dispatch(clearIdentity())
+        // handle 401 unauthorized response
+        if  (error.response && error.response.status===401)
+          dispatch(clearIdentity())
 
-      throw err
-    })
+        throw error
+      })
   }
 }

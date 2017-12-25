@@ -12,17 +12,17 @@ const defaultIdentity = {
 }
 
 const identity = handleActions({
-  [actions.setIdentity](state, payload) {
+  [actions.setIdentity](state, {payload}) {
     return payload ? payload : defaultIdentity
   }
 }, defaultIdentity)
 
 const alert = handleActions({
-  [actions.setError](state, payload) {
+  [actions.setError](state, {payload}) {
     return { type: 'error', message: payload }
   },
 
-  [actions.setSuccess](state, payload) {
+  [actions.setSuccess](state, {payload}) {
     return { type: 'success', message: payload }
   },
 }, {
@@ -31,7 +31,7 @@ const alert = handleActions({
 })
 
 const isLoading = handleActions({
-  [actions.setLoading](state, payload) {
+  [actions.setLoading](state, {payload}) {
     return payload
   },
 }, false)

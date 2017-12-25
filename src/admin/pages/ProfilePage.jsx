@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
+import PropTypes from 'prop-types'
 
 import * as admin from '../actions'
 import LoginRequired from '../widgets/LoginRequired'
-import UserLayout from '../layouts/UserLayout'
+import UserLayout from '../widgets/UserLayout'
 import Alert from '../../common/widgets/Alert'
 import Spinner from '../../common/widgets/Spinner'
 import ProfileForm from '../widgets/ProfileForm'
@@ -17,7 +19,7 @@ class ProfilePage extends Component {
   render() {
     const { data, errors, isLoading, setProfile, saveProfile } = this.props
     return (
-      <UserLayout title="Update Profile">
+      <div>
         { isLoading ? <Spinner/> : '' }
         <Alert/>
         { data ? (
@@ -27,9 +29,18 @@ class ProfilePage extends Component {
             </div>
           </div>
         ) : null }
-      </UserLayout>
+      </div>
     )
   }
+}
+
+ProfilePage.propTypes = {
+  data: PropTypes.object,
+  errors: PropTypes.object,
+  isLoading: PropTypes.bool,
+  loadProfile: PropTypes.func,
+  setProfile: PropTypes.func,
+  saveProfile: PropTypes.func,
 }
 
 const mapStateToProps = state => {
@@ -48,7 +59,11 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default LoginRequired(connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProfilePage))
+export default compose(
+  LoginRequired,
+  UserLayout({ title: 'Update Profile'}),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)(ProfilePage)

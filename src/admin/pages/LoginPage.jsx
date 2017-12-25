@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 import { Redirect } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import * as actions from '../actions'
 import { getObjectValue } from '../../common/services/helper'
 import Spinner from '../../common/widgets/Spinner'
 import Alert from '../../common/widgets/Alert'
-import withBaseLayout from '../layouts/withBaseLayout'
+import BaseLayout from '../widgets/BaseLayout'
 import LoginForm from '../widgets/LoginForm'
 
 class LoginPage extends Component {
@@ -64,7 +66,18 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withBaseLayout(connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LoginPage))
+LoginPage.propTypes = {
+  data: PropTypes.object,
+  errors: PropTypes.object,
+  isLoading: PropTypes.bool,
+  login: PropTypes.func,
+  setLoginData: PropTypes.func,
+}
+
+export default compose(
+  BaseLayout,
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)(LoginPage)

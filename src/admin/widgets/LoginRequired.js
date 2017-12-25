@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { clearIdentity } from '../../common/actions'
 import { validateIdentity, getComponentName } from '../../common/services/helper'
 
 function LoginRequired(ProtectedComponent) {
@@ -17,7 +16,7 @@ function LoginRequired(ProtectedComponent) {
       }}/>)
   }
 
-  Protector.displayName = `LoginRequired(${getComponentName(ProtectedComponent)})`;
+  Protector.displayName = `LoginRequired(${getComponentName(ProtectedComponent)})`
 
   return connect(
     mapStateToProps

@@ -12,25 +12,26 @@ function UserLayout({ title }) {
     class LayoutComponent extends Component {
       constructor(props) {
         super(props)
-        this.state = { hasError: false }
+        this.state = {
+          title,
+          hasError: false
+        }
       }
 
       componentDidCatch(error, info) {
-        this.setState({ hasError: true, error, info })
+        this.setState({
+          title: 'Opps...',
+          hasError: true,
+          error,
+          info
+        })
         // TODO: log error to sentry
       }
 
       errorPage() {
         // TODO: render sentry feedback form
         return (
-          <div className="login-box">
-            <div className="login-logo">
-              <a role="button"><strong>Opps...</strong></a>
-            </div>
-            <div className="login-box-body">
-              <p className="login-box-msg">Something went wrong.</p>
-            </div>
-          </div>
+          <p>Something went wrong.</p>
         )
       }
 
@@ -49,7 +50,7 @@ function UserLayout({ title }) {
             <Sidebar />
             <div className="content-wrapper">
               <section className="content-header">
-                <h1>{title}</h1>
+                <h1>{this.state.title}</h1>
               </section>
 
               <section className="content">

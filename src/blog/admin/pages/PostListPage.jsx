@@ -10,6 +10,22 @@ import Spinner from '../../../common/widgets/Spinner'
 
 class PostListPage extends Component {
 
+  constructor(props) {
+    super(props)
+  }
+
+  onEdit(post) {
+    console.log(post)
+  }
+
+  onDelete(post) {
+    const { deletePost, loadPosts } = this.props
+    if (confirm(`Are you sure to delete "${post.title}"?`)) {
+      deletePost(post)
+        .then(() => loadPosts())
+    }
+  }
+
   componentDidMount() {
     this.props.loadPosts()
   }
@@ -19,24 +35,36 @@ class PostListPage extends Component {
     return (
       <div>
         { isLoading ? <Spinner/> : null }
-        <div className="box box-primary">
-          <div className="box-body">
-            <table className="table table-bordered">
-              <tbody>
-                <tr>
-                  <th>#</th>
-                  <th>Title</th>
-                </tr>
-                { !isLoading && posts.map((post, index) => (
-                  <tr key={post._id}>
-                    <td>{index+1}</td>
-                    <td>{post.title}</td>
+        { !isLoading && (
+          <div className="box box-primary">
+            <div className="box-body">
+              <table className="table table-bordered">
+                <tbody>
+                  <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th></th>
                   </tr>
-                )) }
-              </tbody>
-            </table>
+                  { posts.map((post, index) => (
+                    <tr key={post._id}>
+                      <td>{index+1}</td>
+                      <td>{post.title}</td>
+                      <td>
+                        <a className="btn btn-primary btn-xs" title="Edit" onClick={this.onEdit.bind(this, post)} role="button">
+                          <span className="glyphicon glyphicon-edit"></span>
+                        </a>
+                        &nbsp;
+                        <a className="btn btn-danger btn-xs" title="Edit" onClick={this.onDelete.bind(this, post)} role="button">
+                          <span className="glyphicon glyphicon-trash"></span>
+                        </a>
+                      </td>
+                    </tr>
+                  )) }
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
+        ) }
       </div>
     )
   }
@@ -45,6 +73,7 @@ class PostListPage extends Component {
 PostListPage.propTypes = {
   isLoading: PropTypes.bool,
   loadPosts: PropTypes.func,
+  deletePost: PropTypes.func,
   posts: PropTypes.array,
 }
 
@@ -58,6 +87,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     loadPosts: () => dispatch(blog.loadPosts()),
+    deletePost: post => dispatch(blog.deletePost(post)),
   }
 }
 

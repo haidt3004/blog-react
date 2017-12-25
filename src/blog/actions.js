@@ -12,3 +12,12 @@ export const loadPosts = () => {
     }).catch(() => null)
   }
 }
+
+export const deletePost = post => {
+  return dispatch => {
+    return dispatch(common.request({
+      url: `posts/${post._id}`,
+      method: 'delete',
+    })).catch(() => null)
+  }
+}

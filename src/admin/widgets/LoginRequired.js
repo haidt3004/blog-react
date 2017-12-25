@@ -11,7 +11,7 @@ function LoginRequired(ProtectedComponent) {
     return validateIdentity(identity) ?
       <ProtectedComponent {...passthroughProps} /> :
       (<Redirect to={{
-        pathname: '/login',
+        pathname: '/admin/login',
         state: { from: props.location }
       }}/>)
   }

@@ -35,7 +35,7 @@ export const setSaveProfileErrors = createAction('SET_PROFILE_ERRORS')
 export const loadProfile = () => {
   return dispatch => {
     return dispatch(common.request({
-      url: 'users/profile',
+      url: 'account',
       method: 'get',
     })).then(response => {
       dispatch(setProfile(response.data))
@@ -54,7 +54,7 @@ export const saveProfile = data => {
     }
 
     return dispatch(common.request({
-      url: 'users/profile',
+      url: 'account',
       method: 'put',
       data
     })).then(response => {

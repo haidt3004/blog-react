@@ -1,6 +1,11 @@
 const User = require('../common/models/user')
-const { validationExc, notFoundExc, createAccessToken } = require('../common/helpers')
-const { validateLoginForm } = require('./helpers')
+const { validationExc,
+  notFoundExc,
+  unauthorizedExc,
+  createAccessToken,
+  verifyAccessToken,
+  hashPassword } = require('../common/helpers')
+const { validateLoginForm, validateProfileData } = require('./helpers')
 
 async function login(req, res, next) {
   try {
@@ -41,38 +46,47 @@ async function getProfile(req, res, next) {
 async function updateProfile(req, res, next) {
   try {
     var user = await User.findById(req.userId)
+    var data = req.body
     if (user) {
-      return res.json({ email: user.email, username: user.username })
+      let errors = validateProfileData(data, user)
+      if (errors) {
+        next(validationExc('Invalid Data', errors))
+      } else {
+        user.email = data.email
+        user.username = data.username
+        if (data.password)
+          user.password = hashPassword(data.password)
+        var saved = await user.save()
+        res.json({ username: saved.username, email: saved.email })
+      }
     } else {
       next(notFoundExc('No profile data found'))
     }
   } catch (err) {
     next(err)
   }
-  // User.findById(req.userId)
-  //   .then(function (user) {
-  //     data = common.filterObjectProperties(req.body, [
-  //       'email', 'username', 'password', 'currentPassword'
-  //     ])
+}
 
-  //     var errors = user.validateProfileData(data)
-  //     if (errors) {
-  //       res.status(400).json({
-  //         code: 'invalid_data',
-  //         message: 'Invalid Data',
-  //         errors: errors,
-  //       })
-  //     } else {
-  //       Object.assign(user, data)
-  //       return user.save().then(function (updatedUser) {
-  //         res.json(common.filterObjectProperties(updatedUser, ['email', 'username']))
-  //       })
-  //     }
-  //   }).catch(next)
+async function verifyRequestToken(req, res, next) {
+  var token = req.body.token || req.query.token || req.headers['x-access-token']
+  if (token) {
+    var data = verifyAccessToken(token)
+    if (data) {
+      // save user id for use in next routes
+      // user's id is returned when we decode the token
+      req.userId = data.userId
+      next()
+    } else {
+      next(unauthorizedExc('Invalid token.'))
+    }
+  } else {
+    next(unauthorizedExc('No token provided.'))
+  }
 }
 
 module.exports = {
   login,
   getProfile,
-  updateProfile
+  updateProfile,
+  verifyRequestToken,
 }

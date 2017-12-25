@@ -29,7 +29,8 @@ class LoginPage extends Component {
     const { data, errors, isLoading, setLoginData } = this.props
 
     if (this.state.isLogged) {
-      const from = getObjectValue(this.props, 'location.state.from', { pathname: '/' })
+      const from = getObjectValue(this.props, 'location.state.from',
+        { pathname: '/admin/profile' })
       return <Redirect to={from} />
     }
 

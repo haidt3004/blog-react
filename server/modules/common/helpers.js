@@ -21,7 +21,15 @@ function validationExc(message, errors) {
     status: 400,
     code: 'invalid_data',
     message: message,
-    errors: errors
+    errors: errors,
+  }
+}
+
+function unauthorizedExc(message) {
+  return {
+    status: 401,
+    code: 'unauthorized',
+    message: message,
   }
 }
 
@@ -40,15 +48,15 @@ function connectToDb() {
   })
 }
 
-function hashPassword (value) {
+function hashPassword(value) {
   return bcrypt.hashSync(value)
 }
 
-function verifyPassword (value, hash) {
+function verifyPassword(value, hash) {
   return bcrypt.compareSync(value, hash)
 }
 
-function createAccessToken(user, duration='1h') {
+function createAccessToken(user, duration = '1h') {
   var expiredAt = new Date()
   expiredAt.setSeconds(expiredAt.getSeconds() + ms(duration) / 1000)
   var value = jwt.sign({ userId: user._id }, config.appSecret, { expiresIn: duration })
@@ -58,13 +66,23 @@ function createAccessToken(user, duration='1h') {
   }
 }
 
+function verifyAccessToken(token) {
+  var result = false
+  try {
+    result = jwt.verify(token, config.appSecret)
+  } catch (err) { }
+  return result
+}
+
 module.exports = {
   notFoundExc,
   validationExc,
+  unauthorizedExc,
   logError,
   logInfo,
   connectToDb,
   hashPassword,
   verifyPassword,
   createAccessToken,
+  verifyAccessToken,
 }

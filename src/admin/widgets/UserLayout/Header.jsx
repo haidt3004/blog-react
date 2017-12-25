@@ -25,7 +25,7 @@ const Header = ({ children, username, logout }) => {
                 <span><i className="fa fa-user"></i>&nbsp;&nbsp;{username}</span>
               </a>
               <ul className="dropdown-menu">
-                <li><Link to="/profile">Profile</Link></li>
+                <li><Link to="/admin/profile">Profile</Link></li>
                 <li><a role="button" onClick={logout}>Logout</a></li>
               </ul>
             </li>

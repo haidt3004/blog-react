@@ -14,6 +14,7 @@ app.use(morgan('tiny'))
 app.use('/api', [
   require('./modules/common/routes'),
   require('./modules/admin/routes'),
+  require('./modules/blog/routes'),
 ])
 
 // Only serves static assets in production

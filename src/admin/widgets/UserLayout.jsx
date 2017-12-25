@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import Header from './UserLayout/Header'
 import Sidebar from './UserLayout/Sidebar'
 import TopButton from '../widgets/TopButton'
+import Alert from '../../common/widgets/Alert'
 import $ from 'jquery'
 import '../style.css'
 
@@ -54,6 +55,7 @@ function UserLayout({ title }) {
               </section>
 
               <section className="content">
+                <Alert/>
                 { this.state.hasError ?
                   this.errorPage()
                   :<WrappedComponent {...this.props} />

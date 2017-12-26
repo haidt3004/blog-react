@@ -12,7 +12,7 @@ const postList = handleActions({
 
 const postEdit = handleActions({
   [actions.setPost](state, {payload}) {
-    return { ...state, post: payload }
+    return { ...state, post: payload, errors: null }
   },
   [actions.setPostErrors](state, {payload}) {
     return { ...state, errors: payload }

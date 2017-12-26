@@ -2,13 +2,13 @@ function validatePost(data) {
   var validate = require('validate.js')
   var rules = {
     title: {
-      presence: true,
+      presence: { allowEmpty: false },
     },
     content: {
-      presence: true,
+      presence: { allowEmpty: false },
     },
   }
-  return validate(data, rules);
+  return validate(data, rules)
 }
 
 module.exports = {

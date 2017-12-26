@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 import { compose } from 'redux'
 import PropTypes from 'prop-types'
 
@@ -15,7 +16,7 @@ class PostListPage extends Component {
   }
 
   onEdit(post) {
-    console.log(post)
+    this.props.redirect(`/admin/posts/${post._id}`)
   }
 
   onDelete(post) {
@@ -74,6 +75,7 @@ PostListPage.propTypes = {
   isLoading: PropTypes.bool,
   loadPosts: PropTypes.func,
   deletePost: PropTypes.func,
+  redirect: PropTypes.func,
   posts: PropTypes.array,
 }
 
@@ -88,6 +90,7 @@ const mapDispatchToProps = dispatch => {
   return {
     loadPosts: () => dispatch(blog.loadPosts()),
     deletePost: post => dispatch(blog.deletePost(post)),
+    redirect: path => { dispatch(push(path)) },
   }
 }
 

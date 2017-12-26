@@ -4,7 +4,7 @@ import { routerMiddleware } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
 
 import reducers from './reducers'
-import { loadIdentity } from './common/services/helper'
+import { loadIdentity } from './common/helpers'
 
 // prepare preloaded state from local storage
 const identity = loadIdentity()

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Form from './Form'
-import { getComponentName } from '../../services/helper'
+import { getComponentName } from '../../helpers'
 
 function withForm(WrappedInput) {
 

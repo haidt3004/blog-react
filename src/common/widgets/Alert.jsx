@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import * as common from '../actions'
-import { delay } from '../services/helper'
+import { delay } from '../helpers'
 
 class Alert extends Component {
 
   componentWillReceiveProps(props) {
     if (props.alert.message.length>0) {
       delay(3000)
-      .then(() => this.props.resetAlert())
+        .then(() => this.props.resetAlert())
     }
   }
 

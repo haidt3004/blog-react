@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { getObjectValue } from '../../services/helper'
+import { getObjectValue } from '../../helpers'
 
 class Form extends Component {
 

@@ -1,12 +1,32 @@
+import { combineReducers } from 'redux'
 import { handleActions } from 'redux-actions'
 import * as actions from './actions'
 
-const blog = handleActions({
+const postList = handleActions({
   [actions.setPosts](state, {payload}) {
-    return { ...state, posts: payload }
+    return { ...state, items: payload }
   },
 }, {
-  posts: []
+  items: [],
 })
 
-export default blog
+const postEdit = handleActions({
+  [actions.setPost](state, {payload}) {
+    return { ...state, post: payload }
+  },
+  [actions.setPostErrors](state, {payload}) {
+    return { ...state, errors: payload }
+  },
+  [actions.setPostIsSaving](state, {payload}) {
+    return { ...state, isSaving: payload }
+  },
+}, {
+  post: {},
+  errors: null,
+  isSaving: false,
+})
+
+export default combineReducers({
+  postList,
+  postEdit
+})

@@ -59,7 +59,7 @@ const mapDispatchToProps = dispatch => {
 
 export default compose(
   LoginRequired,
-  UserLayout({ title: 'Update Profile'}),
+  UserLayout,
   connect(
     mapStateToProps,
     mapDispatchToProps

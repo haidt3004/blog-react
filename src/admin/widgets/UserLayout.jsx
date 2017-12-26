@@ -8,74 +8,75 @@ import Alert from '../../common/widgets/Alert'
 import $ from 'jquery'
 import '../style.css'
 
-function UserLayout({ title }) {
-  return WrappedComponent => {
-    class LayoutComponent extends Component {
-      constructor(props) {
-        super(props)
-        this.state = {
-          title,
-          hasError: false
-        }
+function UserLayout(WrappedComponent) {
+  class LayoutComponent extends Component {
+    constructor(props) {
+      super(props)
+      this.state = {
+        title: 'Page title',
+        hasError: false
       }
+    }
 
-      componentDidCatch(error, info) {
-        this.setState({
-          title: 'Opps...',
-          hasError: true,
-          error,
-          info
-        })
-        // TODO: log error to sentry
-      }
+    setTitle(title) {
+      this.setState({ title })
+    }
 
-      errorPage() {
-        // TODO: render sentry feedback form
-        return (
-          <p>Something went wrong.</p>
-        )
-      }
+    componentDidCatch(error, info) {
+      this.setState({
+        title: 'Opps...',
+        hasError: true,
+        error,
+        info
+      })
+      // TODO: log error to sentry
+    }
 
-      componentDidMount() {
-        $('body').addClass('skin-purple sidebar-mini')
-      }
+    errorPage() {
+      // TODO: render sentry feedback form
+      return (
+        <p>Something went wrong.</p>
+      )
+    }
 
-      componentWillUnmount() {
-        $('body').removeClass('skin-purple sidebar-mini')
-      }
+    componentDidMount() {
+      $('body').addClass('skin-purple sidebar-mini')
+    }
 
-      render() {
-        return (
-          <div className="wrapper">
-            <Header />
-            <Sidebar />
-            <div className="content-wrapper">
-              <section className="content-header">
-                <h1>{this.state.title}</h1>
-              </section>
+    componentWillUnmount() {
+      $('body').removeClass('skin-purple sidebar-mini')
+    }
 
-              <section className="content">
-                <Alert/>
-                { this.state.hasError ?
-                  this.errorPage()
-                  :<WrappedComponent {...this.props} />
-                }
-              </section>
-            </div>
-            <TopButton />
+    render() {
+      return (
+        <div className="wrapper">
+          <Header />
+          <Sidebar />
+          <div className="content-wrapper">
+            <section className="content-header">
+              <h1>{this.state.title}</h1>
+            </section>
+
+            <section className="content">
+              <Alert/>
+              { this.state.hasError ?
+                this.errorPage()
+                :<WrappedComponent layout={this} {...this.props}/>
+              }
+            </section>
           </div>
-        )
-      }
+          <TopButton />
+        </div>
+      )
     }
-
-    LayoutComponent.displayName = 'UserLayout'
-    LayoutComponent.propTypes = {
-      title: PropTypes.string,
-    }
-
-    // return BaseLayout(LayoutComponent)
-    return LayoutComponent
   }
+
+  LayoutComponent.displayName = 'UserLayout'
+  LayoutComponent.propTypes = {
+    title: PropTypes.string,
+  }
+
+  return LayoutComponent
 }
 
 export default UserLayout

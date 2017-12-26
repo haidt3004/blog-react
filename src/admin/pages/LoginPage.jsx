@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import * as actions from '../actions'
-import { getObjectValue } from '../../common/services/helper'
+import { getObjectValue } from '../../common/helpers'
 import Spinner from '../../common/widgets/Spinner'
 import Alert from '../../common/widgets/Alert'
 import BaseLayout from '../widgets/BaseLayout'

@@ -82,7 +82,7 @@ PostListPage.propTypes = {
 const mapStateToProps = state => {
   return {
     isLoading: state.common.isLoading,
-    posts: state.blog.posts
+    posts: state.blog.postList.items
   }
 }
 
@@ -96,7 +96,7 @@ const mapDispatchToProps = dispatch => {
 
 export default compose(
   LoginRequired,
-  UserLayout({ title: 'Posts' }),
+  UserLayout,
   connect(
     mapStateToProps,
     mapDispatchToProps

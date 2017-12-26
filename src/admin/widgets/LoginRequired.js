@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { validateIdentity, getComponentName } from '../../common/services/helper'
+import { validateIdentity, getComponentName } from '../../common/helpers'
 
 function LoginRequired(ProtectedComponent) {
 

@@ -1,6 +1,6 @@
 import { createAction } from 'redux-actions'
 import axios from 'axios'
-import * as helper from './services/helper'
+import * as helper from './helpers'
 
 export const setLoading = createAction('SET_IS_LOADING')
 export const setError = createAction('SET_ERROR')
@@ -27,7 +27,7 @@ export const clearIdentity = () => {
  *
  * @param {Object} config
  */
-export const request = config => {
+export const request = ({ progress=true, ...config }) => {
   return (dispatch, getState) => {
     // prepare config
     var axiosCfg = {
@@ -41,15 +41,15 @@ export const request = config => {
       axiosCfg.headers['x-access-token'] = token
     }
 
-    dispatch(setLoading(true))
+    if (progress) dispatch(setLoading(true))
     dispatch(setError(''))
 
     return axios(axiosCfg)
       .then(response => {
-        dispatch(setLoading(false))
+        if (progress) dispatch(setLoading(false))
         return response
       }).catch(error => {
-        dispatch(setLoading(false))
+        if (progress) dispatch(setLoading(false))
         // display error message
         var message = 'An error occurred while processing your request'
         if (error.response) {

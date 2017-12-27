@@ -15,7 +15,8 @@ const App = () => (
       <Switch>
         <Route path="/admin/login" component={LoginPage} />
         <Route path="/admin/profile" component={ProfilePage} />
-        <Route path="/admin/posts/:id" component={PostEditPage} />
+        <Route path="/admin/posts/edit/:id" component={PostEditPage} />
+        <Route path="/admin/posts/add" component={PostEditPage} />
         <Route path="/admin/posts" component={PostListPage} exact />
       </Switch>
     </ConnectedRouter>

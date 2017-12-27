@@ -36,8 +36,12 @@ function unauthorizedExc(message) {
 function connectToDb() {
   mongoose.set('debug', config.db.debug)
   mongoose.Promise = global.Promise
+  var options = {
+    config: { autoIndex: false },
+    useMongoClient: true,
+  }
   return new Promise((resolve, reject) => {
-    mongoose.connect(config.db.uri, { useMongoClient: true }, (err) => {
+    mongoose.connect(config.db.uri, options, err => {
       if (err) {
         reject(new Error('Could not connect to database'))
       } else {

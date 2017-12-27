@@ -2,12 +2,6 @@ const express = require('express')
 const app = express()
 const { logError, notFoundExc } = require('./modules/common/helpers')
 
-// delay expressjs response to test spinner
-if (process.env.NODE_ENV==='dev') {
-  var delay = require('express-delay')
-  app.use(delay(1000))
-}
-
 // enable parsing request boby with different content types
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())

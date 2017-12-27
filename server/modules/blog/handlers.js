@@ -4,7 +4,7 @@ const { validatePost } = require('./helpers')
 
 async function getPosts(req, res, next) {
   try {
-    var posts = await Post.find()
+    var posts = await Post.find().sort({ updatedAt: -1})
     res.json(posts)
   } catch (err) {
     next(err)
@@ -50,6 +50,7 @@ async function updatePost(req, res, next) {
     }
 
     post.set(data)
+    post.updatedAt = new Date()
     var saved = await post.save()
     return res.json(saved)
   } catch (err) {

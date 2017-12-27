@@ -35,6 +35,8 @@ class PostListPage extends Component {
         { !isLoading && (
           <div className="box box-primary">
             <div className="box-body">
+              <p><Link to="/admin/posts/add" className="btn btn-success">Add</Link></p>
+
               <table className="table table-bordered">
                 <tbody>
                   <tr>
@@ -47,7 +49,7 @@ class PostListPage extends Component {
                       <td>{index+1}</td>
                       <td>{post.title}</td>
                       <td>
-                        <Link to={`/admin/posts/${post._id}`} className="btn btn-primary btn-xs" title="Edit">
+                        <Link to={`/admin/posts/edit/${post._id}`} className="btn btn-primary btn-xs" title="Edit">
                           <span className="glyphicon glyphicon-edit"></span>
                         </Link>
                         &nbsp;

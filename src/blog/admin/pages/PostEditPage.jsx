@@ -18,10 +18,12 @@ class PostEditPage extends Component {
   }
 
   componentDidMount() {
-    const { loadPost, match } = this.props
+    const { loadPost, match, setPost } = this.props
     var postId = match.params.id
     if (postId) {
       loadPost(postId)
+    } else {
+      setPost({})
     }
   }
 

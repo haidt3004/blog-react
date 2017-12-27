@@ -2,10 +2,10 @@ import { createAction } from 'redux-actions'
 import axios from 'axios'
 import { getObjectValue, saveIdentityToStorage, delay } from './helpers'
 
-export const setLoading = createAction('SET_IS_LOADING')
+export const setLoading = createAction('CM/SET_LOADING')
 
-export const setAlert = createAction('SET_ALERT')
-export const clearAlert = createAction('CLEAR_ALERT')
+export const setAlert = createAction('CM/SET_ALERT')
+export const clearAlert = createAction('CM/CLEAR_ALERT')
 export const setError = message => dispatch => {
   dispatch(setAlert({ type: 'error', message }))
   delay(3000)
@@ -17,7 +17,7 @@ export const setSuccess = message => dispatch => {
     .then(() => dispatch(clearAlert()))
 }
 
-export const setIdentity = createAction('SET_IDENTITY')
+export const setIdentity = createAction('CM/SET_IDENTITY')
 export const saveIdentity = identity => dispatch => {
   saveIdentityToStorage(identity)
   dispatch(setIdentity(identity))

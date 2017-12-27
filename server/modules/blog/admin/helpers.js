@@ -1,5 +1,6 @@
+const validate = require('validate.js')
+
 function validatePost(data) {
-  var validate = require('validate.js')
   var rules = {
     title: {
       presence: { allowEmpty: false },

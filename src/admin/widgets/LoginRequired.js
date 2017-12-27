@@ -18,9 +18,7 @@ function LoginRequired(ProtectedComponent) {
 
   Protector.displayName = `LoginRequired(${getComponentName(ProtectedComponent)})`
 
-  return connect(
-    mapStateToProps
-  )(Protector)
+  return connect(mapStateToProps)(Protector)
 }
 
 function mapStateToProps(state) {

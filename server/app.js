@@ -12,9 +12,10 @@ app.use(morgan('tiny'))
 
 // add module's middlewares
 app.use('/api', [
-  require('./modules/common/routes'),
-  require('./modules/admin/routes'),
-  require('./modules/blog/routes'),
+  require('./modules/common/router'),
+  require('./modules/blog/router'),
+  require('./modules/admin/router'),
+  require('./modules/blog/admin/router'),
 ])
 
 // Only serves static assets in production

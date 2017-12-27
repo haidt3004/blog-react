@@ -4,7 +4,7 @@ import { push } from 'react-router-redux'
 import { compose } from 'redux'
 import PropTypes from 'prop-types'
 
-import * as blog from '../../actions'
+import * as actions from '../actions'
 import LoginRequired from '../../../admin/widgets/LoginRequired'
 import UserLayout from '../../../admin/widgets/UserLayout'
 import Spinner from '../../../common/widgets/Spinner'
@@ -67,25 +67,22 @@ PostEditPage.propTypes = {
 const mapStateToProps = state => {
   return {
     isLoading: state.common.isLoading,
-    post: state.blog.postEdit.post,
-    errors: state.blog.postEdit.errors,
-    isSaving: state.blog.postEdit.isSaving,
+    post: state.blog.admin.postEdit.post,
+    errors: state.blog.admin.postEdit.errors,
+    isSaving: state.blog.admin.postEdit.isSaving,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadPost: id => dispatch(blog.loadPost(id)),
-    setPost: data => dispatch(blog.setPost(data)),
-    savePost: (data, id) => dispatch(blog.savePost(data, id)),
+    loadPost: id => dispatch(actions.loadPost(id)),
+    setPost: data => dispatch(actions.setPost(data)),
+    savePost: (data, id) => dispatch(actions.savePost(data, id)),
   }
 }
 
 export default compose(
   LoginRequired,
   UserLayout,
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
+  connect(mapStateToProps, mapDispatchToProps)
 )(PostEditPage)

@@ -77,8 +77,5 @@ LoginPage.propTypes = {
 
 export default compose(
   BaseLayout,
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
+  connect(mapStateToProps, mapDispatchToProps)
 )(LoginPage)

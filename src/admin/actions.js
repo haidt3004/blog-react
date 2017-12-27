@@ -3,8 +3,8 @@ import * as common from '../common/actions'
 import { getObjectValue } from '../common/helpers'
 import { validateLoginData, validateProfileData } from './helpers'
 
-export const setLoginData = createAction('SET_LOGIN_DATA')
-export const setLoginErrors = createAction('SET_LOGIN_ERRORS')
+export const setLoginData = createAction('ADM/SET_LOGIN_DATA')
+export const setLoginErrors = createAction('ADM/SET_LOGIN_ERRORS')
 export const login = data => {
   return dispatch => {
     dispatch(setLoginErrors(null))
@@ -30,8 +30,8 @@ export const login = data => {
   }
 }
 
-export const setProfile = createAction('SET_PROFILE_DATA')
-export const setSaveProfileErrors = createAction('SET_PROFILE_ERRORS')
+export const setProfile = createAction('ADM/SET_PROFILE_DATA')
+export const setSaveProfileErrors = createAction('ADM/SET_PROFILE_ERRORS')
 export const loadProfile = () => {
   return dispatch => {
     return dispatch(common.request({

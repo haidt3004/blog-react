@@ -4,7 +4,7 @@ import { compose } from 'redux'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import * as blog from '../../actions'
+import * as actions from '../actions'
 import LoginRequired from '../../../admin/widgets/LoginRequired'
 import UserLayout from '../../../admin/widgets/UserLayout'
 import Spinner from '../../../common/widgets/Spinner'
@@ -75,30 +75,27 @@ class PostListPage extends Component {
 PostListPage.propTypes = {
   layout: PropTypes.instanceOf(Component),
   isLoading: PropTypes.bool,
+  posts: PropTypes.array,
   loadPosts: PropTypes.func,
   deletePost: PropTypes.func,
-  posts: PropTypes.array,
 }
 
 const mapStateToProps = state => {
   return {
     isLoading: state.common.isLoading,
-    posts: state.blog.postList.items
+    posts: state.blog.admin.postList.items
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadPosts: () => dispatch(blog.loadPosts()),
-    deletePost: post => dispatch(blog.deletePost(post)),
+    loadPosts: () => dispatch(actions.loadPosts()),
+    deletePost: post => dispatch(actions.deletePost(post)),
   }
 }
 
 export default compose(
   LoginRequired,
   UserLayout,
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
+  connect(mapStateToProps, mapDispatchToProps)
 )(PostListPage)

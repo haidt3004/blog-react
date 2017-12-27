@@ -18,11 +18,13 @@ class PostEditPage extends Component {
   }
 
   componentDidMount() {
-    const { loadPost, match, setPost } = this.props
+    const { layout, loadPost, match, setPost } = this.props
     var postId = match.params.id
     if (postId) {
+      layout.setTitle('Edit Post')
       loadPost(postId)
     } else {
+      layout.setTitle('Add Post')
       setPost({})
     }
   }
@@ -51,6 +53,7 @@ class PostEditPage extends Component {
 }
 
 PostEditPage.propTypes = {
+  layout: PropTypes.instanceOf(Component),
   loadPost: PropTypes.func,
   setPost: PropTypes.func,
   savePost: PropTypes.func,

@@ -24,6 +24,7 @@ class PostListPage extends Component {
   }
 
   componentDidMount() {
+    this.props.layout.setTitle('Posts')
     this.props.loadPosts()
   }
 
@@ -35,7 +36,9 @@ class PostListPage extends Component {
         { !isLoading && (
           <div className="box box-primary">
             <div className="box-body">
-              <p><Link to="/admin/posts/add" className="btn btn-success">Add</Link></p>
+              <p><Link to="/admin/posts/add" className="btn btn-success">
+                <span className="glyphicon glyphicon-plus-sign"></span>&nbsp;Add
+              </Link></p>
 
               <table className="table table-bordered">
                 <tbody>
@@ -70,6 +73,7 @@ class PostListPage extends Component {
 }
 
 PostListPage.propTypes = {
+  layout: PropTypes.instanceOf(Component),
   isLoading: PropTypes.bool,
   loadPosts: PropTypes.func,
   deletePost: PropTypes.func,

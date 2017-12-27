@@ -12,6 +12,7 @@ import ProfileForm from '../widgets/ProfileForm'
 class ProfilePage extends Component {
 
   componentDidMount() {
+    this.props.layout.setTitle('Your profile settings')
     this.props.loadProfile()
   }
 
@@ -33,6 +34,7 @@ class ProfilePage extends Component {
 }
 
 ProfilePage.propTypes = {
+  layout: PropTypes.instanceOf(Component),
   data: PropTypes.object,
   errors: PropTypes.object,
   isLoading: PropTypes.bool,

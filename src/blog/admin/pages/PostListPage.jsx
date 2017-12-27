@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
 import { compose } from 'redux'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import * as blog from '../../actions'
@@ -13,10 +13,6 @@ class PostListPage extends Component {
 
   constructor(props) {
     super(props)
-  }
-
-  onEdit(post) {
-    this.props.redirect(`/admin/posts/${post._id}`)
   }
 
   onDelete(post) {
@@ -51,9 +47,9 @@ class PostListPage extends Component {
                       <td>{index+1}</td>
                       <td>{post.title}</td>
                       <td>
-                        <a className="btn btn-primary btn-xs" title="Edit" onClick={this.onEdit.bind(this, post)} role="button">
+                        <Link to={`/admin/posts/${post._id}`} className="btn btn-primary btn-xs" title="Edit">
                           <span className="glyphicon glyphicon-edit"></span>
-                        </a>
+                        </Link>
                         &nbsp;
                         <a className="btn btn-danger btn-xs" title="Edit" onClick={this.onDelete.bind(this, post)} role="button">
                           <span className="glyphicon glyphicon-trash"></span>
@@ -75,7 +71,6 @@ PostListPage.propTypes = {
   isLoading: PropTypes.bool,
   loadPosts: PropTypes.func,
   deletePost: PropTypes.func,
-  redirect: PropTypes.func,
   posts: PropTypes.array,
 }
 
@@ -90,7 +85,6 @@ const mapDispatchToProps = dispatch => {
   return {
     loadPosts: () => dispatch(blog.loadPosts()),
     deletePost: post => dispatch(blog.deletePost(post)),
-    redirect: path => { dispatch(push(path)) },
   }
 }
 

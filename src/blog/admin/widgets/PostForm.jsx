@@ -1,6 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
+import { Link } from 'react-router-dom'
 
 import Form from '../../../common/widgets/form/Form'
 import FormGroup from '../../../common/widgets/form/FormGroup'
@@ -8,7 +7,7 @@ import ErrorList from '../../../common/widgets/form/ErrorList'
 import TextInput from '../../../common/widgets/form/TextInput'
 import TextArea from '../../../common/widgets/form/TextArea'
 
-const ProfileForm = ({ onCancel, ...props }) => (
+const ProfileForm = props => (
   <Form {...props} className="form-horizontal">
     <FormGroup field="title">
       <label className="control-label col-sm-2">Title</label>
@@ -28,17 +27,10 @@ const ProfileForm = ({ onCancel, ...props }) => (
       <div className="col-sm-6 col-sm-offset-2">
         <button type="submit" className="btn btn-primary">Save</button>
         &nbsp;
-        <button type="button" className="btn btn-default" onClick={onCancel}>Cancel</button>
+        <Link to="/admin/posts" className="btn btn-default">Cancel</Link>
       </div>
     </div>
   </Form>
 )
 
-export default connect(
-  null,
-  dispatch => {
-    return {
-      onCancel: () => { dispatch(push('/admin/posts')) },
-    }
-  }
-)(ProfileForm)
+export default ProfileForm

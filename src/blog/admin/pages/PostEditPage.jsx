@@ -52,7 +52,6 @@ PostEditPage.propTypes = {
   loadPost: PropTypes.func,
   setPost: PropTypes.func,
   savePost: PropTypes.func,
-  redirect: PropTypes.func,
   isLoading: PropTypes.bool,
   isSaving: PropTypes.bool,
   post: PropTypes.object,
@@ -74,7 +73,6 @@ const mapDispatchToProps = dispatch => {
     loadPost: id => dispatch(blog.loadPost(id)),
     setPost: data => dispatch(blog.setPost(data)),
     savePost: (data, id) => dispatch(blog.savePost(data, id)),
-    redirect: path => { dispatch(push(path)) },
   }
 }
 

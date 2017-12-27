@@ -28,11 +28,7 @@ class PostEditPage extends Component {
   onSubmit(data) {
     const { savePost, match } = this.props
     var postId = match.params.id
-    if (postId) {
-      savePost(data, postId)
-    } else {
-      savePost(data)
-    }
+    savePost(data, postId)
   }
 
   render() {

@@ -1,4 +1,5 @@
 import { createAction } from 'redux-actions'
+import { push } from 'react-router-redux'
 import * as common from '../common/actions'
 import { getObjectValue } from '../common/helpers'
 import { validatePostData } from './helpers'
@@ -57,8 +58,8 @@ export const savePost = (data, id) => {
     return dispatch(common.request(options))
       .then(response => {
         dispatch(setPostIsSaving(false))
+        dispatch(push('/admin/posts'))
         dispatch(common.setSuccess('Data saved.'))
-        dispatch(setPost(response.data))
       }).catch(err => {
         dispatch(setPostIsSaving(false))
         dispatch(setPostErrors(getObjectValue(err, 'response.data.errors', null)))

@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router'
 import { ConnectedRouter } from 'react-router-redux'
 
 import store, { history } from './store'
+import HomePage from './blog/pages/HomePage'
 import LoginPage from './admin/pages/LoginPage'
 import ProfilePage from './admin/pages/ProfilePage'
 import PostListPage from './blog/admin/pages/PostListPage'
@@ -13,6 +14,7 @@ const App = () => (
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <Switch>
+        <Route path="/" component={HomePage} />
         <Route path="/admin/login" component={LoginPage} />
         <Route path="/admin/profile" component={ProfilePage} />
         <Route path="/admin/posts/edit/:id" component={PostEditPage} />

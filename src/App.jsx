@@ -14,12 +14,12 @@ const App = () => (
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <Switch>
-        <Route path="/" component={HomePage} />
+        <Route path="/" component={HomePage} exact />
         <Route path="/admin/login" component={LoginPage} />
         <Route path="/admin/profile" component={ProfilePage} />
+        <Route path="/admin/posts" component={PostListPage} exact />
         <Route path="/admin/posts/edit/:id" component={PostEditPage} />
         <Route path="/admin/posts/add" component={PostEditPage} />
-        <Route path="/admin/posts" component={PostListPage} exact />
       </Switch>
     </ConnectedRouter>
   </Provider>

@@ -18,12 +18,12 @@ const identity = handleActions({
 }, defaultIdentity)
 
 const alert = handleActions({
-  [actions.setError](state, {payload}) {
-    return { type: 'error', message: payload }
+  [actions.setAlert](state, {payload}) {
+    return payload
   },
 
-  [actions.setSuccess](state, {payload}) {
-    return { type: 'success', message: payload }
+  [actions.clearAlert](state, action) {
+    return { type: 'success', message: '' }
   },
 }, {
   type: 'success',

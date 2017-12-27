@@ -2,23 +2,15 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import * as common from '../actions'
-import { delay } from '../helpers'
 
 class Alert extends Component {
 
-  componentWillReceiveProps(props) {
-    if (props.alert.message.length>0) {
-      delay(3000)
-        .then(() => this.props.resetAlert())
-    }
-  }
-
   render() {
-    var { alert: { type, message }, resetAlert } = this.props
+    var { alert: { type, message }, clearAlert } = this.props
     var bsClass = `alert alert-${type==='error' ? 'danger': type}`
     return message.length>0 ? (
       <div className={bsClass}>
-        <button type="button" className="close" onClick={()=>resetAlert()}>
+        <button type="button" className="close" onClick={()=>clearAlert()}>
           <span aria-hidden="true">&times;</span>
         </button>
         {message}
@@ -30,6 +22,8 @@ class Alert extends Component {
 Alert.propTypes = {
   type: PropTypes.oneOf(['success', 'error']),
   message: PropTypes.string,
+  alert: PropTypes.object,
+  clearAlert: PropTypes.func,
 }
 
 const mapStateToProps = state => {
@@ -40,7 +34,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    resetAlert: () => dispatch(common.setSuccess(''))
+    clearAlert: () => dispatch(common.clearAlert())
   }
 }
 

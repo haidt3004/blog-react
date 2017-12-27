@@ -18,11 +18,11 @@ export function getObjectValue(obj, path, defVal=undefined) {
   }
 }
 
-export function saveIdentity(value) {
+export function saveIdentityToStorage(value) {
   saveItemToStorage('identity', value)
 }
 
-export function loadIdentity() {
+export function loadIdentityFromStorage() {
   return loadItemFromStorage('identity')
 }
 

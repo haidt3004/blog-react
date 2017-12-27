@@ -1,24 +1,29 @@
 import { createAction } from 'redux-actions'
 import axios from 'axios'
-import * as helper from './helpers'
+import { getObjectValue, saveIdentityToStorage, delay } from './helpers'
 
 export const setLoading = createAction('SET_IS_LOADING')
-export const setError = createAction('SET_ERROR')
-export const setSuccess = createAction('SET_SUCCESS')
-export const setIdentity = createAction('SET_IDENTITY')
 
-export const saveIdentity = identity => {
-  return dispatch => {
-    helper.saveIdentity(identity)
-    dispatch(setIdentity(identity))
-  }
+export const setAlert = createAction('SET_ALERT')
+export const clearAlert = createAction('CLEAR_ALERT')
+export const setError = message => dispatch => {
+  dispatch(setAlert({ type: 'error', message }))
+  delay(3000)
+    .then(() => dispatch(clearAlert()))
+}
+export const setSuccess = message => dispatch => {
+  dispatch(setAlert({ type: 'success', message }))
+  delay(3000)
+    .then(() => dispatch(clearAlert()))
 }
 
-export const clearIdentity = () => {
-  return dispatch => {
-    helper.saveIdentity(null)
-    dispatch(setIdentity(null))
-  }
+export const setIdentity = createAction('SET_IDENTITY')
+export const saveIdentity = identity => dispatch => {
+  saveIdentityToStorage(identity)
+  dispatch(setIdentity(identity))
+}
+export const clearIdentity = () => dispatch => {
+  dispatch(saveIdentity(null))
 }
 
 /**
@@ -36,14 +41,12 @@ export const request = ({ progress=true, ...config }) => {
       headers: {},
       ...config
     }
-    var token = helper.getObjectValue(getState(), 'common.identity.token.value')
+    var token = getObjectValue(getState(), 'common.identity.token.value')
     if (token) {
       axiosCfg.headers['x-access-token'] = token
     }
 
     if (progress) dispatch(setLoading(true))
-    dispatch(setError(''))
-
     return axios(axiosCfg)
       .then(response => {
         if (progress) dispatch(setLoading(false))

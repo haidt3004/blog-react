@@ -4,10 +4,10 @@ import { routerMiddleware } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
 
 import reducers from './reducers'
-import { loadIdentity } from './common/helpers'
+import { loadIdentityFromStorage } from './common/helpers'
 
 // prepare preloaded state from local storage
-const identity = loadIdentity()
+const identity = loadIdentityFromStorage()
 const preloadedState = identity ? { common: { identity } } : undefined
 
 // enable redux devtool chrome extension

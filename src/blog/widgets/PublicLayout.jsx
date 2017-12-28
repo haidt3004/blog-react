@@ -9,7 +9,7 @@ function PublicLayout(WrappedComponent) {
     constructor(props) {
       super(props)
       this.state = {
-        title: 'Page title',
+        title: '',
         hasError: false
       }
     }

@@ -12,3 +12,15 @@ export const loadPosts = () => {
     }).catch(() => null)
   }
 }
+
+export const setPost = createAction('BLG/SET_POST')
+export const loadPost = id => {
+  return dispatch => {
+    return dispatch(common.request({
+      url: `posts/${id}`,
+      method: 'get',
+    })).then(response => {
+      dispatch(setPost(response.data))
+    }).catch(() => null)
+  }
+}

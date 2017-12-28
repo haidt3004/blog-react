@@ -5,6 +5,7 @@ import { ConnectedRouter } from 'react-router-redux'
 
 import store, { history } from './store'
 import HomePage from './blog/pages/HomePage'
+import PostDetailPage from './blog/pages/PostDetailPage'
 import LoginPage from './admin/pages/LoginPage'
 import ProfilePage from './admin/pages/ProfilePage'
 import PostListPage from './blog/admin/pages/PostListPage'
@@ -15,6 +16,7 @@ const App = () => (
     <ConnectedRouter history={history}>
       <Switch>
         <Route path="/" component={HomePage} exact />
+        <Route path="/post/:id" component={PostDetailPage} />
         <Route path="/admin/login" component={LoginPage} />
         <Route path="/admin/profile" component={ProfilePage} />
         <Route path="/admin/posts" component={PostListPage} exact />

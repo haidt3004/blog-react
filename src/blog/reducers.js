@@ -11,7 +11,16 @@ const postList = handleActions({
   items: [],
 })
 
+const postDetail = handleActions({
+  [actions.setPost](state, {payload}) {
+    return { ...state, post: payload }
+  },
+}, {
+  post: {},
+})
+
 export default combineReducers({
   postList,
+  postDetail,
   admin: adminReducer,
 })

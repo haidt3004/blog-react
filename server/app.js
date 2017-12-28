@@ -2,6 +2,11 @@ const express = require('express')
 const app = express()
 const { logError, notFoundExc } = require('./modules/common/helpers')
 
+// integrate sentry with raven-node
+const sentry = require('./modules/common/helpers/sentry')
+sentry.install()
+sentry.addRequestHandler(app)
+
 // enable parsing request boby with different content types
 const bodyParser = require('body-parser')
 app.use(bodyParser.json())
@@ -32,6 +37,8 @@ if (process.env.NODE_ENV === 'production') {
 app.use(function (req, res, next) {
   return next(notFoundExc('No route found'))
 })
+
+sentry.addErrorHandler(app)
 
 // error handler
 app.use(function (err, req, res, next) {

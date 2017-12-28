@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import Alert from '../../common/widgets/Alert'
 import '../style.css'
+import Alert from '../../common/widgets/Alert'
+import Raven from '../../common/helpers/sentry'
 
 function PublicLayout(WrappedComponent) {
   class LayoutComponent extends Component {
@@ -25,13 +26,15 @@ function PublicLayout(WrappedComponent) {
         error,
         info
       })
-      // TODO: log error to sentry
+      Raven.captureException(error, info)
     }
 
     errorPage() {
       // TODO: render sentry feedback form
       return (
-        <p>Something went wrong.</p>
+        <div>
+          <p>Something went wrong. Click <a role="button" onClick={() => Raven.lastEventId() && Raven.showReportDialog()}>here</a> to report your problem.</p>
+        </div>
       )
     }
 

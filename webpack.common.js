@@ -1,7 +1,7 @@
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
-const path = require('path');
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
+const path = require('path')
 const outputDir = path.resolve(__dirname, 'build')
 
 module.exports = {
@@ -15,25 +15,26 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin([outputDir]),
+    // Automatically generate an HTML5 file for you that includes all your webpack bundles
     new HtmlWebpackPlugin({
       title: 'React Blog',
       favicon: './src/favicon.ico',
       template: './src/index.html'
     }),
+    // Automatically load jquery instead of having to import or require them everywhere
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
     }),
-    // fix import momentjs library
+    // Fix import momentjs library
     new webpack.IgnorePlugin(/\.\/locale$/),
   ],
   resolve: {
     extensions: ['.js', '.jsx'],
-    // add src directory for resolving module
+    // Tell webpack what directories should be searched when resolving modules.
     modules: [
-      path.resolve(__dirname, "src"),
-      "node_modules"
+      'node_modules'
     ]
   },
   module: {
@@ -44,7 +45,8 @@ module.exports = {
           'style-loader',
           {
             loader: 'css-loader',
-            // sourceMap not enabled by default because they expose a runtime overhead and increase in bundle size
+            // sourceMap not enabled by default because they expose a runtime overhead
+            // and increase in bundle size
             // options: {
             //   sourceMap: true
             // }
@@ -62,8 +64,8 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        loader: "babel-loader",
+        loader: 'babel-loader',
       }
     ],
   },
-};
+}

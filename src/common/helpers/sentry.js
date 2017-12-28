@@ -10,8 +10,8 @@ var sentryDNS = process.env.SENTRY_DNS
  * install raven
  */
 export function install() {
-  if (!isEnabled) return false
+  if (!isEnabled || !sentryDNS) return false
   Raven.config(sentryDNS).install()
 }
 
-export default install
+export default Raven

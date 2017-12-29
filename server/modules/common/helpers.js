@@ -68,7 +68,9 @@ function verifyAccessToken(token) {
   var result = false
   try {
     result = jwt.verify(token, config.appSecret)
-  } catch (err) { }
+  } catch (err) {
+    throw new Error('Error while verifying access token')
+  }
   return result
 }
 

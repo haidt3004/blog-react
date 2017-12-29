@@ -34,18 +34,21 @@ export const clearIdentity = () => dispatch => {
  */
 export const request = ({ progress=true, ...config }) => {
   return (dispatch, getState) => {
-    // prepare config
+    // create axios config with default values
     var axiosCfg = {
       baseURL: '/api/',
       timeout: 3000,
       headers: {},
       ...config
     }
+
+    // add authorization header to request
     var token = getObjectValue(getState(), 'common.identity.token.value')
     if (token) {
-      axiosCfg.headers['x-access-token'] = token
+      axiosCfg.headers['Authorization'] = `bearer ${token}`
     }
 
+    // execute http request
     if (progress) dispatch(setLoading(true))
     return axios(axiosCfg)
       .then(response => {
@@ -53,6 +56,7 @@ export const request = ({ progress=true, ...config }) => {
         return response
       }).catch(error => {
         if (progress) dispatch(setLoading(false))
+
         // display error message
         var message = 'An error occurred while processing your request'
         if (error.response) {
@@ -66,7 +70,7 @@ export const request = ({ progress=true, ...config }) => {
         }
         dispatch(setError(message))
 
-        // handle 401 unauthorized response
+        // clear identity and show login page on 401 response
         if  (error.response && error.response.status===401)
           dispatch(clearIdentity())
 

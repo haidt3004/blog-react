@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha --exit",
     "start": "nodemon index.js",
-    "start-prod" : "forever start index.js"
+    "start-prod": "forever start index.js"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +21,8 @@
     "mongoose": "^4.13.7",
     "morgan": "^1.9.0",
     "ms": "^2.1.1",
+    "passport": "^0.4.0",
+    "passport-jwt": "^3.0.1",
     "raven": "^2.3.0",
     "validate.js": "^0.11.1"
   },

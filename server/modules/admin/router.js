@@ -1,11 +1,12 @@
-var handlers = require('./handlers')
-var express = require('express')
-var router = express.Router()
+const handlers = require('./handlers')
+const express = require('express')
+const router = express.Router()
+const jwtMiddleware = require('../common/helpers/jwt')
 
 router.route('/account/session')
   .post(handlers.login)
 
-router.use(handlers.verifyRequest)
+router.use(jwtMiddleware)
 
 router.route('/account')
   .get(handlers.getProfile)

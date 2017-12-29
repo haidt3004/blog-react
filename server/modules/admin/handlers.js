@@ -67,7 +67,7 @@ async function updateProfile(req, res, next) {
   }
 }
 
-async function verifyRequestToken(req, res, next) {
+async function verifyRequest(req, res, next) {
   var token = req.body.token || req.query.token || req.headers['x-access-token']
   if (token) {
     var data = verifyAccessToken(token)
@@ -88,5 +88,5 @@ module.exports = {
   login,
   getProfile,
   updateProfile,
-  verifyRequestToken,
+  verifyRequest,
 }

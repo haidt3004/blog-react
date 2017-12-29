@@ -5,7 +5,7 @@ var router = express.Router()
 router.route('/account/session')
   .post(handlers.login)
 
-router.use(handlers.verifyRequestToken)
+router.use(handlers.verifyRequest)
 
 router.route('/account')
   .get(handlers.getProfile)

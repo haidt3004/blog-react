@@ -16,7 +16,7 @@ userSchema.methods.checkPassword = function (value) {
 }
 
 userSchema.methods.createToken = function (duration='1h') {
-  return createAccessToken(this.password, duration)
+  return createAccessToken(this, duration)
 }
 
 var User = mongoose.model('common.users', userSchema)

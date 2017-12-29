@@ -19,7 +19,7 @@ class HomePage extends Component {
     const { posts, isLoading } = this.props
     return (
       <div>
-        { isLoading1 ? <Spinner/> : null }
+        { isLoading ? <Spinner/> : null }
         { !isLoading && posts.map((post, index) => (
           <div className="post" key={post._id}>
             <h3><Link to={`/post/${post._id}`}>{post.title}</Link></h3>

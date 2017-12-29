@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --exit",
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "start-prod" : "forever start index.js"
   },
   "keywords": [],
   "author": "",

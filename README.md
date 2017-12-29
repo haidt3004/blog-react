@@ -29,14 +29,11 @@ This project perform the following tasks:
 npm install -g nodemon
 ```
 
-## Import database scripts
-```
-mongoimport --host localhost:27017 --db rblog --collection common.users --file data/users.json --jsonArray --drop
-mongoimport --host localhost:27017 --db rblog --collection blog.posts --file data/posts.json --jsonArray --drop
-```
+## Init database with test data
 
-## Export database scripts
-```
-mongoexport --host localhost:27017 --db rblog -c common.users --out data/users.json --jsonArray --pretty
-mongoexport --host localhost:27017 --db rblog -c blog.posts --out data/posts.json --jsonArray --pretty
-```
+Run the import scripts in `data/import.sh`
+
+## Export database
+
+Run the export scripts in `data/export.sh`
+

@@ -1,7 +1,7 @@
 const chai = require('chai')
 const expect = chai.expect
-const server = require('../index')
 const supertest = require('supertest')
+const server = require('../index')
 const request = supertest(server)
 
 const { logError } = require('../modules/common/helpers')

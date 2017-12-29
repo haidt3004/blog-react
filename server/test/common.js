@@ -4,34 +4,23 @@ const server = require('../index')
 const supertest = require('supertest')
 const request = supertest(server)
 
-describe('api/test', function () {
+const {logError} = require('../modules/common/helpers')
+const User = require('../modules/common/models/user')
+const token = getToken()
 
-  it('should return working text', function (done) {
-    request
-      .get('/api/test')
-      .expect('Content-Type', /json/)
-      .expect(200)
-      .expect(function (res) {
-        var text = JSON.parse(res.text)
-        expect(text).to.equal('api is working')
-      })
-      .end(done)
-  })
+async function getToken() {
+  try {
+    var user = await User.findOne()
+    if (user) {
+      return user.createToken()
+    }
+  } catch (error) {
+    logError('Error while generating access token')
+    logError(error)
+  }
+  return ''
+}
 
-})
-
-describe('api/test-db', function () {
-
-  it('should return data from database', function (done) {
-    request
-      .get('/api/test-db')
-      .expect('Content-Type', /json/)
-      .expect(200)
-      // .expect(function (res) {
-      //   var text = JSON.parse(res.text)
-      //   expect(text).to.have.string('there is ')
-      // })
-      .end(done)
-  })
-
-})
+module.exports = {
+  expect, request, token
+}

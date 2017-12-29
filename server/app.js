@@ -17,7 +17,6 @@ app.use(morgan('tiny'))
 
 // add module's middlewares
 app.use('/api', [
-  require('./modules/common/router'),
   require('./modules/blog/router'),
   require('./modules/admin/router'),
   require('./modules/blog/admin/router'),

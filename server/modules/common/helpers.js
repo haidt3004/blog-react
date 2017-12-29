@@ -33,6 +33,9 @@ function unauthorizedExc(message) {
   }
 }
 
+/**
+ * @returns Promise
+ */
 function connectToDb() {
   mongoose.set('debug', config.db.debug)
   mongoose.Promise = global.Promise
@@ -40,15 +43,7 @@ function connectToDb() {
     config: { autoIndex: false },
     useMongoClient: true,
   }
-  return new Promise((resolve, reject) => {
-    mongoose.connect(config.db.uri, options, err => {
-      if (err) {
-        reject(new Error('Could not connect to database'))
-      } else {
-        resolve(1)
-      }
-    })
-  })
+  return mongoose.connect(config.db.uri, options)
 }
 
 function hashPassword(value) {
@@ -59,7 +54,7 @@ function verifyPassword(value, hash) {
   return bcrypt.compareSync(value, hash)
 }
 
-function createAccessToken(user, duration = '1h') {
+function createAccessToken(user, duration) {
   var expiredAt = new Date()
   expiredAt.setSeconds(expiredAt.getSeconds() + ms(duration) / 1000)
   var value = jwt.sign({ userId: user._id }, config.appSecret, { expiresIn: duration })

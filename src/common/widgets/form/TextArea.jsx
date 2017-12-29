@@ -15,7 +15,7 @@ class TextArea extends Component {
   render() {
     const { value, onChange, ...passThroughProps } = this.props
     var val = value===undefined ? '' : value
-    return (<textarea value={val} onChange={this.onChange} {...passThroughProps} />)
+    return <textarea value={val} onChange={this.onChange} {...passThroughProps} />
   }
 }
 

@@ -7,19 +7,19 @@ import ErrorList from '../../../common/widgets/form/ErrorList'
 import TextInput from '../../../common/widgets/form/TextInput'
 import TextArea from '../../../common/widgets/form/TextArea'
 
-const ProfileForm = props => (
+const PostForm = props => (
   <Form {...props} className="form-horizontal">
     <FormGroup field="title">
       <label className="control-label col-sm-2">Title</label>
       <div className="col-sm-6">
-        <TextInput name="title" className="form-control" />
+        <TextInput name="title" className="form-control"/>
         <ErrorList />
       </div>
     </FormGroup>
     <FormGroup field="content">
       <label className="control-label col-sm-2">Content</label>
       <div className="col-sm-6">
-        <TextArea name="content" className="form-control" />
+        <TextArea name="content" className="form-control" rows="10"/>
         <ErrorList />
       </div>
     </FormGroup>
@@ -33,4 +33,4 @@ const ProfileForm = props => (
   </Form>
 )
 
-export default ProfileForm
+export default PostForm

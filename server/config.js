@@ -7,7 +7,7 @@ var config = {
     debug: process.env.MONGOOSE_DEBUG==='true'
   },
   appSecret: 'react blog secret',
-  logPath: process.env.LOG_PATH || path.resolve(__dirname),
+  logPath: process.env.LOG_PATH || path.resolve(__dirname, 'logs'),
   sentryDns: process.env.SENTRY_DNS || false,
 }
 

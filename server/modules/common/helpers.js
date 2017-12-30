@@ -1,8 +1,8 @@
-var jwt = require('jsonwebtoken')
-var bcrypt = require('bcrypt-nodejs')
-var ms = require('ms')
-var mongoose = require('mongoose')
-var config = require('../../config')
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt-nodejs')
+const ms = require('ms')
+const mongoose = require('mongoose')
+const config = require('../../config')
 
 function notFoundExc(message) {
   return {

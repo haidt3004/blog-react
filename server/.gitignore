@@ -1,13 +1,5 @@
-# Bower dependency directory (https://bower.io/)
-bower_components
-public/bower
-
 # Dependency directories
 node_modules/
 
 # dotenv environment variables file
 .env
-
-# Custom
-scripts/
-todo.yml

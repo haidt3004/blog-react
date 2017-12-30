@@ -1,4 +1,4 @@
-const { request, expect, getToken } = require('./common')
+const { request, expect, getApiToken } = require('./common')
 
 describe('admin module', function () {
   it('should return token when login success', function (done) {
@@ -19,9 +19,10 @@ describe('admin module', function () {
   })
 
   it('should return profile data when get', async function () {
+    var token = await getApiToken()
     await request
       .get('/api/account')
-      .set('x-access-token', await getToken())
+      .set('Authorization', `bearer ${token}`)
       .expect('Content-Type', /json/)
       .expect(200)
       .expect(resp => {
@@ -31,9 +32,10 @@ describe('admin module', function () {
   })
 
   it('should return profile data when updating', async function () {
+    var token = await getApiToken()
     await request
       .put('/api/account')
-      .set('x-access-token', await getToken())
+      .set('Authorization', `bearer ${token}`)
       .send({
         'email': 'admin@m.mm',
         'username': 'admin1',

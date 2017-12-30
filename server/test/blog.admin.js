@@ -1,12 +1,13 @@
-const { request, expect, getToken } = require('./common')
+const { request, expect, getApiToken } = require('./common')
 
 describe('blog/admin module', function () {
   var post = null
 
   it('should return post data when adding post', async function () {
+    var token = await getApiToken()
     await request
       .post('/api/admin/posts')
-      .set('x-access-token', await getToken())
+      .set('Authorization', `bearer ${token}`)
       .send({
         'title': 'new post',
         'content': 'new post\' content',
@@ -23,9 +24,10 @@ describe('blog/admin module', function () {
   })
 
   it('should return post data when get', async function () {
+    var token = await getApiToken()
     await request
       .get(`/api/admin/posts/${post._id}`)
-      .set('x-access-token', await getToken())
+      .set('Authorization', `bearer ${token}`)
       .expect('Content-Type', /json/)
       .expect(200)
       .expect(resp => {
@@ -36,9 +38,10 @@ describe('blog/admin module', function () {
   })
 
   it('should return an array of posts', async function () {
+    var token = await getApiToken()
     await request
       .get('/api/admin/posts')
-      .set('x-access-token', await getToken())
+      .set('Authorization', `bearer ${token}`)
       .expect('Content-Type', /json/)
       .expect(200)
       .expect(resp => {
@@ -49,9 +52,10 @@ describe('blog/admin module', function () {
   })
 
   it('should return post data when updating post', async function () {
+    var token = await getApiToken()
     await request
       .put(`/api/admin/posts/${post._id}`)
-      .set('x-access-token', await getToken())
+      .set('Authorization', `bearer ${token}`)
       .send({
         'title': 'updated post',
         'content': 'updated content',
@@ -66,9 +70,10 @@ describe('blog/admin module', function () {
   })
 
   it('should return post data when deleting post', async function () {
+    var token = await getApiToken()
     await request
       .delete(`/api/admin/posts/${post._id}`)
-      .set('x-access-token', await getToken())
+      .set('Authorization', `bearer ${token}`)
       .expect('Content-Type', /json/)
       .expect(200)
       .expect(resp => {

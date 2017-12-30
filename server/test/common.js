@@ -8,7 +8,7 @@ const { logError } = require('../modules/common/helpers')
 const User = require('../modules/common/models/user')
 var token = undefined
 
-async function getToken() {
+async function getApiToken() {
   if (token === undefined) {
     try {
       var user = await User.findOne()
@@ -23,5 +23,5 @@ async function getToken() {
 }
 
 module.exports = {
-  expect, request, getToken
+  expect, request, getApiToken
 }

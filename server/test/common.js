@@ -3,8 +3,7 @@ const expect = chai.expect
 const supertest = require('supertest')
 const server = require('../index')
 const request = supertest(server)
-
-const { logError } = require('../modules/common/helpers')
+const log = require('../modules/common/helpers/log')
 const User = require('../modules/common/models/user')
 var token = undefined
 
@@ -14,7 +13,7 @@ async function getApiToken() {
       var user = await User.findOne()
       token = user.createToken().value
     } catch (error) {
-      logError('Error while generating access token')
+      log.error('Error while generating access token')
       throw error
     }
   }

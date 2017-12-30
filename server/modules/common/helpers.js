@@ -2,10 +2,6 @@ var jwt = require('jsonwebtoken')
 var bcrypt = require('bcrypt-nodejs')
 var ms = require('ms')
 var mongoose = require('mongoose')
-
-var debug = require('debug')
-var logError = debug('app:error')
-var logInfo = debug('app:info')
 var config = require('../../config')
 
 function notFoundExc(message) {
@@ -78,8 +74,6 @@ module.exports = {
   notFoundExc,
   validationExc,
   unauthorizedExc,
-  logError,
-  logInfo,
   connectToDb,
   hashPassword,
   verifyPassword,

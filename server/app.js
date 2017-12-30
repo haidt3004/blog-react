@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
-const { logError, notFoundExc } = require('./modules/common/helpers')
+const { notFoundExc } = require('./modules/common/helpers')
+const log = require('./modules/common/helpers/log')
 
 // integrate sentry with raven-node
 const sentry = require('./modules/common/helpers/sentry')
@@ -47,7 +48,7 @@ app.use(function (err, req, res, next) {
     res.status(status).json(data)
   } else {
     // uncaught exception
-    logError(err)
+    log.error(err)
     res.status(500).json({
       code: 'server_error',
       message: err.message,

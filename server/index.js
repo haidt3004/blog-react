@@ -2,7 +2,9 @@ require('dotenv').config()
 var http = require('http')
 var app = require('./app')
 var server = http.createServer(app)
-var { logInfo, logError, connectToDb } = require('./modules/common/helpers')
+const config = require('./config')
+const log = require('./modules/common/helpers/log')
+var { connectToDb } = require('./modules/common/helpers')
 
 /**
  * Start the api server
@@ -10,34 +12,14 @@ var { logInfo, logError, connectToDb } = require('./modules/common/helpers')
 async function run() {
   try {
     await connectToDb()
-    var port = normalizePort(process.env.PORT || '3000')
-    app.set('port', port)
+    var port = config.port
     server.listen(port)
     server.on('error', onError)
     server.on('listening', onListening)
   } catch (error) {
-    logError(error)
+    log.error(error)
     process.exit(1)
   }
-}
-
-/**
- * Normalize a port into a number, string, or false.
- */
-function normalizePort(val) {
-  var port = parseInt(val, 10)
-
-  if (isNaN(port)) {
-    // named pipe
-    return val
-  }
-
-  if (port >= 0) {
-    // port number
-    return port
-  }
-
-  return false
 }
 
 /**
@@ -48,7 +30,7 @@ function onError(error) {
     throw error
   }
 
-  var port = app.get('port')
+  var port = config.port
   var bind = typeof port === 'string'
     ? 'Pipe ' + port
     : 'Port ' + port
@@ -56,11 +38,11 @@ function onError(error) {
   // handle specific listen errors with friendly messages
   switch (error.code) {
   case 'EACCES':
-    logError(bind + ' requires elevated privileges')
+    log.error(bind + ' requires elevated privileges')
     process.exit(1)
     break
   case 'EADDRINUSE':
-    logError(bind + ' is already in use')
+    log.error(bind + ' is already in use')
     process.exit(1)
     break
   default:
@@ -76,7 +58,7 @@ function onListening() {
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port
-  logInfo('Web server listening on ' + bind)
+  log.info('Web server listening on ' + bind)
 }
 
 run()

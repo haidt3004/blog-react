@@ -2,8 +2,9 @@
  * wrapper module for making raven integration more easily
  */
 const Raven = require('raven')
+const config = require('../../../config')
 var isEnabled = process.env.NODE_ENV==='production'
-var sentryDNS = process.env.SENTRY_DNS
+var sentryDNS = config.sentryDns
 
 /**
  * install raven

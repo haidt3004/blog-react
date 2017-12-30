@@ -1,15 +1,17 @@
 require('dotenv').config()
 const path = require('path')
+const config = require('../config')
+const log = require('../modules/common/helpers/log')
 const { connect, importCollection } = require('../modules/common/helpers/mongodb')
 
 before('init database', function () {
+  log.info('init test database')
   this.timeout(10000)
-  console.log('init test database')
   return initDatabase()
 })
 
 async function initDatabase() {
-  const { con, db } = await connect(process.env.DB_URI)
+  const { con, db } = await connect(config.db.uri)
   var p1 = importCollection(db, getDataFile('blog.posts'))
   var p2 = importCollection(db, getDataFile('common.users'))
   await Promise.all([p1, p2])

@@ -40,16 +40,19 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /\.(css|scss)$/,
         use: [
-          'style-loader',
           {
+            // Adds CSS to the DOM by injecting a <style> tag
+            loader: 'style-loader',
+          },
+          {
+            // resolve imported css
             loader: 'css-loader',
-            // sourceMap not enabled by default because they expose a runtime overhead
-            // and increase in bundle size
-            // options: {
-            //   sourceMap: true
-            // }
+          },
+          {
+            // compiles Sass to CSS
+            loader: 'sass-loader'
           }
         ]
       },

@@ -6,7 +6,7 @@ import Sidebar from './UserLayout/Sidebar'
 import TopButton from '../widgets/TopButton'
 import Alert from '../../common/widgets/Alert'
 import $ from 'jquery'
-import '../style.css'
+import '../style.scss'
 
 function UserLayout(WrappedComponent) {
   class LayoutComponent extends Component {

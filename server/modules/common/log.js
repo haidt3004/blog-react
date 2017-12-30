@@ -1,6 +1,6 @@
 const path = require('path')
 const winston = require('winston')
-const { logPath } = require('../../../config')
+const { logPath } = require('../../config')
 const logger = new (winston.Logger)({
   colors: {
     info: 'green',

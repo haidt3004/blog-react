@@ -3,7 +3,7 @@ const expect = chai.expect
 const supertest = require('supertest')
 const server = require('../index')
 const request = supertest(server)
-const log = require('../modules/common/helpers/log')
+const log = require('../modules/common/log')
 const User = require('../modules/common/models/user')
 var token = undefined
 

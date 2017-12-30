@@ -1,8 +1,8 @@
 require('dotenv').config()
 const path = require('path')
 const config = require('../config')
-const log = require('../modules/common/helpers/log')
-const { connect, importCollection } = require('../modules/common/helpers/mongodb')
+const log = require('../modules/common/log')
+const { connect, importCollection } = require('../modules/common/mongodb')
 
 before('init database', function () {
   log.info('init test database')

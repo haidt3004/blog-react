@@ -1,10 +1,10 @@
 const express = require('express')
 const app = express()
 const { notFoundExc } = require('./modules/common/helpers')
-const log = require('./modules/common/helpers/log')
+const log = require('./modules/common/log')
 
 // integrate sentry with raven-node
-const sentry = require('./modules/common/helpers/sentry')
+const sentry = require('./modules/common/sentry')
 sentry.install()
 sentry.addRequestHandler(app)
 

@@ -3,7 +3,7 @@ var http = require('http')
 var app = require('./app')
 var server = http.createServer(app)
 const config = require('./config')
-const log = require('./modules/common/helpers/log')
+const log = require('./modules/common/log')
 var { connectToDb } = require('./modules/common/helpers')
 
 /**

@@ -1,25 +1,8 @@
 .dropdown.user li a { color: #777 !important }
 
-.clickable {
-	cursor: pointer;
-}
-
 .sidebar-mini.sidebar-collapse .sidebar-menu > li:hover > a > span:not(.pull-right),
 .sidebar-mini.sidebar-collapse .sidebar-menu > li:hover > .treeview-menu {
 	display:none !important;
-}
-
-.select2-selection__choice {
-	font-size: 13px;
-}
-
-.select2-container .select2-search--inline .select2-search__field {
-	font-size: 15px;
-}
-
-.select2-dropdown .select2-search__field:focus,
-.select2-search--inline .select2-search__field:focus {
-  border: medium none;
 }
 
 .top-button {

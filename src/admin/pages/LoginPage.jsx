@@ -8,7 +8,7 @@ import * as actions from '../actions'
 import { getObjectValue } from '../../common/helpers'
 import Spinner from '../../common/widgets/Spinner'
 import Alert from '../../common/widgets/Alert'
-import BaseLayout from '../widgets/BaseLayout'
+import BlankLayout from '../widgets/BlankLayout'
 import LoginForm from '../widgets/LoginForm'
 
 class LoginPage extends Component {
@@ -76,6 +76,6 @@ LoginPage.propTypes = {
 }
 
 export default compose(
-  BaseLayout,
+  BlankLayout,
   connect(mapStateToProps, mapDispatchToProps)
 )(LoginPage)

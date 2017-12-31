@@ -1,3 +1,10 @@
+import 'font-awesome/css/font-awesome.min.css'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/js/bootstrap.min.js'
+import 'admin-lte/dist/js/adminlte.min.js'
+// import './UserLayout/style.scss'
+import $ from 'jquery'
+
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
@@ -5,8 +12,6 @@ import Header from './UserLayout/Header'
 import Sidebar from './UserLayout/Sidebar'
 import TopButton from '../widgets/TopButton'
 import Alert from '../../common/widgets/Alert'
-import $ from 'jquery'
-import '../style.scss'
 
 function UserLayout(WrappedComponent) {
   class LayoutComponent extends Component {

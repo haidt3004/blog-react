@@ -1,16 +1,11 @@
+import 'font-awesome/css/font-awesome.min.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
-import 'select2/dist/js/select2.min.js'
-import 'select2/dist/css/select2.min.css'
-import 'moment/min/moment-with-locales.min.js'
-import 'admin-lte/dist/css/AdminLTE.min.css'
-import 'admin-lte/dist/css/skins/skin-purple.min.css'
-import 'font-awesome/css/font-awesome.min.css'
-import 'admin-lte/dist/js/adminlte.min.js'
+import '../adminlte.scss'
 import React, { Component } from 'react'
 import $ from 'jquery'
 
-function BaseLayout(WrappedComponent) {
+function BlankLayout(WrappedComponent) {
 
   class LayoutComponent extends Component {
     constructor(props) {
@@ -53,8 +48,8 @@ function BaseLayout(WrappedComponent) {
     }
   }
 
-  LayoutComponent.displayName = 'BaseLayout'
+  LayoutComponent.displayName = 'BlankLayout'
   return LayoutComponent
 }
 
-export default BaseLayout
+export default BlankLayout

@@ -1,7 +1,11 @@
+import 'font-awesome/css/font-awesome.min.css'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/js/bootstrap.min.js'
+import '../style.css'
+
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import '../style.css'
 import Alert from '../../common/widgets/Alert'
 import Raven from '../../common/helpers/sentry'
 

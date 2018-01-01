@@ -10,12 +10,13 @@ import LoginPage from './admin/pages/LoginPage'
 import ProfilePage from './admin/pages/ProfilePage'
 import PostListPage from './blog/admin/pages/PostListPage'
 import PostEditPage from './blog/admin/pages/PostEditPage'
+import MaterialUIDemo from './mate/Demo'
 
 const App = () => (
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <Switch>
-        <Route path="/" component={HomePage} exact />
+        <Route path="/" component={MaterialUIDemo} exact />
         <Route path="/post/:id" component={PostDetailPage} />
         <Route path="/admin/login" component={LoginPage} />
         <Route path="/admin/profile" component={ProfilePage} />

@@ -49,6 +49,7 @@ module.exports = {
           {
             // resolve imported css
             loader: 'css-loader',
+            options: { modules: true }
           },
           {
             // compiles Sass to CSS

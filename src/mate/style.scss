@@ -1,0 +1,20 @@
+body {
+  margin: 0;
+  background-color: #efefef;
+}
+
+.logo {
+  color:#fff;
+  line-height: 56px;
+  font-size: 22px;
+  background-color: #1e88e5;
+  text-align: center;
+  margin: 0;
+}
+
+.menu-item {
+  color: #fff;
+  &:hover {
+    text-decoration: none;
+  }
+}

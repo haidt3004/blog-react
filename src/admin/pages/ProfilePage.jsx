@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import * as admin from '../actions'
 import LoginRequired from '../widgets/LoginRequired'
-import UserLayout from '../widgets/UserLayout'
+import AdminLayout from '../widgets/AdminLayout'
 import Spinner from '../../common/widgets/Spinner'
 import ProfileForm from '../widgets/ProfileForm'
 
@@ -61,6 +61,6 @@ const mapDispatchToProps = dispatch => {
 
 export default compose(
   LoginRequired,
-  UserLayout,
+  AdminLayout,
   connect(mapStateToProps, mapDispatchToProps)
 )(ProfilePage)

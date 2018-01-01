@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
-import { install as installRavenJs } from './common/helpers/sentry'
+import { install as installRavenJs } from './common/sentry'
 
 installRavenJs()
 

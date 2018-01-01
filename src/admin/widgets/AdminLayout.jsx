@@ -1,19 +1,17 @@
 import 'font-awesome/css/font-awesome.min.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
-import 'admin-lte/dist/js/adminlte.min.js'
-// import './UserLayout/style.scss'
 import $ from 'jquery'
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import Header from './UserLayout/Header'
-import Sidebar from './UserLayout/Sidebar'
+import Header from './AdminLayout/Header'
+import Sidebar from './AdminLayout/Sidebar'
 import TopButton from '../widgets/TopButton'
 import Alert from '../../common/widgets/Alert'
 
-function UserLayout(WrappedComponent) {
+function AdminLayout(WrappedComponent) {
   class LayoutComponent extends Component {
     constructor(props) {
       super(props)
@@ -45,11 +43,9 @@ function UserLayout(WrappedComponent) {
     }
 
     componentDidMount() {
-      $('body').addClass('skin-purple sidebar-mini')
     }
 
     componentWillUnmount() {
-      $('body').removeClass('skin-purple sidebar-mini')
     }
 
     render() {
@@ -76,7 +72,7 @@ function UserLayout(WrappedComponent) {
     }
   }
 
-  LayoutComponent.displayName = 'UserLayout'
+  LayoutComponent.displayName = 'AdminLayout'
   LayoutComponent.propTypes = {
     title: PropTypes.string,
   }
@@ -84,4 +80,4 @@ function UserLayout(WrappedComponent) {
   return LayoutComponent
 }
 
-export default UserLayout
+export default AdminLayout

@@ -1,7 +1,6 @@
 import 'font-awesome/css/font-awesome.min.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/js/bootstrap.min.js'
-import '../adminlte.scss'
 import React, { Component } from 'react'
 import $ from 'jquery'
 
@@ -14,20 +13,12 @@ function BlankLayout(WrappedComponent) {
     }
 
     componentDidMount() {
-      $('body').addClass('login-page')
     }
 
     componentWillUnmount() {
-      $('body').removeClass('login-page')
-    }
-
-    componentDidCatch(error, info) {
-      this.setState({ hasError: true, error, info })
-      // TODO: log error to sentry
     }
 
     errorPage() {
-      // TODO: render sentry feedback form
       return (
         <div className="login-box">
           <div className="login-logo">
@@ -41,10 +32,9 @@ function BlankLayout(WrappedComponent) {
     }
 
     render() {
-      if (this.state.hasError)
-        return this.errorPage()
-
-      return <WrappedComponent {...this.props} />
+      return this.state.hasError ?
+        this.errorPage() :
+        <WrappedComponent {...this.props} />
     }
   }
 

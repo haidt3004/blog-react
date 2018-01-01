@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 
 import * as actions from '../actions'
 import LoginRequired from '../../../admin/widgets/LoginRequired'
-import UserLayout from '../../../admin/widgets/UserLayout'
+import AdminLayout from '../../../admin/widgets/AdminLayout'
 import Spinner from '../../../common/widgets/Spinner'
 
 class PostListPage extends Component {
@@ -96,6 +96,6 @@ const mapDispatchToProps = dispatch => {
 
 export default compose(
   LoginRequired,
-  UserLayout,
+  AdminLayout,
   connect(mapStateToProps, mapDispatchToProps)
 )(PostListPage)

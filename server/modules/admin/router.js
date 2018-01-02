@@ -3,12 +3,12 @@ const express = require('express')
 const router = express.Router()
 const jwtMiddleware = require('../common/jwt')
 
-router.route('/account/session')
+router.route('/admin/session')
   .post(handlers.login)
 
-router.use(jwtMiddleware)
+router.use('/admin', jwtMiddleware)
 
-router.route('/account')
+router.route('/admin/account')
   .get(handlers.getProfile)
   .put(handlers.updateProfile)
 

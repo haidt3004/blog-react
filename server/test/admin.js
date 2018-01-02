@@ -3,7 +3,7 @@ const { request, expect, getApiToken } = require('./common')
 describe('admin module', function () {
   it('should return token when login success', function (done) {
     request
-      .post('/api/account/session')
+      .post('/api/admin/session')
       .send({
         'loginId': 'admin@m.mm',
         'password': '123123'
@@ -21,7 +21,7 @@ describe('admin module', function () {
   it('should return profile data when get', async function () {
     var token = await getApiToken()
     await request
-      .get('/api/account')
+      .get('/api/admin/account')
       .set('Authorization', `bearer ${token}`)
       .expect('Content-Type', /json/)
       .expect(200)
@@ -34,7 +34,7 @@ describe('admin module', function () {
   it('should return profile data when updating', async function () {
     var token = await getApiToken()
     await request
-      .put('/api/account')
+      .put('/api/admin/account')
       .set('Authorization', `bearer ${token}`)
       .send({
         'email': 'admin@m.mm',

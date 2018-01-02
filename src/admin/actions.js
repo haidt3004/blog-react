@@ -16,7 +16,7 @@ export const login = data => {
     }
 
     return dispatch(common.request({
-      url: 'account/session',
+      url: 'admin/session',
       method: 'post',
       data
     })).then(response => {
@@ -35,7 +35,7 @@ export const setSaveProfileErrors = createAction('ADM/SET_PROFILE_ERRORS')
 export const loadProfile = () => {
   return dispatch => {
     return dispatch(common.request({
-      url: 'account',
+      url: 'admin/account',
       method: 'get',
     })).then(response => {
       dispatch(setProfile(response.data))
@@ -54,7 +54,7 @@ export const saveProfile = data => {
     }
 
     return dispatch(common.request({
-      url: 'account',
+      url: 'admin/account',
       method: 'put',
       data
     })).then(response => {

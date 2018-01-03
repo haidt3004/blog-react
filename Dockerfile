@@ -19,13 +19,5 @@ RUN npm run build
 WORKDIR /app/server
 RUN npm install
 
-# Setting environment variables
-ENV DB_URI mongodb://mymongo/rblog
-ENV SENTRY_DNS https://1f4bf702246d45d28e4f0d24d17832ca:0679e0a6c0804c19924078f98954f638@sentry.io/264486
-ENV MONGODB_DEBUG false
-ENV PORT 1000
-ENV NODE_ENV production
-ENV DEBUG *,-express:*,-morgan,-send,-body-parser:*
-
 # launch the container
 CMD ["npm", "run", "start-prod"]

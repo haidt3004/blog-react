@@ -10,7 +10,7 @@ import LoginPage from './admin/pages/LoginPage'
 import ProfilePage from './admin/pages/ProfilePage'
 import PostListPage from './blog/admin/pages/PostListPage'
 import PostEditPage from './blog/admin/pages/PostEditPage'
-import MaterialUIDemo from './mate/Demo'
+import MaterialUIDemo from './mate/AdminLayout'
 
 const App = () => (
   <Provider store={store}>

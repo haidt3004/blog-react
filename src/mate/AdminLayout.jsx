@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+
 import MuiTheme from './theme'
 import Header from './Header'
 import Sidebar from './Sidebar'
-import './style.scss'
+import styles from './AdminLayout.scss'
 
-class MaterialUiExample extends Component {
+class AdminLayout extends Component {
 
   constructor(props) {
     super()
@@ -40,4 +41,4 @@ class MaterialUiExample extends Component {
   }
 }
 
-export default MaterialUiExample
+export default AdminLayout

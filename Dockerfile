@@ -9,7 +9,6 @@ WORKDIR /app
 
 # Copy the current directory contents into the container at /app
 ADD . /app
-RUN npm install forever -g
 
 # Install & build react app
 RUN npm install

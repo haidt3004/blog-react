@@ -9,13 +9,23 @@ WORKDIR /app
 
 # Copy the current directory contents into the container at /app
 ADD . /app
+RUN npm install forever -g
 
 # Install & build react app
 RUN npm install
 RUN npm run build
 
-# Install api app and start it when the container launches
-WORKDIR /app/api
+# Install server app
+WORKDIR /app/server
 RUN npm install
-RUN npm install forever -g
+
+# Setting environment variables
+ENV DB_URI mongodb://mymongo/rblog
+ENV SENTRY_DNS https://1f4bf702246d45d28e4f0d24d17832ca:0679e0a6c0804c19924078f98954f638@sentry.io/264486
+ENV MONGODB_DEBUG false
+ENV PORT 1000
+ENV NODE_ENV production
+ENV DEBUG *,-express:*,-morgan,-send,-body-parser:*
+
+# launch the container
 CMD ["npm", "run", "start-prod"]

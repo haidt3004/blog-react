@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const { notFoundExc } = require('./modules/common/helpers')
-const log = require('./modules/common/log')
+const logger = require('./modules/common/log')
 
 // integrate sentry with raven-node
 const sentry = require('./modules/common/sentry')
@@ -14,7 +14,9 @@ app.use(bodyParser.json())
 
 // log http request to console
 const morgan = require('morgan')
-app.use(morgan('tiny'))
+app.use(morgan('tiny', {
+  stream: logger.stream
+}))
 
 // add module's middlewares
 app.use('/api', [
@@ -48,7 +50,7 @@ app.use(function (err, req, res, next) {
     res.status(status).json(data)
   } else {
     // uncaught exception
-    log.error(err)
+    logger.error(err)
     res.status(500).json({
       code: 'server_error',
       message: err.message,

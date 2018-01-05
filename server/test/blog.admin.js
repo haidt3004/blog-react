@@ -83,4 +83,10 @@ describe('blog/admin module', function () {
       })
   })
 
+  it('should return 401 status when getting posts without token', async function () {
+    await request
+      .get('/api/admin/posts')
+      .expect(401)
+  })
+
 })

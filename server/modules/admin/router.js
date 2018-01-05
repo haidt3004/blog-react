@@ -6,7 +6,7 @@ const jwtMiddleware = require('../common/jwt')
 router.route('/admin/session')
   .post(handlers.login)
 
-router.use('/admin', jwtMiddleware)
+router.use(/^\/admin.*?/, jwtMiddleware)
 
 router.route('/admin/account')
   .get(handlers.getProfile)

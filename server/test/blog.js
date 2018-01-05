@@ -1,7 +1,6 @@
 const { request, expect } = require('./common')
 
-describe('blog module', function () {
-
+describe.only('GET /api/posts', function () {
   it('should return array of posts', async function () {
     await request
       .get('/api/posts')
@@ -13,7 +12,9 @@ describe('blog module', function () {
         expect(result.length).to.not.equal(0, 'No posts found. Please use test database with sample data')
       })
   })
+})
 
+describe.only('GET /api/posts/:id', function () {
   it('should return post data', async function () {
     // post id come from test data
     var id = '5a45f0f86ed4eb04b810ebb6'
@@ -27,5 +28,4 @@ describe('blog module', function () {
         expect(result._id).to.equal(id)
       })
   })
-
 })

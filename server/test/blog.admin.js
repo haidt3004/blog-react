@@ -1,9 +1,9 @@
 const { request, expect, getApiToken } = require('./common')
 
-describe('blog/admin module', function () {
-  var post = null
+var post = null
 
-  it('should return post data when adding post', async function () {
+describe('POST /api/admin/posts', function () {
+  it('should return added post data', async function () {
     var token = await getApiToken()
     await request
       .post('/api/admin/posts')
@@ -22,8 +22,10 @@ describe('blog/admin module', function () {
         post = result
       })
   })
+})
 
-  it('should return post data when get', async function () {
+describe('GET /api/admin/posts/:id', function () {
+  it('should return post data', async function () {
     var token = await getApiToken()
     await request
       .get(`/api/admin/posts/${post._id}`)
@@ -36,7 +38,9 @@ describe('blog/admin module', function () {
         expect(result._id).to.equal(post._id)
       })
   })
+})
 
+describe('GET /api/admin/posts', function () {
   it('should return an array of posts', async function () {
     var token = await getApiToken()
     await request
@@ -50,8 +54,10 @@ describe('blog/admin module', function () {
         expect(result.length).to.not.equal(0)
       })
   })
+})
 
-  it('should return post data when updating post', async function () {
+describe('PUT /api/admin/posts/:id', function () {
+  it('should return updated post data', async function () {
     var token = await getApiToken()
     await request
       .put(`/api/admin/posts/${post._id}`)
@@ -68,8 +74,10 @@ describe('blog/admin module', function () {
         expect(result.title).to.equal('updated post')
       })
   })
+})
 
-  it('should return post data when deleting post', async function () {
+describe('DELETE /api/admin/posts/:id', function () {
+  it('should return data of deleted post', async function () {
     var token = await getApiToken()
     await request
       .delete(`/api/admin/posts/${post._id}`)
@@ -82,11 +90,12 @@ describe('blog/admin module', function () {
         expect(result.title).to.equal('updated post')
       })
   })
+})
 
+describe('GET /api/admin/posts', function () {
   it('should return 401 status when getting posts without token', async function () {
     await request
       .get('/api/admin/posts')
       .expect(401)
   })
-
 })

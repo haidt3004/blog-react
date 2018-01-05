@@ -1,6 +1,6 @@
 const { request, expect, getApiToken } = require('./common')
 
-describe('admin module', function () {
+describe('POST /api/admin/session', function () {
   it('should return token when login success', function (done) {
     request
       .post('/api/admin/session')
@@ -17,8 +17,10 @@ describe('admin module', function () {
       })
       .end(done)
   })
+})
 
-  it('should return profile data when get', async function () {
+describe('GET /api/admin/account', function () {
+  it('should return profile data', async function () {
     var token = await getApiToken()
     await request
       .get('/api/admin/account')
@@ -30,8 +32,10 @@ describe('admin module', function () {
         expect(result).to.have.property('username')
       })
   })
+})
 
-  it('should return profile data when updating', async function () {
+describe('PUT /api/admin/session', function () {
+  it('should return updated profile data', async function () {
     var token = await getApiToken()
     await request
       .put('/api/admin/account')
@@ -48,5 +52,4 @@ describe('admin module', function () {
         expect(result.username).to.equal('admin1')
       })
   })
-
 })

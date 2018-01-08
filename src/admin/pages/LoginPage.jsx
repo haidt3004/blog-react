@@ -37,7 +37,7 @@ class LoginPage extends Component {
     return (
       <div className="login-box">
         <div className="login-logo">
-          <a role="button"><strong>Notebook</strong></a>
+          <a role="button"><strong>React Blog</strong></a>
         </div>
         <div className="login-box-body">
           <p className="login-box-msg">

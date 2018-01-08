@@ -8,6 +8,7 @@ import Checkbox from 'material-ui/Checkbox'
 import TextField from 'material-ui/TextField'
 import MuiTheme from './theme'
 
+import 'bootstrap/dist/css/bootstrap.css'
 import styles from './BlankLayout.scss'
 
 class BlankLayout extends Component {

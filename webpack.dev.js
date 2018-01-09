@@ -7,9 +7,9 @@ module.exports = merge(common, {
     contentBase: './dist',
     historyApiFallback: true,
     proxy: {
-      '/api': 'http://localhost:1000'
+      '/api': 'http://localhost:3000'
     },
-    port: 1002
+    port: 3001
   },
   devtool: 'inline-source-map',
   plugins: [

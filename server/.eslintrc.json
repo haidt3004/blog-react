@@ -12,10 +12,6 @@
       "error",
       2
     ],
-    "linebreak-style": [
-      "off",
-      "windows"
-    ],
     "quotes": [
       "error",
       "single"

@@ -39,8 +39,25 @@ module.exports = {
   },
   module: {
     rules: [
+      // load image
       {
-        test: /\.(css|scss)$/,
+        test: /\.(png|svg|jpg|gif)$/,
+        use: ['file-loader']
+      },
+      // load font
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: ['file-loader']
+      },
+      // load css files
+      {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
+      },
+      // load scss (sass) files in app (with css module enabled)
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
         use: [
           {
             // Adds CSS to the DOM by injecting a <style> tag
@@ -54,17 +71,10 @@ module.exports = {
           {
             // compiles Sass to CSS
             loader: 'sass-loader'
-          }
+          },
         ]
       },
-      {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: ['file-loader']
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: ['file-loader']
-      },
+      // load javascript/reactjs in app
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,

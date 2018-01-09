@@ -1,11 +1,6 @@
 import React, { Component } from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import { Link } from 'react-router-dom'
 import Paper from 'material-ui/Paper'
-import RaisedButton from 'material-ui/RaisedButton'
-import FlatButton from 'material-ui/FlatButton'
-import Checkbox from 'material-ui/Checkbox'
-import TextField from 'material-ui/TextField'
 import MuiTheme from './theme'
 
 import 'bootstrap/dist/css/bootstrap.css'
@@ -14,32 +9,15 @@ import styles from './BlankLayout.scss'
 class BlankLayout extends Component {
 
   render() {
+    const { title, children } = this.props
     return (
       <MuiThemeProvider muiTheme={MuiTheme}>
         <div className="container-fluid">
+          <h1 className={styles.pageTitle}>{title}</h1>
           <div className="row">
-            <div className="col-md-4 col-md-offset-4">
-              <Paper>
-                <form>
-                  <TextField
-                    hintText="E-mail"
-                    floatingLabelText="E-mail"
-                    fullWidth={true}
-                  />
-                  <TextField
-                    hintText="Password"
-                    floatingLabelText="Password"
-                    fullWidth={true}
-                    type="password"
-                  />
-
-                  <div>
-                    <Checkbox label="Remember me" />
-                    <Link to="/">
-                      <RaisedButton label="Login" primary={true} />
-                    </Link>
-                  </div>
-                </form>
+            <div className="col-md-4 col-md-offset-4 col-sm-6  col-sm-offset-3">
+              <Paper className={styles.container}>
+                {children}
               </Paper>
             </div>
           </div>

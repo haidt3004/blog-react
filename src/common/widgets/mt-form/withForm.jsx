@@ -19,6 +19,10 @@ function withForm(WrappedInput) {
       return form
     }
 
+    getFieldErrors() {
+      return this.getForm().getFieldErrors(this.props.field)
+    }
+
     onChange(value) {
       this.getForm().onChange(this.props.field, value)
     }
@@ -26,7 +30,8 @@ function withForm(WrappedInput) {
     render() {
       var { field, ...passThroughProps } = this.props
       var value = this.getForm().getFieldValue(field)
-      return <WrappedInput name={field} value={value} onChange={this.onChange} {...passThroughProps} />
+      var errors = this.getFieldErrors()
+      return <WrappedInput value={value} onChange={this.onChange} errorText={errors[0]} {...passThroughProps} />
     }
   }
 

@@ -1,41 +1,61 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
-import Form from '../../common/widgets/form/Form'
-import FormGroup from '../../common/widgets/form/FormGroup'
-import ErrorList from '../../common/widgets/form/ErrorList'
-import Checkbox from '../../common/widgets/form/Checkbox'
-import TextInput from '../../common/widgets/form/TextInput'
-import PasswordInput from '../../common/widgets/form/PasswordInput'
+import Form from '../../common/widgets/mt-form/Form'
+import Checkbox from '../../common/widgets/mt-form/Checkbox'
+import TextField from '../../common/widgets/mt-form/TextField'
+import RaisedButton from 'material-ui/RaisedButton'
 
-const LoginForm = props => (
-  <Form {...props}>
-    <FormGroup field="loginId" className="has-feedback">
-      <TextInput name="loginId" className="form-control" placeholder="Email" />
-      <span className="glyphicon glyphicon-envelope form-control-feedback"></span>
-      <ErrorList />
-    </FormGroup>
+import styles from './BlankLayout.scss'
 
-    <FormGroup field="password" className="has-feedback">
-      <PasswordInput name="password" className="form-control" placeholder="Password" />
-      <span className="glyphicon glyphicon-lock form-control-feedback"></span>
-      <ErrorList />
-    </FormGroup>
+class LoginForm extends Component {
 
-    <div className="row">
-      <div className="col-xs-8">
-        <div className="checkbox">
-          <label>
-            <Checkbox name="remember" /> Remember Me
-          </label>
+  constructor(props) {
+    super(props)
+    this.onSubmit = this.onSubmit.bind(this)
+  }
+
+  onSubmit(event) {
+    event.preventDefault()
+    this.props.onSubmit()
+  }
+
+  render() {
+    const { onSubmit, ...formProps } = this.props
+
+    return (
+      <Form {...formProps}>
+        <TextField
+          hintText="E-mail"
+          floatingLabelText="E-mail"
+          fullWidth={true}
+          field="loginId"
+        />
+        <TextField
+          hintText="Password"
+          floatingLabelText="Password"
+          fullWidth={true}
+          type="password"
+          field="password"
+        />
+        <div className={`row ${styles.bottom}`}>
+          <div className="col-xs-7">
+            <Checkbox label="Remember me" field="remember"/>
+          </div>
+          <div className="col-xs-5 text-right">
+            <Link to="/">
+              <RaisedButton label="Sign In" primary={true} onClick={this.onSubmit}/>
+            </Link>
+          </div>
         </div>
-      </div>
-      <div className="col-xs-4">
-        <button type="submit" className="btn btn-primary btn-block btn-flat">
-          Sign In
-        </button>
-      </div>
-    </div>
-  </Form>
-)
+      </Form>
+    )
+  }
+}
+
+LoginForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+}
 
 export default LoginForm

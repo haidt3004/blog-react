@@ -2,20 +2,24 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import * as common from '../actions'
+import Snackbar from 'material-ui/Snackbar'
 
 class Alert extends Component {
 
   render() {
     var { alert: { type, message }, clearAlert } = this.props
-    var bsClass = `alert alert-${type==='error' ? 'danger': type}`
-    return message.length>0 ? (
-      <div className={bsClass}>
-        <button type="button" className="close" onClick={()=>clearAlert()}>
-          <span aria-hidden="true">&times;</span>
-        </button>
-        {message}
-      </div>
-    ) : null
+    var style = {
+      color: type==='error' ? 'red': 'green'
+    }
+    return (
+      <Snackbar
+        open={message.length>0}
+        message={message}
+        autoHideDuration={3000}
+        onRequestClose={clearAlert}
+        contentStyle={style}
+      />
+    )
   }
 }
 

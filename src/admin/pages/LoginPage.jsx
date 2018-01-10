@@ -6,8 +6,6 @@ import PropTypes from 'prop-types'
 
 import * as actions from '../actions'
 import { getObjectValue } from '../../common/helpers'
-import Spinner from '../../common/widgets/Spinner'
-import Alert from '../../common/widgets/Alert'
 import BlankLayout from '../widgets/BlankLayout'
 import LoginForm from '../widgets/LoginForm'
 
@@ -17,16 +15,18 @@ class LoginPage extends Component {
     super(props)
     this.onSubmit = this.onSubmit.bind(this)
     this.state = { isLogged: false }
+    props.layout.setTitle('Admin Login')
   }
 
-  onSubmit(data) {
-    this.props.login(data)
+  onSubmit() {
+    const { login, data } = this.props
+    login(data)
       .then(() => this.setState({ isLogged: true }))
       .catch(() => null)
   }
 
   render() {
-    const { data, errors, isLoading, setLoginData } = this.props
+    const { data, errors, setLoginData } = this.props
 
     if (this.state.isLogged) {
       const from = getObjectValue(this.props, 'location.state.from',
@@ -35,18 +35,9 @@ class LoginPage extends Component {
     }
 
     return (
-      <div className="login-box">
-        <div className="login-logo">
-          <a role="button"><strong>React Blog</strong></a>
-        </div>
-        <div className="login-box-body">
-          <p className="login-box-msg">
-            Sign in to start your session
-            {isLoading ? <Spinner /> : null}
-          </p>
-          <Alert />
-          <LoginForm data={data} errors={errors} onSubmit={this.onSubmit} onChange={setLoginData} />
-        </div>
+      <div>
+        <div className="text-center">Sign in to start your session</div>
+        <LoginForm data={data} errors={errors} onSubmit={this.onSubmit} onChange={setLoginData} />
       </div>
     )
   }
@@ -56,7 +47,6 @@ const mapStateToProps = state => {
   return {
     data: state.admin.login.data,
     errors: state.admin.login.errors,
-    isLoading: state.common.isLoading,
   }
 }
 
@@ -70,9 +60,9 @@ const mapDispatchToProps = dispatch => {
 LoginPage.propTypes = {
   data: PropTypes.object,
   errors: PropTypes.object,
-  isLoading: PropTypes.bool,
   login: PropTypes.func,
   setLoginData: PropTypes.func,
+  layout: PropTypes.instanceOf(Component),
 }
 
 export default compose(

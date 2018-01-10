@@ -23,7 +23,7 @@ class Checkbox extends Component {
   }
 
   render() {
-    const { onChange, value, checkValue, unCheckValue, ...passThroughProps } = this.props
+    const { onChange, value, checkValue, unCheckValue, errorText, ...passThroughProps } = this.props
     return (<MCheckbox checked={this.getViewValue(value)} onCheck={this.onChange} {...passThroughProps} />)
   }
 }

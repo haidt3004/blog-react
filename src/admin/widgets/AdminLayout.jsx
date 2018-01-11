@@ -1,83 +1,60 @@
-import 'font-awesome/css/font-awesome.min.css'
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap/dist/js/bootstrap.min.js'
-import $ from 'jquery'
-
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import { compose } from 'redux'
+import 'bootstrap/dist/css/bootstrap.css'
 
+import withErrorBoundary from '../../common/widgets/withErrorBoundary'
+import ErrorPage from '../pages/ErrorPage'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import MuiTheme from './mui-theme'
+import Alert from '../../common/widgets/Alert'
 import Header from './AdminLayout/Header'
 import Sidebar from './AdminLayout/Sidebar'
-import TopButton from '../widgets/TopButton'
-import Alert from '../../common/widgets/Alert'
 
-function AdminLayout(WrappedComponent) {
-  class LayoutComponent extends Component {
+function withAdminLayout(WrappedComponent) {
+
+  class AdminLayout extends Component {
+
     constructor(props) {
       super(props)
+      this.toggleSideBar = this.toggleSideBar.bind(this)
       this.state = {
-        title: 'Page title',
-        hasError: false
+        showSidebar: false,
+        title: 'Page Title',
       }
+    }
+
+    toggleSideBar() {
+      this.setState((prevState, props) => ({
+        showSidebar: !prevState.showSidebar
+      }))
     }
 
     setTitle(title) {
       this.setState({ title })
     }
 
-    componentDidCatch(error, info) {
-      this.setState({
-        title: 'Opps...',
-        hasError: true,
-        error,
-        info
-      })
-      // TODO: log error to sentry
-    }
-
-    errorPage() {
-      // TODO: render sentry feedback form
-      return (
-        <p>Something went wrong.</p>
-      )
-    }
-
-    componentDidMount() {
-    }
-
-    componentWillUnmount() {
-    }
-
     render() {
+      const { showSidebar } = this.state
       return (
-        <div className="wrapper">
-          <Header />
-          <Sidebar />
-          <div className="content-wrapper">
-            <section className="content-header">
-              <h1>{this.state.title}</h1>
-            </section>
-
-            <section className="content">
-              <Alert/>
-              { this.state.hasError ?
-                this.errorPage()
-                :<WrappedComponent layout={this} {...this.props}/>
-              }
-            </section>
+        <MuiThemeProvider muiTheme={MuiTheme}>
+          <div>
+            <Header onLeftIconButtonClick={this.toggleSideBar} />
+            <Sidebar open={showSidebar} toggle={this.toggleSideBar} />
+            <WrappedComponent layout={this} {...this.props} />
+            <Alert/>
           </div>
-          <TopButton />
-        </div>
+        </MuiThemeProvider>
       )
     }
   }
 
-  LayoutComponent.displayName = 'AdminLayout'
-  LayoutComponent.propTypes = {
-    title: PropTypes.string,
+  AdminLayout.propTypes = {
   }
-
-  return LayoutComponent
+  AdminLayout.displayName = 'AdminLayout'
+  return AdminLayout
 }
 
-export default AdminLayout
+export default compose(
+  withAdminLayout,
+  withErrorBoundary(ErrorPage)
+)

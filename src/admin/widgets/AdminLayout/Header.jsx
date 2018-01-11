@@ -1,39 +1,39 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+
+import AppBar from 'material-ui/AppBar'
+import IconMenu from 'material-ui/IconMenu'
+import IconButton from 'material-ui/IconButton'
+import PersonIcon from 'material-ui/svg-icons/social/person'
+import MenuItem from 'material-ui/MenuItem'
+import Divider from 'material-ui/Divider'
+import { white } from 'material-ui/styles/colors'
 import * as common from '../../../common/actions'
 
-const Header = ({ children, username, logout }) => {
-  return (
-    <header className="main-header">
-      <a role="button" className="logo">
-        <span className="logo-mini"><b>NB</b></span>
-        <span className="logo-lg">Note<b>Book</b></span>
-      </a>
-      <nav className="navbar navbar-static-top">
-        <a className="sidebar-toggle" data-toggle="push-menu" role="button">
-          <span className="sr-only">Toggle navigation</span>
-          <span className="icon-bar"></span>
-          <span className="icon-bar"></span>
-          <span className="icon-bar"></span>
-        </a>
+const Header = ({ username, logout, ...appBarProps }) => (
+  <AppBar
+    {...appBarProps}
+    iconElementRight={
+      <IconMenu
+        iconButtonElement={<IconButton><PersonIcon color={white} /></IconButton>}
+        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+        targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+      >
+        <MenuItem primaryText="Dashboard" containerElement={<Link to="/admin" />} />
+        <MenuItem primaryText="Profile" containerElement={<Link to="/admin/profile" />} />
+        <Divider/>
+        <MenuItem primaryText="Logout" onClick={logout} />
+      </IconMenu>
+    }
 
-        <div className="navbar-custom-menu">
-          <ul className="nav navbar-nav">
-            <li className="dropdown user">
-              <a role="button" className="dropdown-toggle" data-toggle="dropdown">
-                <span><i className="fa fa-user"></i>&nbsp;&nbsp;{username}</span>
-              </a>
-              <ul className="dropdown-menu">
-                <li><Link to="/admin/profile">Profile</Link></li>
-                <li><a role="button" onClick={logout}>Logout</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </header>
-  )
+  />
+)
+
+Header.propTypes = {
+  username: PropTypes.string,
+  logout: PropTypes.func,
 }
 
 const mapStateToProps = state => {

@@ -1,35 +1,37 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import Drawer from 'material-ui/Drawer'
 import { Link } from 'react-router-dom'
+import { List, ListItem } from 'material-ui/List'
+import FolderIcon from 'material-ui/svg-icons/file/folder'
+import LabelIcon from 'material-ui/svg-icons/action/label'
+import SettingIcon from 'material-ui/svg-icons/action/settings'
+import Divider from 'material-ui/Divider'
+import styles from '../AdminLayout.scss'
 
-const Sidebar = () => {
-  return (
-    <aside className="main-sidebar">
-      <section className="sidebar">
-        <ul className="sidebar-menu">
-          <li className="treeview active">
-            <a role="button">
-              <i className="fa fa-clock-o"></i>
-              <span>Content</span>
-            </a>
-            <ul className="treeview-menu">
-              <li>
-                <Link to="/admin/posts">
-                  <i className="fa fa-child"></i>
-                  <span>Posts</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/diary/tags">
-                  <i className="fa fa-tags"></i>
-                  <span>Tags</span>
-                </Link>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </section>
-    </aside>
-  )
+const Sidebar = ({open, toggle}) => (
+  <Drawer docked={false} open={open} onRequestChange={open => toggle()}>
+    <h1 className={styles.logo}>React Blog</h1>
+    <List>
+      <ListItem leftIcon={<FolderIcon />}>
+        <Link to="/admin/posts" className={styles['menu-item']}>Posts</Link>
+      </ListItem>
+      <ListItem leftIcon={<LabelIcon />}>
+        <Link to="admin/tags" className={styles['menu-item']}>Tags</Link>
+      </ListItem>
+    </List>
+    <Divider />
+    <List>
+      <ListItem leftIcon={<SettingIcon />}>
+        <Link to="admin/config" className={styles['menu-item']}>Configuration</Link>
+      </ListItem>
+    </List>
+  </Drawer>
+)
+
+Sidebar.propTypes = {
+  open: PropTypes.bool,
+  toggle: PropTypes.func,
 }
 
 export default Sidebar

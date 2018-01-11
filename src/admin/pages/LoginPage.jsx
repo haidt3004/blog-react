@@ -8,6 +8,8 @@ import * as actions from '../actions'
 import { getObjectValue } from '../../common/helpers'
 import BlankLayout from '../widgets/BlankLayout'
 import LoginForm from '../widgets/LoginForm'
+import ErrorPage from './ErrorPage'
+import withErrorBoundary from '../../common/widgets/withErrorBoundary'
 
 class LoginPage extends Component {
 
@@ -15,7 +17,10 @@ class LoginPage extends Component {
     super(props)
     this.onSubmit = this.onSubmit.bind(this)
     this.state = { isLogged: false }
-    props.layout.setTitle('Admin Login')
+  }
+
+  componentDidMount() {
+    this.props.layout.setTitle('Admin Login Page')
   }
 
   onSubmit() {
@@ -67,5 +72,6 @@ LoginPage.propTypes = {
 
 export default compose(
   BlankLayout,
+  withErrorBoundary(ErrorPage),
   connect(mapStateToProps, mapDispatchToProps)
 )(LoginPage)

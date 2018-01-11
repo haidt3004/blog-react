@@ -35,7 +35,7 @@ function BlankLayout(WrappedComponent) {
     }
 
     render() {
-      const { isLoading } = this.props
+      const { isLoading, ...compProps } = this.props
       return (
         <MuiThemeProvider muiTheme={MuiTheme}>
           <div className={styles.wrapper}>
@@ -44,7 +44,8 @@ function BlankLayout(WrappedComponent) {
               <div className="row">
                 <div className="col-md-4 col-md-offset-4 col-sm-6  col-sm-offset-3">
                   <Paper className={styles.container}>
-                    <WrappedComponent layout={this} {...this.props} />
+                    <WrappedComponent layout={this} {...compProps} />
+
                     { isLoading ? <div className="text-center"><CircularProgress/></div> : null }
                   </Paper>
                 </div>
@@ -62,12 +63,13 @@ function BlankLayout(WrappedComponent) {
     isLoading: PropTypes.bool,
   }
   LayoutComponent.displayName = 'BlankLayout'
+  return connect(mapStateToProps)(LayoutComponent)
+}
 
-  return connect(state => {
-    return {
-      isLoading: state.common.isLoading,
-    }
-  })(LayoutComponent)
+const mapStateToProps = state => {
+  return {
+    isLoading: state.common.isLoading,
+  }
 }
 
 export default BlankLayout

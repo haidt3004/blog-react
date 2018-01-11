@@ -19,11 +19,11 @@ function withBlankLayout(WrappedComponent) {
   class BlankLayout extends Component {
 
     componentDidMount() {
-      $('body').addClass(styles.blankLayout)
+      $('body').addClass(styles.wrapper)
     }
 
     componentWillUnmount() {
-      $('body').removeClass(styles.blankLayout)
+      $('body').removeClass(styles.wrapper)
     }
 
     constructor(props) {
@@ -41,21 +41,19 @@ function withBlankLayout(WrappedComponent) {
       const { isLoading, ...compProps } = this.props
       return (
         <MuiThemeProvider muiTheme={MuiTheme}>
-          <div className={styles.wrapper}>
-            <div className="container-fluid">
-              <h1 className={styles.pageTitle}>{this.state.title}</h1>
-              <div className="row">
-                <div className="col-md-4 col-md-offset-4 col-sm-6  col-sm-offset-3">
-                  <Paper className={styles.container}>
-                    <WrappedComponent layout={this} {...compProps} />
+          <div className="container-fluid">
+            <h1 className={styles.pageTitle}>{this.state.title}</h1>
+            <div className="row">
+              <div className="col-md-4 col-md-offset-4 col-sm-6  col-sm-offset-3">
+                <Paper className={styles.container}>
+                  <WrappedComponent layout={this} {...compProps} />
 
-                    { isLoading ? <div className="text-center"><CircularProgress/></div> : null }
-                  </Paper>
-                </div>
+                  { isLoading ? <div className="text-center"><CircularProgress/></div> : null }
+                </Paper>
               </div>
-
-              <Alert/>
             </div>
+
+            <Alert/>
           </div>
         </MuiThemeProvider>
       )

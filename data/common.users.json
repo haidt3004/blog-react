@@ -3,8 +3,8 @@
 		"$oid": "59b39bcf538ff606c04d12db"
 	},
 	"__v": 0,
-	"username": "admin",
-	"email": "admin@m.mm",
-	"password": "$2a$10$ni3xiw7sVO4YYWC859fJXeoNCcz4jrkhXpvU6xUh3NvPdNbWswP7."
+	"username": "demo",
+	"email": "demo@example.com",
+	"password": "$2a$10$3UZlrlVFx9QZYabAaVXbz.rPhbDNFbTE/FM/rH6ax5fmoReFGjFJi"
 }]
 

@@ -1,6 +1,6 @@
 const { request, expect } = require('./common')
 
-describe.only('GET /api/posts', function () {
+describe('GET /api/posts', function () {
   it('should return array of posts', async function () {
     await request
       .get('/api/posts')
@@ -14,7 +14,7 @@ describe.only('GET /api/posts', function () {
   })
 })
 
-describe.only('GET /api/posts/:id', function () {
+describe('GET /api/posts/:id', function () {
   it('should return post data', async function () {
     // post id come from test data
     var id = '5a45f0f86ed4eb04b810ebb6'

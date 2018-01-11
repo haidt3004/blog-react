@@ -1,19 +1,22 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 import $ from 'jquery'
 import 'bootstrap/dist/css/bootstrap.css'
 import styles from './BlankLayout.scss'
 
+import withErrorBoundary from '../../common/widgets/withErrorBoundary'
+import ErrorPage from '../pages/ErrorPage'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import MuiTheme from './mui-theme'
 import Paper from 'material-ui/Paper'
 import CircularProgress from 'material-ui/CircularProgress'
 import Alert from '../../common/widgets/Alert'
 
-function BlankLayout(WrappedComponent) {
+function withBlankLayout(WrappedComponent) {
 
-  class LayoutComponent extends Component {
+  class BlankLayout extends Component {
 
     componentDidMount() {
       $('body').addClass(styles.blankLayout)
@@ -59,11 +62,11 @@ function BlankLayout(WrappedComponent) {
     }
   }
 
-  LayoutComponent.propTypes = {
+  BlankLayout.propTypes = {
     isLoading: PropTypes.bool,
   }
-  LayoutComponent.displayName = 'BlankLayout'
-  return connect(mapStateToProps)(LayoutComponent)
+  BlankLayout.displayName = 'BlankLayout'
+  return BlankLayout
 }
 
 const mapStateToProps = state => {
@@ -72,4 +75,8 @@ const mapStateToProps = state => {
   }
 }
 
-export default BlankLayout
+export default compose(
+  connect(mapStateToProps),
+  withBlankLayout,
+  withErrorBoundary(ErrorPage)
+)

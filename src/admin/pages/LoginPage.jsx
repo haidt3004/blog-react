@@ -8,8 +8,6 @@ import * as actions from '../actions'
 import { getObjectValue } from '../../common/helpers'
 import BlankLayout from '../widgets/BlankLayout'
 import LoginForm from '../widgets/LoginForm'
-import ErrorPage from './ErrorPage'
-import withErrorBoundary from '../../common/widgets/withErrorBoundary'
 
 class LoginPage extends Component {
 
@@ -72,6 +70,5 @@ LoginPage.propTypes = {
 
 export default compose(
   BlankLayout,
-  withErrorBoundary(ErrorPage),
   connect(mapStateToProps, mapDispatchToProps)
 )(LoginPage)

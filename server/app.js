@@ -3,6 +3,14 @@ const app = express()
 const { notFoundExc } = require('./modules/common/helpers')
 const logger = require('./modules/common/log')
 
+// You want to test your fancy ajax loaders, spinners and stuff
+// but your dev machine is too damn fast for that shit!
+if (process.env.NODE_ENV === 'dev') {
+  var delay = require('express-delay')
+  // Delay all responses for 1 second
+  app.use(delay(1000))
+}
+
 // integrate sentry with raven-node
 const sentry = require('./modules/common/sentry')
 sentry.install()

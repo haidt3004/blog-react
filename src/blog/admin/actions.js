@@ -10,6 +10,7 @@ export const loadPosts = () => {
     return dispatch(common.request({
       url: 'admin/posts',
       method: 'get',
+      loadingState: 'loadPosts'
     })).then(response => {
       dispatch(setPosts(response.data))
     }).catch(() => null)

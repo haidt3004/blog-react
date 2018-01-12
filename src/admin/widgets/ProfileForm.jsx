@@ -45,7 +45,7 @@ const ProfileForm = ({ onSubmit, data, ...otherProps }) => (
       type="password"
       field="repeatPassword"
     />
-    <div className={styles.formActions}>
+    <div className={styles.mt}>
       <RaisedButton label="Save" primary={true} onClick={()=> onSubmit(data)}/>
     </div>
   </Form>

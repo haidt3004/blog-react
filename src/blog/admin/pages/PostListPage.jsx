@@ -5,9 +5,19 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import * as actions from '../actions'
+import styles from '../../../admin/widgets/AdminLayout.scss'
 import LoginRequired from '../../../admin/widgets/LoginRequired'
 import AdminLayout from '../../../admin/widgets/AdminLayout'
-import Spinner from '../../../common/widgets/Spinner'
+import CircularProgress from 'material-ui/CircularProgress'
+import RaisedButton from 'material-ui/RaisedButton'
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn,
+} from 'material-ui/Table'
 
 class PostListPage extends Component {
 
@@ -32,40 +42,35 @@ class PostListPage extends Component {
     const { posts, isLoading } = this.props
     return (
       <div>
-        { isLoading ? <Spinner/> : null }
+        <div className={styles.mb}><Link to="/admin/posts/add"><RaisedButton label="Add" primary={true} /></Link></div>
+        { isLoading ? <CircularProgress/> : null }
         { !isLoading && (
-          <div className="box box-primary">
-            <div className="box-body">
-              <p><Link to="/admin/posts/add" className="btn btn-success">
-                <span className="glyphicon glyphicon-plus-sign"></span>&nbsp;Add
-              </Link></p>
-
-              <table className="table table-bordered">
-                <tbody>
-                  <tr>
-                    <th>#</th>
-                    <th>Title</th>
-                    <th></th>
-                  </tr>
-                  { posts.map((post, index) => (
-                    <tr key={post._id}>
-                      <td>{index+1}</td>
-                      <td>{post.title}</td>
-                      <td>
-                        <Link to={`/admin/posts/edit/${post._id}`} className="btn btn-primary btn-xs" title="Edit">
-                          <span className="glyphicon glyphicon-edit"></span>
-                        </Link>
-                        &nbsp;
-                        <a className="btn btn-danger btn-xs" title="Edit" onClick={this.onDelete.bind(this, post)} role="button">
-                          <span className="glyphicon glyphicon-trash"></span>
-                        </a>
-                      </td>
-                    </tr>
-                  )) }
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <Table>
+            <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+              <TableRow>
+                <TableHeaderColumn>#</TableHeaderColumn>
+                <TableHeaderColumn>Title</TableHeaderColumn>
+                <TableHeaderColumn></TableHeaderColumn>
+              </TableRow>
+            </TableHeader>
+            <TableBody displayRowCheckbox={false}>
+              { posts.map((post, index) => (
+                <TableRow key={post._id}>
+                  <TableRowColumn>{index+1}</TableRowColumn>
+                  <TableRowColumn>{post.title}</TableRowColumn>
+                  <TableRowColumn>
+                    <Link to={`/admin/posts/edit/${post._id}`} className="btn btn-primary btn-xs" title="Edit">
+                      <span className="glyphicon glyphicon-edit"></span>
+                    </Link>
+                    &nbsp;
+                    <a className="btn btn-danger btn-xs" title="Edit" onClick={this.onDelete.bind(this, post)} role="button">
+                      <span className="glyphicon glyphicon-trash"></span>
+                    </a>
+                  </TableRowColumn>
+                </TableRow>
+              )) }
+            </TableBody>
+          </Table>
         ) }
       </div>
     )
@@ -82,7 +87,7 @@ PostListPage.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    isLoading: state.common.isLoading,
+    isLoading: state.common.isLoading.loadPosts,
     posts: state.blog.admin.postList.items
   }
 }

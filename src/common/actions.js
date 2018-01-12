@@ -32,7 +32,7 @@ export const clearIdentity = () => dispatch => {
  *
  * @param {Object} config
  */
-export const request = ({ progress=true, ...config }) => {
+export const request = ({ loadingState='default', ...config }) => {
   return (dispatch, getState) => {
     // create axios config with default values
     var axiosCfg = {
@@ -49,13 +49,13 @@ export const request = ({ progress=true, ...config }) => {
     }
 
     // execute http request
-    if (progress) dispatch(setLoading(true))
+    if (loadingState) dispatch(setLoading({ loadingState, value:true }))
     return axios(axiosCfg)
       .then(response => {
-        if (progress) dispatch(setLoading(false))
+        if (loadingState) dispatch(setLoading({ loadingState, value:false }))
         return response
       }).catch(error => {
-        if (progress) dispatch(setLoading(false))
+        if (loadingState) dispatch(setLoading({ loadingState, value:false }))
 
         // display error message
         var message = 'An error occurred while processing your request'

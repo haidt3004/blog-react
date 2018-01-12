@@ -31,10 +31,10 @@ const alert = handleActions({
 })
 
 const isLoading = handleActions({
-  [actions.setLoading](state, {payload}) {
-    return payload
+  [actions.setLoading](state, { payload: { loadingState, value } }) {
+    return {...state, [loadingState]: value }
   },
-}, false)
+}, {})
 
 export default combineReducers({
   identity,

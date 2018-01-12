@@ -37,6 +37,7 @@ export const loadProfile = () => {
     return dispatch(common.request({
       url: 'admin/account',
       method: 'get',
+      loadingState: 'loadProfile'
     })).then(response => {
       dispatch(setProfile(response.data))
     }).catch(() => null)

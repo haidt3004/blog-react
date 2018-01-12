@@ -4,6 +4,9 @@ const MongoClient = require('mongodb').MongoClient
 const ObjectID = require('mongodb').ObjectID
 
 async function connect(dbUri) {
+  if (!dbUri) {
+    throw new Error('Database connection string is not set')
+  }
   var con = await MongoClient.connect(dbUri)
   var dbName = dbUri.replace(/.*\//, '')
   var db = con.db(dbName)

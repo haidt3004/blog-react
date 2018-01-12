@@ -5,8 +5,8 @@ describe('POST /api/admin/session', function () {
     request
       .post('/api/admin/session')
       .send({
-        'loginId': 'admin@m.mm',
-        'password': '123123'
+        'loginId': 'demo',
+        'password': 'demo'
       })
       .expect('Content-Type', /json/)
       .expect(200)

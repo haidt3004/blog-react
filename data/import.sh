@@ -1,2 +1,2 @@
-mongoimport --host localhost:27017 --db rblog --collection common.users --file data/common.users.json --jsonArray --drop
-mongoimport --host localhost:27017 --db rblog --collection blog.posts --file data/blog.posts.json --jsonArray --drop
+mongoimport --host localhost:3002 --db blog --collection common.users --file data/common.users.json --jsonArray --drop
+mongoimport --host localhost:3002 --db blog --collection blog.posts --file data/blog.posts.json --jsonArray --drop

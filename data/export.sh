@@ -1,2 +1,2 @@
-mongoexport --host localhost:27017 --db rblog -c common.users --out data/common.users.json --jsonArray --pretty
-mongoexport --host localhost:27017 --db rblog -c blog.posts --out data/blog.posts.json --jsonArray --pretty
+mongoexport --host localhost:27017 --db blog -c common.users --out data/common.users.json --jsonArray --pretty
+mongoexport --host localhost:27017 --db blog -c blog.posts --out data/blog.posts.json --jsonArray --pretty

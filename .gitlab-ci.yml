@@ -5,7 +5,7 @@ services:
   alias: mymongo
 
 variables:
-  DB_URI: "mongodb://mymongo/rblog"
+  DB_URI: "mongodb://mymongo/blog"
   PORT: "1000"
   DEBUG: "*,-express:*,-morgan,-send,-body-parser:*"
 

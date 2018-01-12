@@ -3,3 +3,4 @@ node_modules/
 
 # nodejs server
 server/node_modules/
+server/.env

@@ -1,8 +1,8 @@
 # Use an official Node runtime as a parent image
-FROM node:8.9
+FROM node:8.9-alpine
 
-# Make port 1000 available to the world outside this container
-EXPOSE 1000
+# Make port 3000 available to the world outside this container
+EXPOSE 3000
 
 # Set the working directory to /app
 WORKDIR /app

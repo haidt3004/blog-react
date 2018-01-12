@@ -3,7 +3,7 @@ const validate = require('validate.js')
 function validateLoginForm(data) {
   var rules = {
     loginId: {
-      presence: { message: '^Email can\'t be blank' },
+      presence: { message: '^Username can\'t be blank' },
     },
     password: {
       presence: true,

@@ -12,8 +12,8 @@ const login = handleActions({
   },
 }, {
   data: {
-    loginId: 'admin@m.m',
-    password: '123123',
+    loginId: 'demo',
+    password: 'demo',
     remember: true,
   },
   errors: null,

@@ -13,7 +13,7 @@ async function login(req, res, next) {
       return next(validationExc('Please correct your input.', errors))
     }
 
-    var user = await User.findOne({ email: data.loginId })
+    var user = await User.findOne({ username: data.loginId })
     if (!user || !user.checkPassword(data.password)) {
       return res.status(400).json(validationExc('Invalid login information.'))
     }

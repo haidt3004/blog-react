@@ -3,7 +3,7 @@ import validate from 'validate.js'
 export function validateLoginData(data) {
   var rules = {
     loginId: {
-      presence: { message: '^Email can\'t be blank', allowEmpty: false },
+      presence: { message: '^Username can\'t be blank', allowEmpty: false },
     },
     password: {
       presence: { allowEmpty: false },
@@ -15,10 +15,10 @@ export function validateLoginData(data) {
 export function validateProfileData(data) {
   var rules = {
     email: {
-      presence: true,
+      presence: { allowEmpty: false },
     },
     username: {
-      presence: true,
+      presence: { allowEmpty: false },
     },
   }
   return validate(data, rules, { format: 'grouped' })

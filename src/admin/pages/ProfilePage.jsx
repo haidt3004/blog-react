@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import * as admin from '../actions'
 import LoginRequired from '../widgets/LoginRequired'
 import AdminLayout from '../widgets/AdminLayout'
-import Spinner from '../../common/widgets/Spinner'
+import CircularProgress from 'material-ui/CircularProgress'
 import ProfileForm from '../widgets/ProfileForm'
 
 class ProfilePage extends Component {
@@ -20,13 +20,9 @@ class ProfilePage extends Component {
     const { data, errors, isLoading, setProfile, saveProfile } = this.props
     return (
       <div>
-        { isLoading ? <Spinner/> : null }
-        { data ? (
-          <div className="box box-primary">
-            <div className="box-body">
-              <ProfileForm data={data} errors={errors} onSubmit={saveProfile} onChange={setProfile} />
-            </div>
-          </div>
+        { isLoading ? <CircularProgress/> : null }
+        { !isLoading ? (
+          <ProfileForm data={data} errors={errors} onSubmit={saveProfile} onChange={setProfile} />
         ) : null }
       </div>
     )
@@ -38,6 +34,7 @@ ProfilePage.propTypes = {
   data: PropTypes.object,
   errors: PropTypes.object,
   isLoading: PropTypes.bool,
+  isSaving: PropTypes.bool,
   loadProfile: PropTypes.func,
   setProfile: PropTypes.func,
   saveProfile: PropTypes.func,
@@ -47,7 +44,8 @@ const mapStateToProps = state => {
   return {
     data: state.admin.profile.data,
     errors: state.admin.profile.errors,
-    isLoading: state.common.isLoading,
+    isLoading: state.common.isLoading.loadProfile,
+    isSaving: state.common.isLoading.default,
   }
 }
 

@@ -1,60 +1,58 @@
-import React, { Component } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import Form from '../../common/widgets/form/Form'
-import FormGroup from '../../common/widgets/form/FormGroup'
-import ErrorList from '../../common/widgets/form/ErrorList'
-import TextInput from '../../common/widgets/form/TextInput'
-import PasswordInput from '../../common/widgets/form/PasswordInput'
+import Form from '../../common/widgets/mt-form/Form'
+import TextField from '../../common/widgets/mt-form/TextField'
+import RaisedButton from 'material-ui/RaisedButton'
+import Subheader from 'material-ui/Subheader'
+import styles from './AdminLayout.scss'
 
-const ProfileForm = props => (
-  <Form {...props} className="form-horizontal">
-    <fieldset>
-      <legend>Account Information</legend>
-      <FormGroup field="username">
-        <label className="control-label col-sm-2">Username</label>
-        <div className="col-sm-6">
-          <TextInput name="username" className="form-control" />
-          <ErrorList />
-        </div>
-      </FormGroup>
-      <FormGroup field="email">
-        <label className="control-label col-sm-2">Email</label>
-        <div className="col-sm-6">
-          <TextInput name="email" className="form-control" />
-          <ErrorList />
-        </div>
-      </FormGroup>
-    </fieldset>
-    <fieldset>
-      <legend>Change password</legend>
-      <FormGroup field="currentPassword">
-        <label className="control-label col-sm-2">Old Password</label>
-        <div className="col-sm-6">
-          <PasswordInput name="currentPassword" className="form-control" />
-          <ErrorList />
-        </div>
-      </FormGroup>
-      <FormGroup field="password">
-        <label className="control-label col-sm-2">New Password</label>
-        <div className="col-sm-6">
-          <PasswordInput name="password" className="form-control" />
-          <ErrorList />
-        </div>
-      </FormGroup>
-      <FormGroup field="repeatPassword">
-        <label className="control-label col-sm-2">Repeat Password</label>
-        <div className="col-sm-6">
-          <PasswordInput name="repeatPassword" className="form-control" />
-          <ErrorList />
-        </div>
-      </FormGroup>
-    </fieldset>
-    <div className="form-group">
-      <div className="col-sm-6 col-sm-offset-2">
-        <button type="submit" className="btn btn-primary">Save</button>
-      </div>
+const ProfileForm = ({ onSubmit, data, ...otherProps }) => (
+  <Form data={data} {...otherProps}>
+    <Subheader>Account Information</Subheader>
+    <TextField
+      hintText="Username"
+      floatingLabelText="Username"
+      fullWidth={true}
+      field="username"
+    />
+    <TextField
+      hintText="Email"
+      floatingLabelText="Email"
+      fullWidth={true}
+      field="email"
+    />
+
+    <Subheader>Change password</Subheader>
+    <TextField
+      hintText="Old Password"
+      floatingLabelText="Old Password"
+      fullWidth={true}
+      type="password"
+      field="currentPassword"
+    />
+    <TextField
+      hintText="New Password"
+      floatingLabelText="New Password"
+      fullWidth={true}
+      type="password"
+      field="password"
+    />
+    <TextField
+      hintText="Repeat Password"
+      floatingLabelText="Repeat Password"
+      fullWidth={true}
+      type="password"
+      field="repeatPassword"
+    />
+    <div className={styles.formActions}>
+      <RaisedButton label="Save" primary={true} onClick={()=> onSubmit(data)}/>
     </div>
   </Form>
 )
+
+ProfileForm.propTypes = {
+  onSubmit: PropTypes.func
+}
 
 export default ProfileForm

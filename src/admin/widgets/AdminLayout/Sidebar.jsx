@@ -11,7 +11,6 @@ import styles from '../AdminLayout.scss'
 
 const Sidebar = ({open, toggle}) => (
   <Drawer docked={false} open={open} onRequestChange={open => toggle()}>
-    <h1 className={styles.logo}>React Blog</h1>
     <List>
       <ListItem leftIcon={<FolderIcon />}>
         <Link to="/admin/posts" className={styles['menu-item']}>Posts</Link>

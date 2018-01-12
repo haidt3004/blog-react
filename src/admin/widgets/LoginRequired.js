@@ -1,11 +1,12 @@
-import React, { Component } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { validateIdentity, getComponentName } from '../../common/helpers'
 
 function LoginRequired(ProtectedComponent) {
 
-  const Protector = props => {
+  var Protector = props => {
     const { identity, ...passthroughProps } = props
 
     return validateIdentity(identity) ?
@@ -17,7 +18,9 @@ function LoginRequired(ProtectedComponent) {
   }
 
   Protector.displayName = `LoginRequired(${getComponentName(ProtectedComponent)})`
-
+  Protector.propTypes = {
+    identity: PropTypes.object,
+  }
   return connect(mapStateToProps)(Protector)
 }
 

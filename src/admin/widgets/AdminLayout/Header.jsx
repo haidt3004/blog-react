@@ -27,7 +27,6 @@ const Header = ({ username, logout, ...appBarProps }) => (
         <MenuItem primaryText="Logout" onClick={logout} />
       </IconMenu>
     }
-
   />
 )
 

@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { compose } from 'redux'
+import { connect } from 'react-redux'
 import 'bootstrap/dist/css/bootstrap.css'
+import styles from './AdminLayout.scss'
 
 import withErrorBoundary from '../../common/widgets/withErrorBoundary'
 import ErrorPage from '../pages/ErrorPage'
@@ -9,6 +12,8 @@ import MuiTheme from './mui-theme'
 import Alert from '../../common/widgets/Alert'
 import Header from './AdminLayout/Header'
 import Sidebar from './AdminLayout/Sidebar'
+import Paper from 'material-ui/Paper'
+import CircularProgress from 'material-ui/CircularProgress'
 
 function withAdminLayout(WrappedComponent) {
 
@@ -35,12 +40,26 @@ function withAdminLayout(WrappedComponent) {
 
     render() {
       const { showSidebar } = this.state
+      var headerProps = {
+        onLeftIconButtonClick: this.toggleSideBar,
+        title: 'React Blog',
+      }
+
+      if (this.props.isLoading) {
+        headerProps.iconElementLeft = <CircularProgress size={30} style={{marginTop:5, marginRight:9, marginLeft:9 }}/>
+      }
+
       return (
         <MuiThemeProvider muiTheme={MuiTheme}>
           <div>
-            <Header onLeftIconButtonClick={this.toggleSideBar} />
+            <Header {...headerProps} />
             <Sidebar open={showSidebar} toggle={this.toggleSideBar} />
-            <WrappedComponent layout={this} {...this.props} />
+            <div className={styles.wrapper}>
+              <Paper className={styles.container}>
+                <h1 className={styles.pageTitle}>{this.state.title}</h1>
+                <WrappedComponent layout={this} {...this.props} />
+              </Paper>
+            </div>
             <Alert/>
           </div>
         </MuiThemeProvider>
@@ -49,9 +68,16 @@ function withAdminLayout(WrappedComponent) {
   }
 
   AdminLayout.propTypes = {
+    isLoading: PropTypes.bool,
   }
   AdminLayout.displayName = 'AdminLayout'
-  return AdminLayout
+  return connect(mapStateToProps)(AdminLayout)
+}
+
+function mapStateToProps(state) {
+  return {
+    isLoading: state.common.isLoading.default,
+  }
 }
 
 export default compose(

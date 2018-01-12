@@ -5,26 +5,24 @@
 This is a simple blog application. I use it as a starter kit for any ReactJs/NodeJs projects in the future.
 
 
-## Run app with docker (no configuration required)
+## Run project with docker (no configuration required)
 
-1. Install [docker](https://www.docker.com/community-edition) and [docker-compose](https://docs.docker.com/compose/install/) to the target machine. Make sure port 8080 and 3002 are available.
+1. Install [docker](https://www.docker.com/community-edition) and [docker-compose](https://docs.docker.com/compose/install/) to the target machine. Make sure port 8080 and 3002 are available on the target machine.
 
-2. Run below command in terminal to start the app:
+2. Start the app
 
 ```
 docker-compose up -d
 ```
 
-3. Run below command in terminal to init database with sample data
+3. Init database with sample data
 
-```
-sh data/import.sh
-```
+...Comming soon
 
-4. Visit the address [http://localhost:8080](http://localhost:8080) in the browser. A website should show up.
+4. Visit the address [http://localhost:8080](http://localhost:8080). A website should show up.
 
 
-## Setup the project for development
+## Setup project for development
 
 ### 1. Installing dependencies
 
@@ -94,8 +92,26 @@ npm start
 └── webpack.prod.js             # Webpack configuration for production
 ```
 
-## Features
+## Tech stack
 
-### ReactJs app
+### ReactJs
 
-### NodeJs app
+- [x] Modularized source code structure
+- [x] Separated webpack configuration for development and production
+- [x] [CSS Module](https://github.com/css-modules/css-modules) support
+- [x] jQuery, Bootstrap 3 integrated
+- [x] SASS support
+- [x] [Material UI](http://www.material-ui.com/)
+- [x] [Sentry](https://sentry.io/welcome/) integrated
+- [x] React error boundary
+- [x] Redux
+- [x] React router
+
+### NodeJs
+
+- [x] Modularized source code structure
+- [x] RESTful api standard
+- [x] Authentication using Json Web Token
+- [x] [Sentry](https://sentry.io/welcome/) integrated
+- [x] Multi level logging (winston)
+- [x] [Dotenv](https://www.npmjs.com/package/dotenv) integrated. Easy to switch between environments (dev, production...)

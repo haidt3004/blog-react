@@ -40,6 +40,7 @@ class LoginPage extends Component {
     return (
       <div>
         <div className="text-center">Sign in to start your session</div>
+        <div className="text-center"><small>(demo / demo)</small></div>
         <LoginForm data={data} errors={errors} onSubmit={this.onSubmit} onChange={setLoginData} />
       </div>
     )

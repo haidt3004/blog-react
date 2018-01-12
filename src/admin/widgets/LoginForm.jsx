@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 
 import Form from '../../common/widgets/mt-form/Form'
 import Checkbox from '../../common/widgets/mt-form/Checkbox'
@@ -11,24 +10,14 @@ import styles from './BlankLayout.scss'
 
 class LoginForm extends Component {
 
-  constructor(props) {
-    super(props)
-    this.onSubmit = this.onSubmit.bind(this)
-  }
-
-  onSubmit(event) {
-    event.preventDefault()
-    this.props.onSubmit()
-  }
-
   render() {
     const { onSubmit, ...formProps } = this.props
 
     return (
       <Form {...formProps}>
         <TextField
-          hintText="E-mail"
-          floatingLabelText="E-mail"
+          hintText="Username"
+          floatingLabelText="Username"
           fullWidth={true}
           field="loginId"
         />
@@ -44,9 +33,7 @@ class LoginForm extends Component {
             <Checkbox label="Remember me" field="remember"/>
           </div>
           <div className="col-xs-5 text-right">
-            <Link to="/">
-              <RaisedButton label="Sign In" primary={true} onClick={this.onSubmit}/>
-            </Link>
+            <RaisedButton label="Sign In" primary={true} onClick={onSubmit}/>
           </div>
         </div>
       </Form>

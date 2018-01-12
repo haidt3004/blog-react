@@ -64,17 +64,16 @@ function withBlankLayout(WrappedComponent) {
     isLoading: PropTypes.bool,
   }
   BlankLayout.displayName = 'BlankLayout'
-  return BlankLayout
+  return connect(mapStateToProps)(BlankLayout)
 }
 
 const mapStateToProps = state => {
   return {
-    isLoading: state.common.isLoading,
+    isLoading: state.common.isLoading.default,
   }
 }
 
 export default compose(
-  connect(mapStateToProps),
   withBlankLayout,
   withErrorBoundary(ErrorPage)
 )

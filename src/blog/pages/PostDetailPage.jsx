@@ -21,7 +21,10 @@ class PostDetailPage extends Component {
       <div>
         { isLoading ? <Spinner/> : null }
         { !isLoading && (
-          <div>{post.content}</div>
+          <div>
+            <h1>{post.title}</h1>
+            <div>{post.content}</div>
+          </div>
         )}
       </div>
     )
@@ -37,7 +40,7 @@ PostDetailPage.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    isLoading: state.common.isLoading,
+    isLoading: state.common.isLoading.loadPost,
     post: state.blog.postDetail.post
   }
 }

@@ -40,7 +40,7 @@ HomePage.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    isLoading: state.common.isLoading,
+    isLoading: state.common.isLoading.loadPosts,
     posts: state.blog.postList.items
   }
 }

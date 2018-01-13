@@ -1,74 +1,73 @@
-import 'font-awesome/css/font-awesome.min.css'
+import styles from './PublicLayout.scss'
 import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap/dist/js/bootstrap.min.js'
-// import '../style.css'
-
+import $ from 'jquery'
+import logo from './logo.png'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { compose } from 'redux'
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import MuiTheme from './mui-theme'
+import withErrorBoundary from '../../common/widgets/withErrorBoundary'
 import Alert from '../../common/widgets/Alert'
-import Raven from '../../common/sentry'
+import ErrorPage from '../pages/ErrorPage'
 
-function PublicLayout(WrappedComponent) {
-  class LayoutComponent extends Component {
+function withPublicLayout(WrappedComponent) {
+
+  class PublicLayout extends Component {
     constructor(props) {
       super(props)
       this.state = {
-        title: '',
-        hasError: false
+        title: ''
       }
+    }
+
+    componentDidMount() {
+      $('body').addClass(styles.wrapper)
+    }
+
+    componentWillUnmount() {
+      $('body').removeClass(styles.wrapper)
     }
 
     setTitle(title) {
       this.setState({ title })
     }
 
-    componentDidCatch(error, info) {
-      this.setState({
-        title: 'Opps...',
-        hasError: true,
-        error,
-        info
-      })
-      Raven.captureException(error, info)
-    }
-
-    errorPage() {
-      // TODO: render sentry feedback form
-      return (
-        <div>
-          <p>Something went wrong. Click <a role="button" onClick={() => Raven.lastEventId() && Raven.showReportDialog()}>here</a> to report your problem.</p>
-        </div>
-      )
-    }
-
     render() {
       return (
-        <div>
-          <p>header</p>
-          <p>sidebar</p>
-          <div className="main">
-            <h1>{this.state.title}</h1>
-
-            <section className="content">
-              <Alert/>
-              { this.state.hasError ?
-                this.errorPage()
-                :<WrappedComponent layout={this} {...this.props}/>
-              }
-            </section>
+        <MuiThemeProvider muiTheme={MuiTheme}>
+          <div>
+            <header className={styles.header}>
+              <div className="container">
+                <a href="#" className={styles.logo}>
+                  <img src={logo} alt=""/>
+                  <span>React blog</span>
+                </a>
+              </div>
+            </header>
+            <div className={styles.content}>
+              <div className="container">
+                <Alert/>
+                <WrappedComponent layout={this} {...this.props} />
+              </div>
+            </div>
           </div>
-        </div>
+
+        </MuiThemeProvider>
       )
     }
   }
 
-  LayoutComponent.displayName = 'PublicLayout'
-  LayoutComponent.propTypes = {
-    title: PropTypes.string,
+  PublicLayout.displayName = 'PublicLayout'
+  PublicLayout.propTypes = {
+    isLoading: PropTypes.bool,
   }
 
-  return LayoutComponent
+  return PublicLayout
 }
 
-export default PublicLayout
+export default compose(
+  withPublicLayout,
+  withErrorBoundary(ErrorPage)
+)

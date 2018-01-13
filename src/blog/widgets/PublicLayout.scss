@@ -1,0 +1,44 @@
+.wrapper {
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	font-size: 18px;
+	background-color: #faf4e8;
+}
+
+.wrapper a {
+	color: #a40802;
+}
+
+.wrapper a:hover {
+	text-decoration: none;
+}
+
+.header {
+	border-top: 5px solid #e9ce99;
+	background-color: #fff;
+	box-shadow: 0px 0px 10px #ba8982;
+}
+
+.logo {
+	line-height: 60px;
+	color: #a40802;
+	display: block;
+}
+
+a.logo:hover {
+	color: #a40802;
+}
+
+.logo img {
+	display: inline-block
+}
+
+.logo span {
+	font-size: 25px;
+	display: inline-block;
+	margin-left: 5px;
+}
+
+.nav {
+
+}
+

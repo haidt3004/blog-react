@@ -1,34 +1,33 @@
 import React from 'react'
+import styles from '../../../admin/widgets/AdminLayout.scss'
+
 import { Link } from 'react-router-dom'
+import Form from '../../../common/widgets/mt-form/Form'
+import TextField from '../../../common/widgets/mt-form/TextField'
+import RaisedButton from 'material-ui/RaisedButton'
 
-import Form from '../../../common/widgets/form/Form'
-import FormGroup from '../../../common/widgets/form/FormGroup'
-import ErrorList from '../../../common/widgets/form/ErrorList'
-import TextInput from '../../../common/widgets/form/TextInput'
-import TextArea from '../../../common/widgets/form/TextArea'
-
-const PostForm = props => (
-  <Form {...props} className="form-horizontal">
-    <FormGroup field="title">
-      <label className="control-label col-sm-2">Title</label>
-      <div className="col-sm-6">
-        <TextInput name="title" className="form-control"/>
-        <ErrorList />
-      </div>
-    </FormGroup>
-    <FormGroup field="content">
-      <label className="control-label col-sm-2">Content</label>
-      <div className="col-sm-6">
-        <TextArea name="content" className="form-control" rows="10"/>
-        <ErrorList />
-      </div>
-    </FormGroup>
-    <div className="form-group">
-      <div className="col-sm-6 col-sm-offset-2">
-        <button type="submit" className="btn btn-primary">Save</button>
-        &nbsp;
-        <Link to="/admin/posts" className="btn btn-default">Cancel</Link>
-      </div>
+const PostForm = ({ onSubmit, data, ...otherProps }) => (
+  <Form data={data} {...otherProps}>
+    <TextField
+      hintText="Title"
+      floatingLabelText="Title"
+      fullWidth={true}
+      field="title"
+    />
+    <TextField
+      hintText="Content"
+      floatingLabelText="Content"
+      fullWidth={true}
+      multiLine={true}
+      field="content"
+      rows={5}
+    />
+    <div className={styles.mt}>
+      <RaisedButton label="Save" primary={true} onClick={()=> onSubmit(data)}/>
+      &nbsp;
+      <Link to="/admin/posts">
+        <RaisedButton label="Cancel" primary={false}/>
+      </Link>
     </div>
   </Form>
 )

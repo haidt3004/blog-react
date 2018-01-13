@@ -17,13 +17,9 @@ const postEdit = handleActions({
   [actions.setPostErrors](state, {payload}) {
     return { ...state, errors: payload }
   },
-  [actions.setPostIsSaving](state, {payload}) {
-    return { ...state, isSaving: payload }
-  },
 }, {
   post: {},
   errors: null,
-  isSaving: false,
 })
 
 export default combineReducers({

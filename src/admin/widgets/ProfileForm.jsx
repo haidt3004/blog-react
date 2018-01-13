@@ -52,7 +52,8 @@ const ProfileForm = ({ onSubmit, data, ...otherProps }) => (
 )
 
 ProfileForm.propTypes = {
-  onSubmit: PropTypes.func
+  onSubmit: PropTypes.func,
+  data: PropTypes.object,
 }
 
 export default ProfileForm

@@ -21,9 +21,9 @@ class ProfilePage extends Component {
     return (
       <div>
         { isLoading ? <CircularProgress/> : null }
-        { !isLoading ? (
+        { !isLoading && (
           <ProfileForm data={data} errors={errors} onSubmit={saveProfile} onChange={setProfile} />
-        ) : null }
+        )}
       </div>
     )
   }

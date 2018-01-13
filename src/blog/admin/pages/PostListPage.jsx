@@ -18,6 +18,9 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table'
+import DeleteIcon from 'material-ui/svg-icons/action/delete'
+import EditIcon from 'material-ui/svg-icons/editor/mode-edit'
+import IconButton from 'material-ui/IconButton'
 
 class PostListPage extends Component {
 
@@ -40,6 +43,7 @@ class PostListPage extends Component {
 
   render() {
     const { posts, isLoading } = this.props
+    const colIDStyle = {width:50}
     return (
       <div>
         <div className={styles.mb}><Link to="/admin/posts/add"><RaisedButton label="Add" primary={true} /></Link></div>
@@ -48,24 +52,25 @@ class PostListPage extends Component {
           <Table>
             <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
               <TableRow>
-                <TableHeaderColumn>#</TableHeaderColumn>
+                <TableHeaderColumn style={colIDStyle}>#</TableHeaderColumn>
                 <TableHeaderColumn>Title</TableHeaderColumn>
-                <TableHeaderColumn></TableHeaderColumn>
+                <TableHeaderColumn>Actions</TableHeaderColumn>
               </TableRow>
             </TableHeader>
             <TableBody displayRowCheckbox={false}>
               { posts.map((post, index) => (
                 <TableRow key={post._id}>
-                  <TableRowColumn>{index+1}</TableRowColumn>
+                  <TableRowColumn style={colIDStyle}>{index+1}</TableRowColumn>
                   <TableRowColumn>{post.title}</TableRowColumn>
                   <TableRowColumn>
-                    <Link to={`/admin/posts/edit/${post._id}`} className="btn btn-primary btn-xs" title="Edit">
-                      <span className="glyphicon glyphicon-edit"></span>
+                    <Link to={`/admin/posts/edit/${post._id}`}>
+                      <IconButton tooltip="Edit">
+                        <EditIcon/>
+                      </IconButton>
                     </Link>
-                    &nbsp;
-                    <a className="btn btn-danger btn-xs" title="Edit" onClick={this.onDelete.bind(this, post)} role="button">
-                      <span className="glyphicon glyphicon-trash"></span>
-                    </a>
+                    <IconButton tooltip="Delete" onClick={this.onDelete.bind(this, post)}>
+                      <DeleteIcon/>
+                    </IconButton>
                   </TableRowColumn>
                 </TableRow>
               )) }

@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
 import { compose } from 'redux'
 import PropTypes from 'prop-types'
 
 import * as actions from '../actions'
 import LoginRequired from '../../../admin/widgets/LoginRequired'
 import AdminLayout from '../../../admin/widgets/AdminLayout'
-import Spinner from '../../../common/widgets/Spinner'
+import CircularProgress from 'material-ui/CircularProgress'
 import PostForm from '../widgets/PostForm'
 
 class PostEditPage extends Component {
@@ -36,16 +35,12 @@ class PostEditPage extends Component {
   }
 
   render() {
-    const { post, errors, isLoading, isSaving, setPost } = this.props
+    const { post, errors, isLoading, setPost } = this.props
     return (
       <div>
-        { isLoading || isSaving ? <Spinner/> : null }
+        { isLoading ? <CircularProgress/> : null }
         { !isLoading && (
-          <div className="box box-primary">
-            <div className="box-body">
-              <PostForm data={post} errors={errors} onSubmit={this.onSubmit} onChange={setPost} />
-            </div>
-          </div>
+          <PostForm data={post} errors={errors} onSubmit={this.onSubmit} onChange={setPost} />
         )}
       </div>
     )
@@ -58,7 +53,6 @@ PostEditPage.propTypes = {
   setPost: PropTypes.func,
   savePost: PropTypes.func,
   isLoading: PropTypes.bool,
-  isSaving: PropTypes.bool,
   post: PropTypes.object,
   errors: PropTypes.object,
   match: PropTypes.object,
@@ -66,10 +60,9 @@ PostEditPage.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    isLoading: state.common.isLoading,
+    isLoading: state.common.isLoading.loadPost,
     post: state.blog.admin.postEdit.post,
     errors: state.blog.admin.postEdit.errors,
-    isSaving: state.blog.admin.postEdit.isSaving,
   }
 }
 

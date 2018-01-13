@@ -28,12 +28,12 @@ export const deletePost = post => {
 
 export const setPost = createAction('BLG/ADM/SET_POST')
 export const setPostErrors = createAction('BLG/ADM/SET_POST_ERRORS')
-export const setPostIsSaving = createAction('BLG/ADM/SET_POST_IS_SAVING')
 export const loadPost = id => {
   return dispatch => {
     return dispatch(common.request({
       url: `admin/posts/${id}`,
       method: 'get',
+      loadingState: 'loadPost'
     })).then(response => {
       dispatch(setPost(response.data))
     }).catch(() => null)
@@ -52,17 +52,13 @@ export const savePost = (data, id) => {
     var options =  {
       url: id ? `admin/posts/${id}` : 'admin/posts',
       method: id ? 'put' : 'post',
-      data,
-      progress: false
+      data
     }
-    dispatch(setPostIsSaving(true))
     return dispatch(common.request(options))
       .then(response => {
-        dispatch(setPostIsSaving(false))
         dispatch(push('/admin/posts'))
         dispatch(common.setSuccess('Data saved.'))
       }).catch(err => {
-        dispatch(setPostIsSaving(false))
         dispatch(setPostErrors(getObjectValue(err, 'response.data.errors', null)))
       })
   }

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
+import $ from 'jquery'
 import 'bootstrap/dist/css/bootstrap.css'
 import styles from './AdminLayout.scss'
 
@@ -26,6 +27,14 @@ function withAdminLayout(WrappedComponent) {
         showSidebar: false,
         title: 'Page Title',
       }
+    }
+
+    componentDidMount() {
+      $('body').addClass(styles.wrapper)
+    }
+
+    componentWillUnmount() {
+      $('body').removeClass(styles.wrapper)
     }
 
     toggleSideBar() {
@@ -54,7 +63,7 @@ function withAdminLayout(WrappedComponent) {
           <div>
             <Header {...headerProps} />
             <Sidebar open={showSidebar} toggle={this.toggleSideBar} />
-            <div className={styles.wrapper}>
+            <div className={styles.main}>
               <Paper className={styles.container}>
                 <h1 className={styles.pageTitle}>{this.state.title}</h1>
                 <WrappedComponent layout={this} {...this.props} />

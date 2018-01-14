@@ -1,0 +1,11 @@
+version: '3'
+services:
+  mymongo:
+    image: "mongo:3.4.10"
+    ports:
+      - "3003:27017"
+    volumes:
+     - .:/scripts
+     - ../mongo:/data/db
+    working_dir: /scripts
+    command: sh import.sh

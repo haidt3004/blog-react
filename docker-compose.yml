@@ -13,5 +13,5 @@ services:
       - DEBUG=*,-express:*,-morgan,-send,-body-parser:*
   mymongo:
     image: "mongo:3.4.10"
-    ports:
-      - "3002:27017"
+    volumes:
+     - ./mongo:/data/db

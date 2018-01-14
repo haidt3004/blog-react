@@ -18,6 +18,7 @@ const App = () => (
       <Switch>
         <Route path="/" component={HomePage} exact/>
         <Route path="/post/:id" component={PostDetailPage} />
+        <Route path="/admin" component={ProfilePage} exact />
         <Route path="/admin/login" component={LoginPage} />
         <Route path="/admin/profile" component={ProfilePage} />
         <Route path="/admin/posts" component={PostListPage} exact />

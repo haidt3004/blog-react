@@ -7,19 +7,31 @@ This is a simple blog application. I use it as a starter kit for any ReactJs/Nod
 
 ## Run project with docker (no configuration required)
 
-1. Install [docker](https://www.docker.com/community-edition) and [docker-compose](https://docs.docker.com/compose/install/) to the target machine. Make sure port 8080 and 3002 are available on the target machine.
+1. Install [docker](https://www.docker.com/community-edition) and [docker-compose](https://docs.docker.com/compose/install/) to the target machine. Make sure port 8080 is available on the target machine.
 
-2. Start the app
+2. Setting up database with sample data
+
+Run below command in project root directory:
+
+```
+mkdir mongo
+cd data
+docker-compose up
+```
+
+3. Start the app
+
+Run below command in project root directory:
 
 ```
 docker-compose up -d
 ```
 
-3. Init database with sample data
+4. Visit the app
 
-...Comming soon
+Frontend: [http://localhost:8080](http://localhost:8080)
 
-4. Visit the address [http://localhost:8080](http://localhost:8080). A website should show up.
+Admin: [http://localhost:8080/admin](http://localhost:8080/admin)
 
 
 ## Setup project for development
@@ -92,9 +104,9 @@ npm start
 └── webpack.prod.js             # Webpack configuration for production
 ```
 
-## Tech stack
+## Features
 
-### ReactJs
+### Web (ReactJs)
 
 - [x] Modularized source code structure
 - [x] Separated webpack configuration for development and production
@@ -106,8 +118,10 @@ npm start
 - [x] React error boundary
 - [x] Redux
 - [x] React router
+- [x] [ESLint](https://eslint.org/) configured
+- Multiple layouts\themes
 
-### NodeJs
+### Api server (NodeJs, MongoDB)
 
 - [x] Modularized source code structure
 - [x] RESTful api standard
@@ -115,3 +129,4 @@ npm start
 - [x] [Sentry](https://sentry.io/welcome/) integrated
 - [x] Multi level logging (winston)
 - [x] [Dotenv](https://www.npmjs.com/package/dotenv) integrated. Easy to switch between environments (dev, production...)
+- [x] [ESLint](https://eslint.org/) configured

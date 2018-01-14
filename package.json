@@ -25,6 +25,7 @@
     "css-loader": "^0.28.7",
     "eslint": "^4.13.1",
     "eslint-plugin-react": "^7.5.1",
+    "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.6",
     "html-webpack-plugin": "^2.30.1",
     "node-sass": "^4.7.2",

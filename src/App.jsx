@@ -9,14 +9,14 @@ import ProfilePage from './admin/pages/ProfilePage'
 import NotFoundPage from './admin/pages/NotFoundPage'
 import PostListPage from './blog/admin/pages/PostListPage'
 import PostEditPage from './blog/admin/pages/PostEditPage'
-import HomePage from './blog/pages/HomePage'
+import RegistrationPage from './ci/org/pages/RegistrationPage'
 import PostDetailPage from './blog/pages/PostDetailPage'
 
 const App = () => (
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <Switch>
-        <Route path="/" component={HomePage} exact/>
+        <Route path="/" component={RegistrationPage} exact/>
         <Route path="/post/:id" component={PostDetailPage} />
         <Route path="/admin" component={ProfilePage} exact />
         <Route path="/admin/login" component={LoginPage} />

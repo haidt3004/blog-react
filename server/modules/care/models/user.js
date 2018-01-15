@@ -86,32 +86,48 @@ var ciStaffSchema = new Schema({
   staffNo: { type: Number }
 },{ _id : false })
 
-var userSchema = new Schema({
+var organisationSchema = new Schema({
   id: { type: Number, required: true, unique: true },
-  photoURL: { type: String },
+  companyName: { type: String },
+  logo: { type: String },
+  category: { type: String, enum:['Carer Organisation', 'Employment Services Organisation', 'Registered Training Organisation', 'Government Organisation'] },
   description: { type: String, maxlength: 10000 },
-  title: { type: String, enum:['Miss', 'Mrs', 'Ms', 'Mr', 'Other'] },
-  firstName: { type: String, maxlength: 400 },
-  // midName...
-  lastName: { type: String, maxlength: 400 },
   address: { type: addressSchema, default: null },
   phone: { type: String },
-  mobile: { type: String },
-  dob: { type: Date },
-  gender: { type: String },
+  fax: { type: String },
+  email: { type: String },
+  website: { type: String },
+  abn: { type: Number },
+  contactPerson: { type: contactPersonSchema, default: null },
+}, { _id: false })
+
+var userSchema = new Schema({
+  id: { type: Number, required: true, unique: true },
   email: { type: String },
   password: { type: String, required: true }, // encrypted
-  emergContactPerson: { type: contactPersonSchema, default: null },
-  userType: { type: String, enum:['staff', 'admin', 'precarer', 'carer', 'seeker'] },
-  status: { type: String, enum:['Active', 'Inactive']},
+  // photoURL: { type: String },
+  // description: { type: String, maxlength: 10000 },
+  // title: { type: String, enum:['Miss', 'Mrs', 'Ms', 'Mr', 'Other'] },
+  // firstName: { type: String, maxlength: 400 },
+  // midName...
+  // lastName: { type: String, maxlength: 400 },
+  // address: { type: addressSchema, default: null },
+  // phone: { type: String },
+  // mobile: { type: String },
+  // dob: { type: Date },
+  // gender: { type: String },
+  // emergContactPerson: { type: contactPersonSchema, default: null },
+  status: { type: String, enum:['Pending', 'Active', 'Inactive']},
+  userType: { type: String, enum:['organisation', 'staff', 'admin', 'precarer', 'carer', 'seeker'] },
   preCarerProfile: { type: preCarerSchema, default: null },
   carerProfile: { type: carerSchema, default: null },
   seekerProfile: { type: seekerSchema, default: null },
   staffProfile: { type: staffSchema, default: null },
   ciStaffProfile: { type: ciStaffSchema, default: null },
+  organisationProfile: { type: organisationSchema, default: null },
 }, { timestamps: true })
 
-var User = mongoose.model('users', userSchema)
+var User = mongoose.model('common.users', userSchema)
 
 module.exports = User
 

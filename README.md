@@ -7,9 +7,11 @@ This is a simple blog application. I use it as a starter kit for any ReactJs/Nod
 
 ## Run project with docker (no configuration required)
 
-1. Install [docker](https://www.docker.com/community-edition) and [docker-compose](https://docs.docker.com/compose/install/) to the target machine. Make sure port 8080 is available on the target machine.
+1. Clone the source
 
-2. Setting up database with sample data
+2. Install [docker](https://www.docker.com/community-edition) and [docker-compose](https://docs.docker.com/compose/install/) to the target machine. Make sure port 8080 is available.
+
+3. Setting up database with sample data
 
 Run below command in project root directory:
 
@@ -19,7 +21,7 @@ cd data
 docker-compose up
 ```
 
-3. Start the app
+4. Start the app
 
 Run below command in project root directory:
 
@@ -27,7 +29,7 @@ Run below command in project root directory:
 docker-compose up -d
 ```
 
-4. Visit the app
+5. All done, visit the app
 
 Frontend: [http://localhost:8080](http://localhost:8080)
 
@@ -119,7 +121,7 @@ npm start
 - [x] Redux
 - [x] React router
 - [x] [ESLint](https://eslint.org/) configured
-- Multiple layouts\themes
+- [x] Multiple layouts\themes
 
 ### Api server (NodeJs, MongoDB)
 

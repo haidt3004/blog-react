@@ -70,6 +70,26 @@ function verifyAccessToken(token) {
   return result
 }
 
+/**
+ * Get value of nested property by path
+ *
+ * @param {Mixed} obj
+ * @param {String} path
+ * @param {Mixed} defVal default value when the result is undefined
+ */
+function getObjectValue(obj, path, defVal=undefined) {
+  try {
+    for (var i = 0, path = path.split('.'), len = path.length; i < len; i++) {
+      obj = obj[path[i]]
+      if (obj===undefined)
+        return defVal
+    }
+    return obj
+  } catch (error) {
+    return defVal
+  }
+}
+
 module.exports = {
   notFoundExc,
   validationExc,
@@ -79,4 +99,5 @@ module.exports = {
   verifyPassword,
   createAccessToken,
   verifyAccessToken,
+  getObjectValue
 }

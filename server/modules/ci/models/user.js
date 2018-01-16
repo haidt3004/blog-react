@@ -1,5 +1,6 @@
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema
+const { generateUserId } = require('../helpers')
 
 var addressSchema = new Schema({
   unit: { type: Number },
@@ -102,9 +103,9 @@ var organisationSchema = new Schema({
 }, { _id: false })
 
 var userSchema = new Schema({
-  id: { type: Number, required: true, unique: true },
   email: { type: String },
-  password: { type: String, required: true }, // encrypted
+  password: { type: String }, // encrypted
+  uid: { type: Number, required: true, unique: true },
   // photoURL: { type: String },
   // description: { type: String, maxlength: 10000 },
   // title: { type: String, enum:['Miss', 'Mrs', 'Ms', 'Mr', 'Other'] },
@@ -124,10 +125,27 @@ var userSchema = new Schema({
   seekerProfile: { type: seekerSchema, default: null },
   staffProfile: { type: staffSchema, default: null },
   ciStaffProfile: { type: ciStaffSchema, default: null },
-  organisationProfile: { type: organisationSchema, default: null },
+  orgProfile: { type: organisationSchema, default: null },
 }, { timestamps: true })
 
-var User = mongoose.model('common.users', userSchema)
+userSchema.pre('validate', async function(next) {
+  try {
+    if (this.uid) {
+      return next()
+    }
+
+    this.uid = await generateUserId(this)
+    next()
+  } catch (err) {
+    next(err)
+  }
+})
+
+var User = mongoose.model('ci.users', userSchema)
+
+User.STATUS_PENDING = 'Pending'
+User.STATUS_ACTIVE = 'Active'
+User.STATUS_INACTIVE = 'Inactive'
 
 module.exports = User
 

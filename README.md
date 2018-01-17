@@ -11,22 +11,17 @@ This is a simple blog application. I use it as a starter kit for any ReactJs/Nod
 
 2. Install [docker](https://www.docker.com/community-edition) and [docker-compose](https://docs.docker.com/compose/install/) to the target machine. Make sure port 8080 is available.
 
-3. Setting up database with sample data
-
-Run below command in project root directory:
+3. Start the app
 
 ```
 mkdir mongo
-cd data
-docker-compose up
-```
-
-4. Start the app
-
-Run below command in project root directory:
-
-```
 docker-compose up -d
+```
+
+4. Setting up database with sample data
+
+```
+docker-compose exec mymongo bash -c 'cd /scripts; sh import.sh'
 ```
 
 5. All done, visit the app
@@ -53,7 +48,8 @@ Rename the file `.env.example` to `.env`. Open the edited file and change values
 ### 3. Import test data to database
 
 ```
-sh data/import.sh
+cd data/
+sh import.sh
 ```
 
 ### 4. Run the app

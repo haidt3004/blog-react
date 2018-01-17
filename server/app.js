@@ -11,6 +11,10 @@ if (process.env.NODE_ENV === 'dev') {
   app.use(delay(1000))
 }
 
+// enable CORS
+var cors = require('cors')
+app.use(cors())
+
 // integrate sentry with raven-node
 const sentry = require('./modules/common/sentry')
 sentry.install()

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import * as admin from '../actions'
 import LoginRequired from '../widgets/LoginRequired'
 import AdminLayout from '../widgets/AdminLayout'
-import CircularProgress from 'material-ui/CircularProgress'
+import Spinner from '../../common/widgets/Spinner'
 import ProfileForm from '../widgets/ProfileForm'
 
 class ProfilePage extends Component {
@@ -20,10 +20,9 @@ class ProfilePage extends Component {
     const { data, errors, isLoading, setProfile, saveProfile } = this.props
     return (
       <div>
-        { isLoading ? <CircularProgress/> : null }
-        { !isLoading && (
-          <ProfileForm data={data} errors={errors} onSubmit={saveProfile} onChange={setProfile} />
-        )}
+        { isLoading ?
+          <Spinner/> :
+          <ProfileForm data={data} errors={errors} onSubmit={saveProfile} onChange={setProfile} /> }
       </div>
     )
   }

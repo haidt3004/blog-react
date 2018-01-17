@@ -19,13 +19,14 @@ class PostDetailPage extends Component {
     const { post, isLoading } = this.props
     return (
       <div>
-        { isLoading ? <Spinner/> : null }
-        { !isLoading && (
-          <div>
-            <h1>{post.title}</h1>
-            <div>{post.content}</div>
-          </div>
-        )}
+        { isLoading ?
+          <Spinner/> : (
+            <div>
+              <h1>{post.title}</h1>
+              <div>{post.content}</div>
+            </div>
+          )
+        }
       </div>
     )
   }

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import * as actions from '../actions'
 import LoginRequired from '../../../admin/widgets/LoginRequired'
 import AdminLayout from '../../../admin/widgets/AdminLayout'
-import CircularProgress from 'material-ui/CircularProgress'
+import Spinner from '../../../common/widgets/Spinner'
 import PostForm from '../widgets/PostForm'
 
 class PostEditPage extends Component {
@@ -38,10 +38,10 @@ class PostEditPage extends Component {
     const { post, errors, isLoading, setPost } = this.props
     return (
       <div>
-        { isLoading ? <CircularProgress/> : null }
-        { !isLoading && (
+        { isLoading ?
+          <Spinner/> :
           <PostForm data={post} errors={errors} onSubmit={this.onSubmit} onChange={setPost} />
-        )}
+        }
       </div>
     )
   }

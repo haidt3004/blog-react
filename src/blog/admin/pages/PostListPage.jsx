@@ -8,7 +8,7 @@ import * as actions from '../actions'
 import styles from '../../../admin/widgets/AdminLayout.scss'
 import LoginRequired from '../../../admin/widgets/LoginRequired'
 import AdminLayout from '../../../admin/widgets/AdminLayout'
-import CircularProgress from 'material-ui/CircularProgress'
+import Spinner from '../../../common/widgets/Spinner'
 import RaisedButton from 'material-ui/RaisedButton'
 import {
   Table,
@@ -47,36 +47,37 @@ class PostListPage extends Component {
     return (
       <div>
         <div className={styles.mb}><Link to="/admin/posts/add"><RaisedButton label="Add" primary={true} /></Link></div>
-        { isLoading ? <CircularProgress/> : null }
-        { !isLoading && (
-          <Table>
-            <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-              <TableRow>
-                <TableHeaderColumn style={colIDStyle}>#</TableHeaderColumn>
-                <TableHeaderColumn>Title</TableHeaderColumn>
-                <TableHeaderColumn>Actions</TableHeaderColumn>
-              </TableRow>
-            </TableHeader>
-            <TableBody displayRowCheckbox={false}>
-              { posts.map((post, index) => (
-                <TableRow key={post._id}>
-                  <TableRowColumn style={colIDStyle}>{index+1}</TableRowColumn>
-                  <TableRowColumn>{post.title}</TableRowColumn>
-                  <TableRowColumn>
-                    <Link to={`/admin/posts/edit/${post._id}`}>
-                      <IconButton tooltip="Edit">
-                        <EditIcon/>
-                      </IconButton>
-                    </Link>
-                    <IconButton tooltip="Delete" onClick={this.onDelete.bind(this, post)}>
-                      <DeleteIcon/>
-                    </IconButton>
-                  </TableRowColumn>
+        { isLoading ?
+          <Spinner/> : (
+            <Table>
+              <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+                <TableRow>
+                  <TableHeaderColumn style={colIDStyle}>#</TableHeaderColumn>
+                  <TableHeaderColumn>Title</TableHeaderColumn>
+                  <TableHeaderColumn>Actions</TableHeaderColumn>
                 </TableRow>
-              )) }
-            </TableBody>
-          </Table>
-        ) }
+              </TableHeader>
+              <TableBody displayRowCheckbox={false}>
+                { posts.map((post, index) => (
+                  <TableRow key={post._id}>
+                    <TableRowColumn style={colIDStyle}>{index+1}</TableRowColumn>
+                    <TableRowColumn>{post.title}</TableRowColumn>
+                    <TableRowColumn>
+                      <Link to={`/admin/posts/edit/${post._id}`}>
+                        <IconButton tooltip="Edit">
+                          <EditIcon/>
+                        </IconButton>
+                      </Link>
+                      <IconButton tooltip="Delete" onClick={this.onDelete.bind(this, post)}>
+                        <DeleteIcon/>
+                      </IconButton>
+                    </TableRowColumn>
+                  </TableRow>
+                )) }
+              </TableBody>
+            </Table>
+          )
+        }
       </div>
     )
   }

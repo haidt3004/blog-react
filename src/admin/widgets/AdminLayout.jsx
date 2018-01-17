@@ -14,7 +14,7 @@ import Alert from '../../common/widgets/Alert'
 import Header from './AdminLayout/Header'
 import Sidebar from './AdminLayout/Sidebar'
 import Paper from 'material-ui/Paper'
-import CircularProgress from 'material-ui/CircularProgress'
+import Spinner from '../../common/widgets/Spinner'
 
 function withAdminLayout(WrappedComponent) {
 
@@ -55,7 +55,7 @@ function withAdminLayout(WrappedComponent) {
       }
 
       if (this.props.isLoading) {
-        headerProps.iconElementLeft = <CircularProgress size={30} style={{marginTop:5, marginRight:9, marginLeft:9 }}/>
+        headerProps.iconElementLeft = <Spinner style={{marginTop:5, marginRight:9, marginLeft:9 }}/>
       }
 
       return (

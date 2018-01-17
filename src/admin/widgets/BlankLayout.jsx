@@ -11,7 +11,7 @@ import ErrorPage from '../pages/ErrorPage'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import MuiTheme from './mui-theme'
 import Paper from 'material-ui/Paper'
-import CircularProgress from 'material-ui/CircularProgress'
+import Spinner from '../../common/widgets/Spinner'
 import Alert from '../../common/widgets/Alert'
 
 function withBlankLayout(WrappedComponent) {
@@ -48,7 +48,7 @@ function withBlankLayout(WrappedComponent) {
                 <Paper className={styles.container}>
                   <WrappedComponent layout={this} {...compProps} />
 
-                  { isLoading ? <div className="text-center"><CircularProgress/></div> : null }
+                  { isLoading && (<div className="text-center"><Spinner/></div>) }
                 </Paper>
               </div>
             </div>

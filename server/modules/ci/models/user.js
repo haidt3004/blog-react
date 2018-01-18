@@ -1,6 +1,11 @@
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 const { generateUserId } = require('../helpers')
+const {
+  encryptPassword,
+  verifyPassword,
+  createAccessToken
+} = require('../../common/helpers')
 
 var addressSchema = new Schema({
   unit: { type: Number },
@@ -88,10 +93,9 @@ var ciStaffSchema = new Schema({
 },{ _id : false })
 
 var organisationSchema = new Schema({
-  id: { type: Number, required: true, unique: true },
   companyName: { type: String },
   logo: { type: String },
-  category: { type: String, enum:['Carer Organisation', 'Employment Services Organisation', 'Registered Training Organisation', 'Government Organisation'] },
+  orgType: { type: String, enum:['Carer Organisation', 'Employment Services Organisation', 'Registered Training Organisation', 'Government Organisation'] },
   description: { type: String, maxlength: 10000 },
   address: { type: addressSchema, default: null },
   phone: { type: String },
@@ -140,6 +144,18 @@ userSchema.pre('validate', async function(next) {
     next(err)
   }
 })
+
+userSchema.methods.setPassword = function (value) {
+  this.password = encryptPassword(value)
+}
+
+userSchema.methods.checkPassword = function (value) {
+  return verifyPassword(value, this.password)
+}
+
+userSchema.methods.createToken = function (duration='1h') {
+  return createAccessToken(this, duration)
+}
 
 var User = mongoose.model('ci.users', userSchema)
 

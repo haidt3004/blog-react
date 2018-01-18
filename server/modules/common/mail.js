@@ -36,29 +36,34 @@ async function sendMail({ params, templatePath, ...message }) {
     // prepare transport options
     var transportOptions = config.mail
     if (process.env.NODE_ENV==='dev') {
-      var account = await mailer.createTestAccount()
-      transportOptions = {
-        host: account.smtp.host,
-        port: account.smtp.port,
-        secure: account.smtp.secure,
-        auth: {
-          user: account.user,
-          pass: account.pass
+      logger.info('Mail will be sent in test environment.')
+      try {
+        var account = await mailer.createTestAccount()
+        transportOptions = {
+          host: account.smtp.host,
+          port: account.smtp.port,
+          secure: account.smtp.secure,
+          auth: {
+            user: account.user,
+            pass: account.pass
+          }
         }
+      } catch (error) {
+        throw new Error(`Failed to create a testing account: ${error.message}`)
       }
     }
 
     // send the mail
+    logger.info('Going to send mail with message:', message)
     let transporter = mailer.createTransport(transportOptions)
     var info = await transporter.sendMail(message)
 
-    logger.info('Message sent: %s', info.messageId)
     // Preview only available when sending through an Ethereal account
     if (process.env.NODE_ENV==='dev') {
       logger.info('Preview URL: %s', mailer.getTestMessageUrl(info))
     }
   } catch (error) {
-    logger.error('An error occurred while sending mail: %o', error)
+    logger.error('An error occurred while sending mail:', error)
   }
 }
 

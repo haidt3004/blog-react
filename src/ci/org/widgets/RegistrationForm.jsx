@@ -45,16 +45,10 @@ const RegistrationForm = ({ onSubmit, data, ...otherProps }) => (
     <fieldset>
       <legend>Contact person</legend>
       <TextField
-        hintText="First name"
-        floatingLabelText="First name"
+        hintText="Name"
+        floatingLabelText="Name"
         fullWidth={true}
-        field="contactFirstname"
-      />
-      <TextField
-        hintText="Last name"
-        floatingLabelText="Last name"
-        fullWidth={true}
-        field="contactLastname"
+        field="contactName"
       />
       <TextField
         hintText="Email"

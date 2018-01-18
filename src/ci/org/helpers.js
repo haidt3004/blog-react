@@ -1,5 +1,17 @@
 import validate from 'validate.js'
 
+export function validateLoginData(data) {
+  var rules = {
+    loginId: {
+      presence: { message: '^Username can\'t be blank', allowEmpty: false },
+    },
+    password: {
+      presence: { allowEmpty: false },
+    },
+  }
+  return validate(data, rules, { format: 'grouped' })
+}
+
 export function validateRegData(data) {
   var rules = {
     companyName: {
@@ -17,11 +29,8 @@ export function validateRegData(data) {
     password: {
       presence: { allowEmpty: false },
     },
-    contactFirstname: {
-      presence: { allowEmpty: false, message:'^First name can\'be blank' },
-    },
-    contactLastname: {
-      presence: { allowEmpty: false, message:'^Last name can\'be blank' },
+    contactName: {
+      presence: { allowEmpty: false, message:'^Name can\'be blank' },
     },
     contactEmail: {
       presence: { allowEmpty: false, message:'^Email can\'be blank' },

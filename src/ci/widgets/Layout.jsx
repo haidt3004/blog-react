@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.css'
 import './styles.css'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
@@ -8,6 +9,7 @@ import MuiTheme from './mui-theme'
 import withErrorBoundary from '../../common/widgets/withErrorBoundary'
 import Alert from '../../common/widgets/Alert'
 import ErrorPage from '../pages/ErrorPage'
+import { Link } from 'react-router-dom'
 
 function withLayout(WrappedComponent) {
 
@@ -36,11 +38,11 @@ function withLayout(WrappedComponent) {
                     <span className="icon-bar"></span>
                     <span className="icon-bar"></span>
                   </button>
-                  <a href="#" className="navbar-brand">Logo</a>
+                  <Link to="/" className="navbar-brand">Home</Link>
                 </div>
                 <nav className="collapse navbar-collapse" id="bs-navbar">
                   <ul className="nav navbar-nav">
-                    <li className="active"> <a href="../getting-started/">Menu 1</a></li>
+                    <li> <a href="../getting-started/">Menu 1</a></li>
                     <li> <a href="../css/">Menu 2</a> </li>
                     <li> <a href="../components/">Menu 3</a> </li>
                   </ul>

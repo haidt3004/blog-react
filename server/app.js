@@ -5,9 +5,9 @@ const logger = require('./modules/common/log')
 
 // You want to test your fancy ajax loaders, spinners and stuff
 // but your dev machine is too damn fast for that shit!
+// this code delay all responses for 1 second
 if (process.env.NODE_ENV === 'dev') {
   var delay = require('express-delay')
-  // Delay all responses for 1 second
   app.use(delay(1000))
 }
 

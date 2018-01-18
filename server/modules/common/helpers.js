@@ -42,7 +42,7 @@ function connectToDb() {
   return mongoose.connect(config.db.uri, options)
 }
 
-function hashPassword(value) {
+function encryptPassword(value) {
   return bcrypt.hashSync(value)
 }
 
@@ -95,7 +95,7 @@ module.exports = {
   validationExc,
   unauthorizedExc,
   connectToDb,
-  hashPassword,
+  encryptPassword,
   verifyPassword,
   createAccessToken,
   verifyAccessToken,

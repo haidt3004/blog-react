@@ -38,11 +38,8 @@ function validateRegData(data) {
     password: {
       presence: { allowEmpty: false },
     },
-    contactFirstname: {
-      presence: { allowEmpty: false, message:'^First name can\'be blank' },
-    },
-    contactLastname: {
-      presence: { allowEmpty: false, message:'^Last name can\'be blank' },
+    contactName: {
+      presence: { allowEmpty: false, message:'^Name can\'be blank' },
     },
     contactEmail: {
       presence: { allowEmpty: false, message:'^Email can\'be blank' },
@@ -51,7 +48,20 @@ function validateRegData(data) {
   return validate(data, rules, { format: 'grouped' })
 }
 
+function validateLoginForm(data) {
+  var rules = {
+    loginId: {
+      presence: { message: '^Username can\'t be blank' },
+    },
+    password: {
+      presence: true,
+    },
+  }
+  return validate(data, rules, { format: 'grouped' })
+}
+
 module.exports = {
   sendMailRegSuccessToOrg,
-  validateRegData
+  validateRegData,
+  validateLoginForm,
 }

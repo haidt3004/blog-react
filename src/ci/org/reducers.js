@@ -9,6 +9,23 @@ const registration = handleActions({
   [actions.setRegErrors](state, {payload}) {
     return { ...state, errors: payload }
   },
+  [actions.setRegisteredUser](state, {payload}) {
+    return { ...state, user: payload }
+  },
+}, {
+  data: {},
+  errors: null,
+  user: {}
+})
+
+const login = handleActions({
+  [actions.setLoginData](state, {payload}) {
+    return { ...state, data: payload }
+  },
+
+  [actions.setLoginErrors](state, {payload}) {
+    return { ...state, errors: payload }
+  },
 }, {
   data: {},
   errors: null,
@@ -16,4 +33,5 @@ const registration = handleActions({
 
 export default combineReducers({
   registration,
+  login
 })

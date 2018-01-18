@@ -1,8 +1,9 @@
+const createMiddleware = require('../common/jwt')
 const User = require('../common/models/user')
-const { validationExc,
+const {
+  validationExc,
   notFoundExc,
-  createAccessToken,
-  hashPassword } = require('../common/helpers')
+} = require('../common/helpers')
 const { validateLoginForm, validateProfileData } = require('./helpers')
 
 async function login(req, res, next) {
@@ -19,7 +20,7 @@ async function login(req, res, next) {
     }
 
     res.json({
-      token: createAccessToken(user, data.remember ? '30 days' : '3h'),
+      token: user.createToken(data.remember ? '30 days' : '3h'),
       username: user.username,
       id: user._id
     })
@@ -53,7 +54,7 @@ async function updateProfile(req, res, next) {
         user.email = data.email
         user.username = data.username
         if (data.password)
-          user.password = hashPassword(data.password)
+          user.setPassword(data.password)
         var saved = await user.save()
         res.json({ username: saved.username, email: saved.email })
       }
@@ -65,8 +66,11 @@ async function updateProfile(req, res, next) {
   }
 }
 
+const verifyAdminToken = createMiddleware('jwtAdmin', jwtPayload => User.findById(jwtPayload.userId))
+
 module.exports = {
   login,
   getProfile,
   updateProfile,
+  verifyAdminToken,
 }

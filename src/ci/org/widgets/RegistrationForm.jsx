@@ -14,13 +14,7 @@ const RegistrationForm = ({ onSubmit, data, ...otherProps }) => (
       hintText="Company Name"
       floatingLabelText="Company Name"
       fullWidth={true}
-      field="name"
-    />
-    <TextField
-      hintText="Phone"
-      floatingLabelText="Phone"
-      fullWidth={true}
-      field="phone"
+      field="companyName"
     />
     <TextField
       hintText="ABN"
@@ -28,11 +22,24 @@ const RegistrationForm = ({ onSubmit, data, ...otherProps }) => (
       fullWidth={true}
       field="abn"
     />
+    <TextField
+      hintText="Phone"
+      floatingLabelText="Phone"
+      fullWidth={true}
+      field="phone"
+    />
     <SelectField
       floatingLabelText="Type of organisation"
       fullWidth={true}
-      field="category"
+      field="orgType"
       items={items}
+    />
+    <TextField
+      hintText="Password to login"
+      floatingLabelText="Password"
+      fullWidth={true}
+      type="password"
+      field="password"
     />
 
     <fieldset>

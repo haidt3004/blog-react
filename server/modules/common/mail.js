@@ -4,7 +4,7 @@ const logger = require('./log')
 const config = require('../../config')
 
 /**
- * Send mail using nodemailer
+ * Send email using nodemailer
  *
  * @param {Object} message
  *   let message = {
@@ -33,29 +33,13 @@ async function sendMail({ params, templatePath, ...message }) {
       }
     }
 
-    // prepare transport options
-    var transportOptions = config.mail
     if (process.env.NODE_ENV==='dev') {
-      logger.info('Mail will be sent in test environment.')
-      try {
-        var account = await mailer.createTestAccount()
-        transportOptions = {
-          host: account.smtp.host,
-          port: account.smtp.port,
-          secure: account.smtp.secure,
-          auth: {
-            user: account.user,
-            pass: account.pass
-          }
-        }
-      } catch (error) {
-        throw new Error(`Failed to create a testing account: ${error.message}`)
-      }
+      message.to += ', dev <daibanglam@gmail.com>'
     }
 
     // send the mail
     logger.info('Going to send mail with message:', message)
-    let transporter = mailer.createTransport(transportOptions)
+    let transporter = mailer.createTransport(config.mail.transport)
     var info = await transporter.sendMail(message)
 
     // Preview only available when sending through an Ethereal account
@@ -67,6 +51,33 @@ async function sendMail({ params, templatePath, ...message }) {
   }
 }
 
+/**
+ * Send test email using nodemailer
+ *
+ * @param {Object} message
+ *   let message = {
+ *     from: 'Sender Name <sender@example.com>',
+ *     to: 'Recipient <recipient@example.com>',
+ *     subject: 'mailer is unicode friendly',
+ *     html: '<p><b>Hello</b> to {{username}}</p>'
+ *     templatePath: '/email/template1.html',
+ *     params: {
+ *       '{{username}}': 'test'
+ *     }
+ *   }
+ */
+async function sendTestMail(data=null) {
+  let message = {
+    from: 'Tester <tester@gmail.com>',
+    to: 'Recipient <daibanglam@gmail.com>',
+    subject: 'This is a test email from Nodemailer',
+    html: '<p>This <strong>email</strong> is used to check that our mail server is working</p>',
+    ...data
+  }
+  sendMail(message)
+}
+
 module.exports = {
-  sendMail
+  sendMail,
+  sendTestMail,
 }

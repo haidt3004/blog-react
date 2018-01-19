@@ -13,6 +13,7 @@ import store, { history } from './store'
 import RegistrationPage from './ci/org/pages/RegistrationPage'
 import RegistrationSuccessPage from './ci/org/pages/RegistrationSuccessPage'
 import LoginPage from './ci/org/pages/LoginPage'
+import ProfilePage from './ci/org/pages/ProfilePage'
 import HomePage from './ci/pages/HomePage'
 
 const App = () => (
@@ -23,6 +24,7 @@ const App = () => (
         <Route path="/org/register" component={RegistrationPage} />
         <Route path="/org/reg/success" component={RegistrationSuccessPage} />
         <Route path="/org/login" component={LoginPage} />
+        <Route path="/org/profile" component={ProfilePage} />
         {/* <Route path="/post/:id" component={PostDetailPage} /> */}
         {/* <Route path="/admin" component={ProfilePage} exact /> */}
         {/* <Route path="/admin/login" component={LoginPage} /> */}

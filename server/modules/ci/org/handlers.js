@@ -51,7 +51,6 @@ async function login(req, res, next) {
 
     var user = await User.findOne({ 'orgProfile.contactPerson.email': data.loginId, userType:'organisation' })
     if (!user || !user.checkPassword(data.password)) {
-    // if (!user) {
       return res.status(400).json(validationExc('Invalid login information.'))
     }
 

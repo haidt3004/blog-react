@@ -31,7 +31,6 @@ export const login = data => {
 }
 
 export const setProfile = createAction('ADM/SET_PROFILE_DATA')
-export const setSaveProfileErrors = createAction('ADM/SET_PROFILE_ERRORS')
 export const loadProfile = () => {
   return dispatch => {
     return dispatch(common.request({
@@ -44,6 +43,7 @@ export const loadProfile = () => {
   }
 }
 
+export const setSaveProfileErrors = createAction('ADM/SET_PROFILE_ERRORS')
 export const saveProfile = data => {
   return dispatch => {
     dispatch(setSaveProfileErrors(null))

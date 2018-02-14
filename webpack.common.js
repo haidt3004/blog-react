@@ -6,7 +6,7 @@ const outputDir = path.resolve(__dirname, 'build')
 
 module.exports = {
   entry: {
-    app: './src/index.js'
+    app: ['babel-polyfill', './src/index.js']
   },
   output: {
     path: outputDir,

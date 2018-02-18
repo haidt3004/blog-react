@@ -5,6 +5,7 @@ import {
   REQUEST_FINISHED,
   SET_ERROR,
   SET_SUCCESS,
+  LOAD_IDENTITY,
   SET_IDENTITY,
   CLEAR_IDENTITY,
   CLEAR_ALERT
@@ -18,5 +19,6 @@ export const setError = createAction(SET_ERROR)
 export const setSuccess = createAction(SET_SUCCESS)
 export const clearAlert = createAction(CLEAR_ALERT)
 
+export const loadIdentity = createAction(LOAD_IDENTITY)
 export const setIdentity = createAction(SET_IDENTITY)
 export const clearIdentity = createAction(CLEAR_IDENTITY)

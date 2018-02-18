@@ -1,21 +1,15 @@
+import validate from 'validate.js'
+
 /**
- * Get deep value from object by passing path
+ * Get value of nested property by path
  *
  * @param {Mixed} obj
  * @param {String} path
  * @param {Mixed} defVal default value when the result is undefined
  */
-export function getObjectValue(obj, path, defVal=undefined) {
-  try {
-    for (var i = 0, path = path.split('.'), len = path.length; i < len; i++) {
-      obj = obj[path[i]]
-      if (obj===undefined)
-        return defVal
-    }
-    return obj
-  } catch (error) {
-    return defVal
-  }
+export function getObjectValue(obj, keyPath, defVal) {
+  var result = validate.getDeepObjectValue(obj, keyPath)
+  return result ? result : defVal
 }
 
 export function saveIdentityToStorage(value) {
@@ -27,7 +21,7 @@ export function loadIdentityFromStorage() {
 }
 
 export function validateIdentity(identity) {
-  const { token: { value, expiredAt} } = identity
+  const { token: { value, expiredAt } } = identity
   if (!value) return false
 
   var now = new Date()
@@ -43,15 +37,23 @@ export function saveItemToStorage(name, value) {
 
 export function loadItemFromStorage(name) {
   var str = window.localStorage.getItem(name)
-  return str===null ? null : JSON.parse(str)
+  return str === null ? null : JSON.parse(str)
 }
 
-export function delay(ms) {
-  return new Promise((resolve, reject) => {
-    setTimeout(resolve, ms)
-  })
-}
-
+/**
+ * Get component's display name
+ *
+ * @param {Component} Component
+ */
 export function getComponentName(Component) {
   return Component.displayName || Component.name || 'Component'
+}
+
+/**
+ * Helper function used to create action creator function
+ *
+ * @param {String} type
+ */
+export function createAction(type) {
+  return payload => ({ type, payload })
 }

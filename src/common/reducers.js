@@ -1,40 +1,59 @@
 import { combineReducers } from 'redux'
-import { handleActions } from 'redux-actions'
-import * as actions from './actions'
+import * as actionTypes from './constants/actionTypes'
 
-const defaultIdentity = {
+function isLoading(state = {}, action) {
+  switch (action.type) {
+    case actionTypes.REQUEST_START:
+      return { ...state, [action.payload]: true }
+
+    case actionTypes.REQUEST_FINISHED:
+      return { ...state, [action.payload]: false }
+
+    default:
+      return state
+  }
+}
+
+function alert(state = {
+  type: 'success',
+  message: ''
+}, action) {
+  switch (action.type) {
+
+    case actionTypes.SET_ERROR:
+      return { ...state, type: 'error', message: action.payload }
+
+    case actionTypes.SET_SUCCESS:
+      return { ...state, type: 'success', message: action.payload }
+
+    // case actionTypes.CLEAR_ALERT:
+    //   return state
+
+    default:
+      return state
+  }
+}
+
+function identity(state = {
   id: null,
   username: 'Guest',
   token: {
     value: '',
     expiredAt: ''
   }
-}
+}, action) {
+  switch (action.type) {
 
-const identity = handleActions({
-  [actions.setIdentity](state, {payload}) {
-    return payload ? payload : defaultIdentity
+    case actionTypes.SET_IDENTITY:
+      return action.payload
+
+    // case actionTypes.CLEAR_IDENTITY:
+    //   return state
+
+    default:
+      return state
   }
-}, defaultIdentity)
-
-const alert = handleActions({
-  [actions.setAlert](state, {payload}) {
-    return payload
-  },
-
-  [actions.clearAlert](state, action) {
-    return { type: 'success', message: '' }
-  },
-}, {
-  type: 'success',
-  message: ''
-})
-
-const isLoading = handleActions({
-  [actions.setLoading](state, { payload: { loadingState, value } }) {
-    return {...state, [loadingState]: value }
-  },
-}, {})
+}
 
 export default combineReducers({
   identity,

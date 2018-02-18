@@ -1,9 +1,10 @@
 import { createStore, applyMiddleware, compose } from 'redux'
-import thunkMiddleware from 'redux-thunk'
+import createSagaMiddleware from 'redux-saga'
 import { routerMiddleware } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
 
 import reducers from './reducers'
+import rootSaga from './sagas'
 import { loadIdentityFromStorage } from './common/helpers'
 
 // prepare preloaded state from local storage
@@ -16,15 +17,18 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 // add the react-router-redux reducer to store on the `router` key
 // also apply our middleware for navigating
 export const history = createHistory()
+const sagaMiddleware = createSagaMiddleware()
 const store = createStore(
   reducers,
   preloadedState,
   composeEnhancers(
     applyMiddleware(
       routerMiddleware(history),
-      thunkMiddleware
+      sagaMiddleware
     )
   )
 )
+
+sagaMiddleware.run(rootSaga)
 
 export default store

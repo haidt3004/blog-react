@@ -14,10 +14,12 @@ function isLoading(state = {}, action) {
   }
 }
 
-function alert(state = {
+const initialAlert = {
   type: 'success',
   message: ''
-}, action) {
+}
+
+function alert(state = initialAlert, action) {
   switch (action.type) {
 
     case actionTypes.SET_ERROR:
@@ -26,29 +28,31 @@ function alert(state = {
     case actionTypes.SET_SUCCESS:
       return { ...state, type: 'success', message: action.payload }
 
-    // case actionTypes.CLEAR_ALERT:
-    //   return state
+    case actionTypes.CLEAR_ALERT:
+      return initialAlert
 
     default:
       return state
   }
 }
 
-function identity(state = {
+const initialIdentity = {
   id: null,
   username: 'Guest',
   token: {
     value: '',
     expiredAt: ''
   }
-}, action) {
+}
+
+function identity(state = initialIdentity, action) {
   switch (action.type) {
 
     case actionTypes.SET_IDENTITY:
       return action.payload
 
-    // case actionTypes.CLEAR_IDENTITY:
-    //   return state
+    case actionTypes.CLEAR_IDENTITY:
+      return initialIdentity
 
     default:
       return state

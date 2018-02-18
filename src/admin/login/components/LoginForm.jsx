@@ -19,12 +19,9 @@ const renderField = props => {
 class LoginForm extends Component {
 
   render() {
-    const { handleSubmit, pristine, submitting, error } = this.props
+    const { handleSubmit, submitting } = this.props
     return (
       <form onSubmit={handleSubmit}>
-        {error && (
-          <p className="alert alert-danger" role="alert">{error}</p>
-        )}
         <Field name="loginId" component={renderField} type="text" label="Username" />
         <Field name="password" component={renderField} type="password" label="Password" />
         <div className="form-group">

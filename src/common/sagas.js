@@ -1,7 +1,9 @@
-import { takeEvery, all, put } from 'redux-saga/effects'
+import { takeEvery, takeLatest, all, put } from 'redux-saga/effects'
+import { delay } from 'redux-saga'
 
-import { SET_IDENTITY, LOAD_IDENTITY } from './constants/actionTypes'
-import { setIdentity } from './actions'
+import { SET_IDENTITY, LOAD_IDENTITY, SET_ERROR, SET_SUCCESS } from './constants/actionTypes'
+import { ALERT_AUTO_HIDE_DURATION } from './constants/params'
+import { setIdentity, clearAlert } from './actions'
 import {
   saveIdentity,
   loadIdentity
@@ -22,9 +24,17 @@ function* loadIdentitySaga() {
   })
 }
 
+function* alertSaga() {
+  yield takeLatest([SET_ERROR, SET_SUCCESS], function* () {
+    yield delay(ALERT_AUTO_HIDE_DURATION)
+    yield put(clearAlert())
+  })
+}
+
 export default function* commonSaga() {
   yield all([
     saveIdentitySaga(),
-    loadIdentitySaga()
+    loadIdentitySaga(),
+    alertSaga(),
   ])
 }

@@ -5,58 +5,54 @@ import { SubmissionError } from 'redux-form'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 
-
-// import { Redirect } from 'react-router-dom'
-import * as actions from '../actions'
-// import { getObjectValue } from '../../common/helpers'
-// import BlankLayout from '../../layouts/BlankLayout'
+import { login } from '../actions'
 import LoginForm from './LoginForm'
-import Alert from '../../../common/widgets/Alert'
+import BlankLayout from '../../layouts/BlankLayout'
+// import { Redirect } from 'react-router-dom'
+// import { getObjectValue } from '../../common/helpers'
 
 class LoginPage extends Component {
   state = {
+    isAuthenticated: false,
     data: {
       loginId: 'demo',
       password: 'demo'
     }
   }
 
-  onSubmit = data => {
+  onSubmit = async data => {
     try {
-      this.props.login(data)
+      await this.props.login(data)
+      this.setState({ isAuthenticated: true })
     } catch (error) {
       throw new SubmissionError({
-        password: ['Invalid username or password'],
-        _error: 'Login failed.'
+        ...error.errors,
+        _error: error.message
       })
     }
   }
 
   render() {
     return (
-      <div className="container">
-        <Alert />
-        <LoginForm onSubmit={this.onSubmit} initialValues={this.state.data} />
-      </div>
+      <LoginForm onSubmit={this.onSubmit} initialValues={this.state.data} />
     )
   }
 }
 
 LoginPage.propTypes = {
-  // data: PropTypes.object,
-  // errors: PropTypes.object,
-  // setLoginData: PropTypes.func,
-  // layout: PropTypes.instanceOf(Component),
   login: PropTypes.func,
 }
 
 export default compose(
-  // BlankLayout,
+  BlankLayout,
   connect(
     undefined,
     dispatch => ({
-      login: data => dispatch(actions.login(data)),
+      login: data => {
+        var action = login(data)
+        dispatch(action)
+        return action.promise
+      }
     })
   )
 )(LoginPage)
-

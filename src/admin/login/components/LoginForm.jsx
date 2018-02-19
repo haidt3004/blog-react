@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
 import { validateLoginData as validate } from '../helpers'
 import ErrorList from '../../../common/widgets/form/ErrorList'
+import SubmitButton from '../../../common/widgets/form/SubmitButton'
 
 const renderField = props => {
   const { input, meta: { touched, error, valid }, label, type } = props
@@ -25,7 +26,7 @@ class LoginForm extends Component {
         <Field name="loginId" component={renderField} type="text" label="Username" />
         <Field name="password" component={renderField} type="password" label="Password" />
         <div className="form-group">
-          <button type="submit" className="btn btn-primary" disabled={submitting}>Submit</button>
+          <SubmitButton type="submit" className="btn btn-primary" submitting={submitting}>Submit</SubmitButton>
         </div>
       </form>
     )
@@ -34,7 +35,6 @@ class LoginForm extends Component {
 
 LoginForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  pristine: PropTypes.bool.isRequired,
   submitting: PropTypes.bool.isRequired,
 }
 

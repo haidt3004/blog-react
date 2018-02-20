@@ -41,7 +41,11 @@ export function validateIdentity(identity) {
 }
 
 export function saveItemToStorage(name, value) {
-  window.localStorage.setItem(name, JSON.stringify(value))
+  if (value) {
+    window.localStorage.setItem(name, JSON.stringify(value))
+  } else {
+    window.localStorage.removeItem(name)
+  }
 }
 
 export function loadItemFromStorage(name) {

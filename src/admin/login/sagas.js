@@ -1,8 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 
-import http from '../../common/http'
 import { request } from '../../common/helpers'
-import { setIdentity } from '../../common/actions'
+import { saveIdentity } from '../../common/actions'
 import { LOGIN } from './constants/actionTypes'
 
 function* login(action) {
@@ -13,14 +12,8 @@ function* login(action) {
       method: 'post',
       data: payload
     })
-    var identity = response.data
 
-    // set default authorization header to http request
-    http.defaults.headers.common['Authorization'] = `bearer ${identity.token.value}`
-
-    // save identity to local storage
-    yield put(setIdentity(identity))
-
+    yield put(saveIdentity(response.data))
     resolve(response)
   } catch (error) {
     reject(error)

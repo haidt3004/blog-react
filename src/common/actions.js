@@ -10,6 +10,7 @@ export const setSuccess = createAction(types.SET_SUCCESS)
 export const clearAlert = createAction(types.CLEAR_ALERT)
 
 export const loadIdentity = createAction(types.LOAD_IDENTITY)
+export const saveIdentity = createAction(types.SAVE_IDENTITY)
 export const setIdentity = createAction(types.SET_IDENTITY)
 export const clearIdentity = createAction(types.CLEAR_IDENTITY)
 

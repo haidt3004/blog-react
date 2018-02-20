@@ -14,7 +14,7 @@ class LoginPage extends Component {
     isAuthenticated: false,
     data: {
       loginId: 'demo',
-      password: 'demo'
+      password: '123123'
     }
   }
 

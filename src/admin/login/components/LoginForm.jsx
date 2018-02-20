@@ -14,7 +14,7 @@ class LoginForm extends Component {
         <Field name="loginId" component={InputField} type="text" label="Username" />
         <Field name="password" component={InputField} type="password" label="Password" />
         <div className="form-group">
-          <SubmitButton type="submit" className="btn btn-primary" submitting={submitting}>Submit</SubmitButton>
+          <SubmitButton type="submit" className="btn btn-primary" submitting={submitting}>Login</SubmitButton>
         </div>
       </form>
     )

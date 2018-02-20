@@ -8,3 +8,11 @@ var httpClient = axios.create({
 })
 
 export default httpClient
+
+export function setAccessToken(token) {
+  if (token) {
+    httpClient.defaults.headers.common['Authorization'] = `bearer ${token}`
+  } else {
+    httpClient.defaults.headers.common['Authorization'] = false
+  }
+}

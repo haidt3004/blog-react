@@ -7,6 +7,7 @@ export const SET_SUCCESS = 'CM/SET_SUCCESS'
 export const CLEAR_ALERT = 'CM/CLEAR_ALERT'
 
 export const SET_IDENTITY = 'CM/SET_IDENTITY'
+export const SAVE_IDENTITY = 'CM/SAVE_IDENTITY'
 export const LOAD_IDENTITY = 'CM/LOAD_IDENTITY'
 export const CLEAR_IDENTITY = 'CM/CLEAR_IDENTITY'
 

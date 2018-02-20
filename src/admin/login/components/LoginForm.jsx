@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
 import { validateLoginData as validate } from '../helpers'
 import InputField from '../../../common/widgets/form/InputField'
+import CheckboxField from '../../../common/widgets/form/CheckboxField'
 import SubmitButton from '../../../common/widgets/form/SubmitButton'
 
 class LoginForm extends Component {
@@ -13,6 +14,7 @@ class LoginForm extends Component {
       <form onSubmit={handleSubmit}>
         <Field name="loginId" component={InputField} type="text" label="Username" />
         <Field name="password" component={InputField} type="password" label="Password" />
+        <Field name="remember" component={CheckboxField} label="Remember me" />
         <div className="form-group">
           <SubmitButton type="submit" className="btn btn-primary" submitting={submitting}>Login</SubmitButton>
         </div>

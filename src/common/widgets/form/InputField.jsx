@@ -4,7 +4,7 @@ import ErrorList from './ErrorList'
 
 const InputField = props => {
   const { input, meta: { touched, error, valid }, label, type } = props
-  const className = touched && (!valid ? 'has-error' : 'has-success')
+  const className = touched ? (!valid ? 'has-error' : 'has-success') : ''
   return (
     <div className={`form-group ${className}`}>
       <label className="control-label">{label}</label>

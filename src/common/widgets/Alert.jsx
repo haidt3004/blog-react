@@ -7,9 +7,10 @@ import { Alert as BsAlert } from 'react-bootstrap'
 class Alert extends Component {
 
   render() {
-    const { message, onDismiss } = this.props
+    const { message, onDismiss, type } = this.props
+    const style = type == 'success' ? 'success' : 'danger'
     return message.length > 0 ? (
-      <BsAlert bsStyle="danger" onDismiss={onDismiss}>
+      <BsAlert bsStyle={style} onDismiss={onDismiss}>
         {message}
       </BsAlert>
     ) : null

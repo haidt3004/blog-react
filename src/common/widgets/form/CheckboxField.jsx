@@ -4,7 +4,7 @@ import ErrorList from './ErrorList'
 
 const CheckboxField = props => {
   const { input, meta: { touched, error, valid }, label } = props
-  const className = touched ? (!valid ? 'has-error' : 'has-success') : ''
+  const className = touched && error ? 'has-error' : ''
   return (
     <div className={className}>
       <div className="checkbox">

@@ -5,7 +5,7 @@ import { validateProfileData as validate } from '../helpers'
 import InputField from '../../../common/widgets/form/InputField'
 import SubmitButton from '../../../common/widgets/form/SubmitButton'
 
-class LoginForm extends Component {
+class ProfileForm extends Component {
 
   render() {
     const { handleSubmit, submitting } = this.props
@@ -30,12 +30,13 @@ class LoginForm extends Component {
   }
 }
 
-LoginForm.propTypes = {
+ProfileForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   submitting: PropTypes.bool.isRequired,
 }
 
 export default reduxForm({
-  form: 'adminLogin',
+  form: 'updateProfile',
   validate,
-})(LoginForm)
+  enableReinitialize: true
+})(ProfileForm)

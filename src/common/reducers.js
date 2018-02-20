@@ -1,13 +1,19 @@
 import { combineReducers } from 'redux'
 import * as actionTypes from './constants/actionTypes'
 
-function isLoading(state = {}, action) {
+/**
+ * contain status of all ajax request (finished or not)
+ * @param {Object} state
+ * @param {Object} action
+ */
+function request(state = {}, action) {
+  var requestName = action.payload
   switch (action.type) {
     case actionTypes.REQUEST_START:
-      return { ...state, [action.payload]: true }
+      return { ...state, [requestName]: false }
 
     case actionTypes.REQUEST_FINISHED:
-      return { ...state, [action.payload]: false }
+      return { ...state, [requestName]: true }
 
     default:
       return state
@@ -62,5 +68,5 @@ function identity(state = initialIdentity, action) {
 export default combineReducers({
   identity,
   alert,
-  isLoading,
+  request,
 })

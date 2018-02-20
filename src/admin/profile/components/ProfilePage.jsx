@@ -38,19 +38,20 @@ class ProfilePage extends Component {
   }
 
   render() {
-    const { isLoading } = this.props
+    const { profileLoaded } = this.props
     return (
       <div>
-        {isLoading || isLoading === undefined ?
-          <Spinner /> :
-          <ProfileForm onSubmit={this.onSubmit} initialValues={this.state.initialValues} />}
+        {profileLoaded ?
+          <ProfileForm onSubmit={this.onSubmit} initialValues={this.state.initialValues} /> :
+          <Spinner />
+        }
       </div>
     )
   }
 }
 
 ProfilePage.propTypes = {
-  isLoading: PropTypes.bool,
+  profileLoaded: PropTypes.bool,
   loadProfile: PropTypes.func,
   saveProfile: PropTypes.func,
   setTitle: PropTypes.func,
@@ -58,12 +59,12 @@ ProfilePage.propTypes = {
 
 export default compose(
   BlankLayout,
+  // LoginRequired,
+  // AdminLayout,
   connect(
-    state => {
-      return {
-        isLoading: state.common.isLoading.default,
-      }
-    },
+    state => ({
+      profileLoaded: state.common.request.loadProfile,
+    }),
     dispatch => ({
       // set page title
       setTitle: title => dispatch(setTitle(title)),

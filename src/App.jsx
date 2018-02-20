@@ -10,7 +10,7 @@ import store, { history } from './store'
 // import PostDetailPage from './blog/pages/PostDetailPage'
 // import NotFoundPage from './admin/pages/NotFoundPage'
 import LoginPage from './admin/login/components/LoginPage'
-// import ProfilePage from './admin/pages/ProfilePage'
+import ProfilePage from './admin/profile/components/ProfilePage'
 
 const App = () => (
   <Provider store={store}>
@@ -20,7 +20,7 @@ const App = () => (
         {/* <Route path="/post/:id" component={PostDetailPage} /> */}
         {/* <Route path="/admin" component={ProfilePage} exact /> */}
         <Route path="/admin/login" component={LoginPage} />
-        {/* <Route path="/admin/profile" component={ProfilePage} /> */}
+        <Route path="/admin/profile" component={ProfilePage} />
         {/* <Route path="/admin/posts" component={PostListPage} exact /> */}
         {/* <Route path="/admin/posts/edit/:id" component={PostEditPage} /> */}
         {/* <Route path="/admin/posts/add" component={PostEditPage} /> */}

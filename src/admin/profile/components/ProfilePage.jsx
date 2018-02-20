@@ -5,16 +5,25 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 
 import { setTitle } from '../../../common/actions'
-import { saveProfile, loadProfile } from './actions'
+import { saveProfile, loadProfile } from '../actions'
 import Spinner from '../../../common/widgets/Spinner'
 import ProfileForm from './ProfileForm'
 import BlankLayout from '../../layouts/BlankLayout'
 
 class ProfilePage extends Component {
 
-  componentDidMount() {
+  state = {
+    initialValues: {}
+  }
+
+  async componentDidMount() {
     this.props.setTitle('Your profile settings')
-    // this.props.loadProfile()
+    try {
+      var response = await this.props.loadProfile()
+      this.setState({
+        initialValues: response.data
+      })
+    } catch (error) { }
   }
 
   onSubmit = async data => {
@@ -32,9 +41,9 @@ class ProfilePage extends Component {
     const { isLoading } = this.props
     return (
       <div>
-        {isLoading ?
+        {isLoading || isLoading === undefined ?
           <Spinner /> :
-          <ProfileForm onSubmit={this.onSubmit} />}
+          <ProfileForm onSubmit={this.onSubmit} initialValues={this.state.initialValues} />}
       </div>
     )
   }

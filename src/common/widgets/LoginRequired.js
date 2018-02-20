@@ -4,22 +4,22 @@ import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { validateIdentity, getComponentName } from '../../common/helpers'
 
-function LoginRequired(ProtectedComponent) {
-
+const LoginRequired = loginUrl => ProtectedComponent => {
   var Protector = props => {
     const { identity, ...passthroughProps } = props
 
     return validateIdentity(identity) ?
       <ProtectedComponent {...passthroughProps} /> :
-      (<Redirect to={{
-        pathname: '/admin/login',
+      <Redirect to={{
+        pathname: loginUrl,
         state: { from: props.location }
-      }}/>)
+      }} />
   }
 
   Protector.displayName = `LoginRequired(${getComponentName(ProtectedComponent)})`
   Protector.propTypes = {
     identity: PropTypes.object,
+    location: PropTypes.object,
   }
   return connect(mapStateToProps)(Protector)
 }

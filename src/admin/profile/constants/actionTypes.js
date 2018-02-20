@@ -1,0 +1,2 @@
+export const LOAD_PROFILE = 'ADM/LOAD_PROFILE'
+export const SAVE_PROFILE = 'ADM/SAVE_PROFILE'

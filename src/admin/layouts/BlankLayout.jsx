@@ -6,7 +6,7 @@ import React, { Component } from 'react'
 import { compose } from 'redux'
 
 import withErrorBoundary from '../../common/widgets/withErrorBoundary'
-import ErrorPage from '../pages/ErrorPage'
+import ErrorPage from './ErrorPage'
 import Alert from '../../common/widgets/Alert'
 
 function withBlankLayout(WrappedComponent) {

@@ -1,15 +1,13 @@
-import 'bootstrap/dist/css/bootstrap.css'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { SubmissionError } from 'redux-form'
+import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 
 import { login } from '../actions'
 import LoginForm from './LoginForm'
 import BlankLayout from '../../layouts/BlankLayout'
-// import { Redirect } from 'react-router-dom'
-// import { getObjectValue } from '../../common/helpers'
 
 class LoginPage extends Component {
   state = {
@@ -33,14 +31,16 @@ class LoginPage extends Component {
   }
 
   render() {
-    return (
+    const { from: returnUrl } = this.props.location.state || { from: { pathname: '/admin/profile' } }
+    return this.state.isAuthenticated ?
+      <Redirect to={returnUrl} /> :
       <LoginForm onSubmit={this.onSubmit} initialValues={this.state.data} />
-    )
   }
 }
 
 LoginPage.propTypes = {
   login: PropTypes.func,
+  location: PropTypes.object,
 }
 
 export default compose(

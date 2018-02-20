@@ -4,7 +4,7 @@ import Raven from '../../common/sentry'
 
 class ErrorPage extends Component {
   componentDidMount() {
-    this.props.layout.setTitle('Error')
+    this.props.setTitle('Error')
   }
 
   render() {
@@ -17,7 +17,7 @@ class ErrorPage extends Component {
 ErrorPage.propTypes = {
   error: PropTypes.object,
   info: PropTypes.object,
-  layout: PropTypes.instanceOf(Component),
+  setTitle: PropTypes.func,
 }
 
 export default ErrorPage

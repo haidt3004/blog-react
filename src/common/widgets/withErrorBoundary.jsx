@@ -28,7 +28,7 @@ const withErrorBoundary = ErrorPage => WrappedComponent => {
     }
   }
 
-  ErrorBoundary.displayName = `ErrorBoundary(${getComponentName(WrappedComponent)})`
+  ErrorBoundary.displayName = `withErrorBoundary(${getComponentName(WrappedComponent)})`
   return ErrorBoundary
 }
 

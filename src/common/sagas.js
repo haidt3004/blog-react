@@ -1,8 +1,8 @@
-import { takeEvery, takeLatest, all, put } from 'redux-saga/effects'
+import { takeEvery, takeLatest, put } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
 
 import * as actionTypes from './constants/actionTypes'
-import { ALERT_AUTO_HIDE_DURATION } from './constants/params'
+import { ALERT_DISPLAY_DURATION } from './constants/params'
 import { setIdentity, clearAlert } from './actions'
 import { setAccessToken } from './http'
 import {
@@ -10,44 +10,34 @@ import {
   loadIdentity as loadIdentityFromLocalStorage
 } from './helpers'
 
-function* saveIdentitySaga() {
-  yield takeEvery(actionTypes.SAVE_IDENTITY, function* (action) {
-    var identity = action.payload
+function* saveIdentity(action) {
+  var identity = action.payload
+  yield put(setIdentity(identity))
+  saveIdentityToLocalStorage(identity)
+  setAccessToken(identity.token.value)
+}
+
+function* loadIdentity() {
+  var identity = loadIdentityFromLocalStorage()
+  if (identity) {
     yield put(setIdentity(identity))
-    saveIdentityToLocalStorage(identity)
     setAccessToken(identity.token.value)
-  })
+  }
 }
 
-function* loadIdentitySaga() {
-  yield takeEvery(actionTypes.LOAD_IDENTITY, function* () {
-    var identity = loadIdentityFromLocalStorage()
-    if (identity) {
-      yield put(setIdentity(identity))
-      setAccessToken(identity.token.value)
-    }
-  })
+function clearIdentity() {
+  saveIdentityToLocalStorage(false)
+  setAccessToken(false)
 }
 
-function* clearIdentitySaga() {
-  yield takeEvery(actionTypes.CLEAR_IDENTITY, function () {
-    saveIdentityToLocalStorage(false)
-    setAccessToken(false)
-  })
-}
-
-function* alertSaga() {
-  yield takeLatest([actionTypes.SET_ERROR, actionTypes.SET_SUCCESS], function* () {
-    yield delay(ALERT_AUTO_HIDE_DURATION)
-    yield put(clearAlert())
-  })
+function* autoHideAlert() {
+  yield delay(ALERT_DISPLAY_DURATION)
+  yield put(clearAlert())
 }
 
 export default function* commonSaga() {
-  yield all([
-    saveIdentitySaga(),
-    loadIdentitySaga(),
-    clearIdentitySaga(),
-    alertSaga(),
-  ])
+  yield takeEvery(actionTypes.SAVE_IDENTITY, saveIdentity)
+  yield takeEvery(actionTypes.LOAD_IDENTITY, loadIdentity)
+  yield takeEvery(actionTypes.CLEAR_IDENTITY, clearIdentity)
+  yield takeLatest([actionTypes.SET_ERROR, actionTypes.SET_SUCCESS], autoHideAlert)
 }

@@ -21,6 +21,10 @@ module.exports = {
       favicon: './src/favicon.ico',
       template: './src/index.html'
     }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery'
+    }),
     // Fix import momentjs library
     new webpack.IgnorePlugin(/\.\/locale$/),
   ],

@@ -8,7 +8,7 @@ import { setTitle } from '../../../common/actions'
 import { saveProfile, loadProfile } from '../actions'
 import Spinner from '../../../common/widgets/Spinner'
 import ProfileForm from './ProfileForm'
-import BlankLayout from '../../layouts/BlankLayout'
+import AdminLayout from '../../layouts/AdminLayout'
 
 class ProfilePage extends Component {
 
@@ -58,7 +58,7 @@ ProfilePage.propTypes = {
 }
 
 export default compose(
-  BlankLayout,
+  AdminLayout,
   // LoginRequired,
   // AdminLayout,
   connect(

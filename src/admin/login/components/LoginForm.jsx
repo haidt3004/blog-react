@@ -6,22 +6,24 @@ import InputField from '../../../common/widgets/form/InputField'
 import CheckboxField from '../../../common/widgets/form/CheckboxField'
 import SubmitButton from '../../../common/widgets/form/SubmitButton'
 
-class LoginForm extends Component {
-
-  render() {
-    const { handleSubmit, submitting } = this.props
-    return (
-      <form onSubmit={handleSubmit}>
-        <Field name="loginId" component={InputField} type="text" label="Username" />
-        <Field name="password" component={InputField} type="password" label="Password" />
-        <Field name="remember" component={CheckboxField} label="Remember me" />
-        <div className="form-group">
-          <SubmitButton type="submit" className="btn btn-primary" submitting={submitting}>Login</SubmitButton>
-        </div>
-      </form>
-    )
-  }
-}
+const LoginForm = ({ handleSubmit, submitting }) => (
+  <form onSubmit={handleSubmit}>
+    <h1>Admin Login</h1>
+    <div className="text-left">
+      <Field name="loginId" component={InputField} type="text" placeholder="Username" />
+    </div>
+    <div className="text-left">
+      <Field name="password" component={InputField} type="password" placeholder="Password" />
+    </div>
+    <div className="text-left">
+      <Field name="remember" component={CheckboxField} label="Remember me" />
+    </div>
+    <div>
+      <SubmitButton type="submit" className="btn btn-default submit" submitting={submitting} submitLabel="Logging...">Log in</SubmitButton>
+      <a className="reset_pass" href="#">Lost your password?</a>
+    </div>
+  </form>
+)
 
 LoginForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,

@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import ErrorList from './ErrorList'
 
 const InputField = props => {
-  const { input, meta: { touched, error, valid }, label, type } = props
+  const { input, meta: { touched, error, valid }, label, type, ...otherProps } = props
   const className = touched && error ? 'has-error' : ''
   return (
     <div className={`form-group ${className}`}>
-      <label className="control-label">{label}</label>
-      <input {...input} className="form-control" type={type} />
+      {label && <label className="control-label">{label}</label>}
+      <input {...input} {...otherProps} className="form-control" type={type} />
       {touched && <ErrorList errors={error} />}
     </div>
   )

@@ -1,1 +1,6 @@
 /* coming soon... */
+.login_content form input[type=text],
+.login_content form input[type=email],
+.login_content form input[type=password] {
+  margin-bottom: 10px !important;
+}

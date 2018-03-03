@@ -1,5 +1,6 @@
 import http from './http'
 import { put, call } from 'redux-saga/effects'
+import validate from 'validate.js'
 
 import {
   requestStart,
@@ -7,7 +8,7 @@ import {
   setError,
   clearIdentity
 } from './actions'
-import validate from 'validate.js'
+import { APP_NAME } from './constants/params'
 
 /**
  * Get value of nested property by path
@@ -41,15 +42,17 @@ export function validateIdentity(identity) {
 }
 
 export function saveItemToStorage(name, value) {
+  var itemName = `${APP_NAME}_${name}`
   if (value) {
-    window.localStorage.setItem(name, JSON.stringify(value))
+    window.localStorage.setItem(itemName, JSON.stringify(value))
   } else {
-    window.localStorage.removeItem(name)
+    window.localStorage.removeItem(itemName)
   }
 }
 
 export function loadItemFromStorage(name) {
-  var str = window.localStorage.getItem(name)
+  var itemName = `${APP_NAME}_${name}`
+  var str = window.localStorage.getItem(itemName)
   return str === null ? null : JSON.parse(str)
 }
 

@@ -3,44 +3,47 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import PropTypes from 'prop-types'
 
-import * as actions from '../actions'
-import LoginRequired from '../../../admin/widgets/LoginRequired'
-import AdminLayout from '../../../admin/widgets/AdminLayout'
-import Spinner from '../../../common/widgets/Spinner'
-import PostForm from '../widgets/PostForm'
+import actions from '../actions'
+import { setTitle } from '../../../../common/actions'
+import AdminLayout from '../../../../admin/hoc/AdminLayout'
+import Spinner from '../../../../common/widgets/Spinner'
+import PostForm from './PostForm'
 
 class PostEditPage extends Component {
 
-  constructor(props) {
-    super(props)
-    this.onSubmit = this.onSubmit.bind(this)
+  state = {
+    initialFormValues: {}
   }
 
-  componentDidMount() {
-    const { layout, loadPost, match, setPost } = this.props
+  async componentDidMount() {
+    const { setTitle, loadPost, match, setPost } = this.props
     var postId = match.params.id
     if (postId) {
-      layout.setTitle('Edit Post')
-      loadPost(postId)
+      setTitle('Edit Post')
+      try {
+        var response = await loadPost(postId)
+        this.setState({
+          initialFormValues: response.data
+        })
+      } catch (error) { }
     } else {
-      layout.setTitle('Add Post')
-      setPost({})
+      setTitle('Add Post')
     }
   }
 
-  onSubmit(data) {
+  onSubmit = data => {
     const { savePost, match } = this.props
     var postId = match.params.id
     savePost(data, postId)
   }
 
   render() {
-    const { post, errors, isLoading, setPost } = this.props
+    const { post, errors, postLoaded, setPost } = this.props
     return (
       <div>
-        { isLoading ?
-          <Spinner/> :
-          <PostForm data={post} errors={errors} onSubmit={this.onSubmit} onChange={setPost} />
+        {postLoaded ?
+          <PostForm onSubmit={this.onSubmit} initialValues={this.state.initialValues} /> :
+          <Spinner />
         }
       </div>
     )
@@ -48,34 +51,25 @@ class PostEditPage extends Component {
 }
 
 PostEditPage.propTypes = {
-  layout: PropTypes.instanceOf(Component),
+  postLoaded: PropTypes.bool,
   loadPost: PropTypes.func,
-  setPost: PropTypes.func,
-  savePost: PropTypes.func,
-  isLoading: PropTypes.bool,
-  post: PropTypes.object,
-  errors: PropTypes.object,
+  // setPost: PropTypes.func,
+  // savePost: PropTypes.func,
   match: PropTypes.object,
 }
 
-const mapStateToProps = state => {
-  return {
-    isLoading: state.common.isLoading.loadPost,
-    post: state.blog.admin.postEdit.post,
-    errors: state.blog.admin.postEdit.errors,
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    loadPost: id => dispatch(actions.loadPost(id)),
-    setPost: data => dispatch(actions.setPost(data)),
-    savePost: (data, id) => dispatch(actions.savePost(data, id)),
-  }
-}
-
 export default compose(
-  LoginRequired,
   AdminLayout,
-  connect(mapStateToProps, mapDispatchToProps)
+  connect(
+    state => ({
+      postLoaded: state.common.request.loadPost,
+      // post: state.blog.admin.postEdit.post,
+    }),
+    dispatch => ({
+      loadPost: id => dispatch(actions.loadPost(id)),
+      setTitle: title => dispatch(setTitle(title)),
+      // setPost: data => dispatch(actions.setPost(data)),
+      // savePost: (data, id) => dispatch(actions.savePost(data, id)),
+    })
+  )
 )(PostEditPage)

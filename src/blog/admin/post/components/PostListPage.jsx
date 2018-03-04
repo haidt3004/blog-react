@@ -4,18 +4,18 @@ import { compose } from 'redux'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import AdminLayout from '../../../../admin/hoc/AdminLayout'
-import { setTitle } from '../../../../common/actions'
 import { loadPosts, deletePost } from '../actions'
+import { setTitle } from '../../../../common/actions'
+import AdminLayout from '../../../../admin/hoc/AdminLayout'
 import Spinner from '../../../../common/widgets/Spinner'
 
 class PostListPage extends Component {
 
-  onDelete(post) {
+  async onDelete(post) {
     const { deletePost, loadPosts } = this.props
     if (confirm(`Are you sure to delete "${post.title}"?`)) {
-      deletePost(post)
-        .then(() => loadPosts())
+      await deletePost(post)
+      loadPosts()
     }
   }
 
@@ -46,7 +46,8 @@ class PostListPage extends Component {
                       <th scope="row">{index + 1}</th>
                       <td>{post.title}</td>
                       <td>
-                        <button className="btn btn-danger btn-sm" title="Delete">
+                        <button className="btn btn-danger btn-sm" title="Delete"
+                          onClick={() => this.onDelete(post)}>
                           <i className="fa fa-trash"></i>
                         </button>
                         <Link to={`/admin/posts/${post._id}`} className="btn btn-info btn-sm" title="Edit">

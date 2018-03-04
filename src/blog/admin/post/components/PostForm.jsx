@@ -1,35 +1,22 @@
-import React from 'react'
-import styles from '../../../admin/widgets/AdminLayout.scss'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Field, reduxForm } from 'redux-form'
 
 import { Link } from 'react-router-dom'
-import Form from '../../../common/widgets/mt-form/Form'
-import TextField from '../../../common/widgets/mt-form/TextField'
-import RaisedButton from 'material-ui/RaisedButton'
+import { validatePostData as validate } from '../helpers'
+import InputField from '../../../../common/widgets/form/InputField'
+import SubmitButton from '../../../../common/widgets/form/SubmitButton'
 
-const PostForm = ({ onSubmit, data, ...otherProps }) => (
-  <Form data={data} {...otherProps}>
-    <TextField
-      hintText="Title"
-      floatingLabelText="Title"
-      fullWidth={true}
-      field="title"
-    />
-    <TextField
-      hintText="Content"
-      floatingLabelText="Content"
-      fullWidth={true}
-      multiLine={true}
-      field="content"
-      rows={5}
-    />
-    <div className={styles.mt}>
-      <RaisedButton label="Save" primary={true} onClick={()=> onSubmit(data)}/>
+const PostForm = ({ handleSubmit, submitting }) => (
+  <form onSubmit={handleSubmit}>
+    <Field name="title" component={InputField} type="text" label="Title" />
+    <Field name="content" component={InputField} type="email" label="Content" />
+    <div className="form-group">
+      <SubmitButton type="submit" className="btn btn-primary" submitting={submitting} submitLabel="Saving...">Save</SubmitButton>
       &nbsp;
-      <Link to="/admin/posts">
-        <RaisedButton label="Cancel" primary={false}/>
-      </Link>
+      <Link to="/admin/posts" clasName="btn btn-default">Cancel</Link>
     </div>
-  </Form>
+  </form>
 )
 
 export default PostForm

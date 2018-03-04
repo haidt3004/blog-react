@@ -15,6 +15,14 @@ function postList(state = initialPostListState, action) {
   }
 }
 
+function postEdit(state = {}, action) {
+  switch (action.type) {
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
-  postList
+  postList,
+  postEdit
 })

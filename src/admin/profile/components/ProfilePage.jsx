@@ -13,15 +13,16 @@ import AdminLayout from '../../hoc/AdminLayout'
 class ProfilePage extends Component {
 
   state = {
-    initialValues: {}
+    initialFormValues: {}
   }
 
   async componentDidMount() {
-    this.props.setTitle('Your profile settings')
+    const { setTitle, loadProfile } = this.props
+    setTitle('Your profile settings')
     try {
-      var response = await this.props.loadProfile()
+      var response = await loadProfile()
       this.setState({
-        initialValues: response.data
+        initialFormValues: response.data
       })
     } catch (error) { }
   }
@@ -43,7 +44,7 @@ class ProfilePage extends Component {
       <div>
         {profileLoaded ?
           (<div className="x_panel">
-            <ProfileForm onSubmit={this.onSubmit} initialValues={this.state.initialValues} />
+            <ProfileForm onSubmit={this.onSubmit} initialValues={this.state.initialFormValues} />
           </div>) :
           <Spinner />
         }

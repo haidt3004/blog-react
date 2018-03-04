@@ -65,8 +65,18 @@ function identity(state = initialIdentity, action) {
   }
 }
 
+function title(state = '', action) {
+  switch (action.type) {
+    case actionTypes.SET_TITLE:
+      return action.payload
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
   identity,
   alert,
   request,
+  title
 })

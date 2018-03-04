@@ -16,6 +16,7 @@ class ProfileForm extends Component {
           <Field name="username" component={InputField} type="text" label="Username" />
           <Field name="email" component={InputField} type="email" label="Email" />
         </fieldset>
+        <br />
         <fieldset>
           <legend>Change password</legend>
           <Field name="currentPassword" component={InputField} type="password" label="Old Password" />
@@ -23,7 +24,7 @@ class ProfileForm extends Component {
           <Field name="repeatPassword" component={InputField} type="password" label="Repeat Password" />
         </fieldset>
         <div className="form-group">
-          <SubmitButton type="submit" className="btn btn-primary" submitting={submitting}>Save</SubmitButton>
+          <SubmitButton type="submit" className="btn btn-primary" submitting={submitting} submitLabel="Saving...">Save</SubmitButton>
         </div>
       </form>
     )

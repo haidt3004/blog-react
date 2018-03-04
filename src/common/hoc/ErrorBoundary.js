@@ -2,13 +2,12 @@ import React, { Component } from 'react'
 import { getComponentName } from '../helpers'
 import Raven from '../../common/sentry'
 
-const withErrorBoundary = ErrorPage => WrappedComponent => {
-  class ErrorBoundary extends Component {
-    constructor(props) {
-      super(props)
-      this.state = {
-        hasError: false
-      }
+const ErrorBoundary = ErrorPage => WrappedComponent => {
+
+  class Wrapper extends Component {
+
+    state = {
+      hasError: false
     }
 
     componentDidCatch(error, info) {
@@ -28,8 +27,8 @@ const withErrorBoundary = ErrorPage => WrappedComponent => {
     }
   }
 
-  ErrorBoundary.displayName = `withErrorBoundary(${getComponentName(WrappedComponent)})`
-  return ErrorBoundary
+  Wrapper.displayName = `ErrorBoundary(${getComponentName(WrappedComponent)})`
+  return Wrapper
 }
 
-export default withErrorBoundary
+export default ErrorBoundary

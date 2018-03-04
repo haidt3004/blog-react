@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { clearAlert } from '../actions'
-import { Alert as BsAlert } from 'react-bootstrap'
 
 class Alert extends Component {
 
@@ -10,9 +9,12 @@ class Alert extends Component {
     const { message, onDismiss, type } = this.props
     const style = type == 'success' ? 'success' : 'danger'
     return message.length > 0 ? (
-      <BsAlert bsStyle={style} onDismiss={onDismiss}>
+      <div className={`alert alert-${style} alert-dismissible`} role="alert">
+        <button type="button" className="close" onClick={onDismiss}>
+          <span aria-hidden="true">&times;</span>
+        </button>
         {message}
-      </BsAlert>
+      </div>
     ) : null
   }
 }

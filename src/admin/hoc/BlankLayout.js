@@ -1,18 +1,19 @@
-import 'font-awesome/css/font-awesome.min.css'
-import 'bootstrap/dist/css/bootstrap.css'
-import 'gentelella/build/css/custom.min.css'
-import './BlankLayout.css'
-
 import React, { Component } from 'react'
 import { compose } from 'redux'
 import $ from 'jquery'
-import withErrorBoundary from '../../common/widgets/withErrorBoundary'
-import ErrorPage from './ErrorPage'
+
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.min.js'
+import 'font-awesome/css/font-awesome.min.css'
+import 'gentelella/build/css/custom.min.css'
+import './BlankLayout.css'
 import Alert from '../../common/widgets/Alert'
+import ErrorBoundary from '../../common/hoc/ErrorBoundary'
+import ErrorPage from '../components/ErrorPage'
 
-function withBlankLayout(WrappedComponent) {
+function BlankLayout(WrappedComponent) {
 
-  class BlankLayout extends Component {
+  class Wrapper extends Component {
 
     componentDidMount() {
       $('body').addClass('login')
@@ -38,11 +39,11 @@ function withBlankLayout(WrappedComponent) {
     }
   }
 
-  BlankLayout.displayName = 'BlankLayout'
-  return BlankLayout
+  Wrapper.displayName = 'BlankLayout'
+  return Wrapper
 }
 
 export default compose(
-  withBlankLayout,
-  withErrorBoundary(ErrorPage)
+  BlankLayout,
+  ErrorBoundary(ErrorPage)
 )

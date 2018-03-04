@@ -8,7 +8,7 @@ import { setTitle } from '../../../common/actions'
 import { saveProfile, loadProfile } from '../actions'
 import Spinner from '../../../common/widgets/Spinner'
 import ProfileForm from './ProfileForm'
-import AdminLayout from '../../layouts/AdminLayout'
+import AdminLayout from '../../hoc/AdminLayout'
 
 class ProfilePage extends Component {
 
@@ -59,8 +59,6 @@ ProfilePage.propTypes = {
 
 export default compose(
   AdminLayout,
-  // LoginRequired,
-  // AdminLayout,
   connect(
     state => ({
       profileLoaded: state.common.request.loadProfile,

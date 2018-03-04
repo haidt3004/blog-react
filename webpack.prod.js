@@ -8,7 +8,7 @@ module.exports = merge(common, {
   devtool: 'source-map',
   module: {
     rules: [
-      // load css files
+      // Extract css from the bundle into a separate file.
       {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
@@ -22,39 +22,18 @@ module.exports = merge(common, {
             }
           ]
         })
-      },
-      // load scss (sass) files in app (with css module enabled)
-      {
-        test: /\.scss$/,
-        exclude: /node_modules/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              // resolve imported css
-              loader: 'css-loader',
-              options: {
-                modules: true,
-                minimize: true,
-              }
-            },
-            {
-              // compiles Sass to CSS
-              loader: 'sass-loader',
-              options: {
-                sourceMap: true
-              }
-            },
-          ]
-        })
-      },
+      }
     ]
   },
   plugins: [
     new UglifyJSPlugin({
       sourceMap: true
     }),
+
+    // Extract css from the bundle into a separate file.
     new ExtractTextPlugin('styles.css'),
+
+    // define environment variables for production
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
       'process.env.SENTRY_DNS': JSON.stringify('https://1f4bf702246d45d28e4f0d24d17832ca@sentry.io/264486'),

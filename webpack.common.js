@@ -21,6 +21,7 @@ module.exports = {
       favicon: './src/favicon.ico',
       template: './src/index.html'
     }),
+    // Automatically load jQuery instead of having to import or require them everywhere (required for including bootstrap javascript)
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery'
@@ -45,12 +46,12 @@ module.exports = {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
         use: ['file-loader']
       },
-      // load javascript/reactjs in app
+      // load javascript/react components
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-      }
+      },
     ],
   },
 }

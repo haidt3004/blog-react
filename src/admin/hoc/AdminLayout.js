@@ -12,6 +12,7 @@ import ErrorBoundary from '../../common/hoc/ErrorBoundary'
 import ErrorPage from '../components/ErrorPage'
 import Sidebar from './AdminLayout/Sidebar'
 import TopNav from './AdminLayout/TopNav'
+import Alert from '../../common/widgets/Alert'
 
 function AdminLayout(WrappedComponent) {
 
@@ -150,9 +151,8 @@ function AdminLayout(WrappedComponent) {
 
                 <div className="row">
                   <div className="col-md-12 col-sm-12 col-xs-12">
-                    <div className="x_panel">
-                      <WrappedComponent {...passThroughProps} />
-                    </div>
+                    <Alert />
+                    <WrappedComponent {...passThroughProps} />
                   </div>
                 </div>
               </div>
@@ -160,8 +160,7 @@ function AdminLayout(WrappedComponent) {
 
             <footer>
               <div className="pull-right">
-                React Blog - Simple MEARN app by
-                <a href="https://github.com/lamhq">lamhq</a>
+                React Blog - Simple MEARN app by <a href="https://github.com/lamhq">lamhq</a>
               </div>
               <div className="clearfix"></div>
             </footer>

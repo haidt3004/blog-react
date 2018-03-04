@@ -42,7 +42,9 @@ class ProfilePage extends Component {
     return (
       <div>
         {profileLoaded ?
-          <ProfileForm onSubmit={this.onSubmit} initialValues={this.state.initialValues} /> :
+          (<div className="x_panel">
+            <ProfileForm onSubmit={this.onSubmit} initialValues={this.state.initialValues} />
+          </div>) :
           <Spinner />
         }
       </div>

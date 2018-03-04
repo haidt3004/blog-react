@@ -136,7 +136,6 @@ function AdminLayout(WrappedComponent) {
               </div>
             </div>
 
-
             <TopNav />
 
             <div className="right_col" role="main">
@@ -181,11 +180,11 @@ function AdminLayout(WrappedComponent) {
 
 export default compose(
   LoginRequired('/admin/login'),
-  AdminLayout,
-  ErrorBoundary(ErrorPage),
   connect(
     state => ({
       title: state.common.title,
     })
-  )
+  ),
+  AdminLayout,
+  ErrorBoundary(ErrorPage)
 )

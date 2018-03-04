@@ -5,7 +5,7 @@ import { ConnectedRouter } from 'react-router-redux'
 import store, { history } from './store'
 
 // import HomePage from './blog/pages/HomePage'
-// import PostListPage from './blog/admin/pages/PostListPage'
+import PostListPage from './blog/admin/post/components/PostListPage'
 // import PostEditPage from './blog/admin/pages/PostEditPage'
 // import PostDetailPage from './blog/pages/PostDetailPage'
 // import NotFoundPage from './admin/pages/NotFoundPage'
@@ -21,7 +21,7 @@ const App = () => (
         {/* <Route path="/admin" component={ProfilePage} exact /> */}
         <Route path="/admin/login" component={LoginPage} />
         <Route path="/admin/profile" component={ProfilePage} />
-        {/* <Route path="/admin/posts" component={PostListPage} exact /> */}
+        <Route path="/admin/posts" component={PostListPage} exact />
         {/* <Route path="/admin/posts/edit/:id" component={PostEditPage} /> */}
         {/* <Route path="/admin/posts/add" component={PostEditPage} /> */}
         {/* <Route path="/admin" component={NotFoundPage} /> */}

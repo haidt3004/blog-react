@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const SideBar = props => (
   <div id="sidebar-menu" className="main_menu_side hidden-print main_menu">
@@ -7,18 +8,12 @@ const SideBar = props => (
       <ul className="nav side-menu">
         <li>
           <a>
-            <i className="fa fa-home"></i> Home
+            <i className="fa fa-edit"></i> Content
             <span className="fa fa-chevron-down"></span>
           </a>
           <ul className="nav child_menu">
             <li>
-              <a href="index.html">Dashboard</a>
-            </li>
-            <li>
-              <a href="index2.html">Dashboard2</a>
-            </li>
-            <li>
-              <a href="index3.html">Dashboard3</a>
+              <Link to={`/admin/posts`}>Post</Link>
             </li>
           </ul>
         </li>

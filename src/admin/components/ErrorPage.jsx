@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+
 import Raven from '../../common/sentry'
+import { setTitle } from '../../common/actions'
 
 class ErrorPage extends Component {
+
   componentDidMount() {
     this.props.setTitle('Error')
   }
@@ -20,4 +24,9 @@ ErrorPage.propTypes = {
   setTitle: PropTypes.func,
 }
 
-export default ErrorPage
+export default connect(
+  undefined,
+  dispatch => ({
+    setTitle: title => dispatch(setTitle(title)),
+  })
+)(ErrorPage)

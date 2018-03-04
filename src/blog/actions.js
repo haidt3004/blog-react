@@ -1,4 +1,3 @@
-import { createAction } from 'redux-actions'
 import * as common from '../common/actions'
 
 export const setPosts = createAction('BLG/SET_POSTS')

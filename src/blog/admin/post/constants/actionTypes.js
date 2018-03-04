@@ -1,0 +1,3 @@
+export const LOAD_POSTS = 'BLOG/ADM/LOAD_POSTS'
+export const SET_POSTS = 'BLOG/ADM/SET_POSTS'
+export const DELETE_POST = 'BLOG/ADM/DELETE_POST'

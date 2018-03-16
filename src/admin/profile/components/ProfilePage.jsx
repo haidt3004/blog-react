@@ -29,7 +29,10 @@ class ProfilePage extends Component {
 
   onSubmit = async data => {
     try {
-      await this.props.saveProfile(data)
+      var response = await this.props.saveProfile(data)
+      this.setState({
+        initialFormValues: response.data
+      })
     } catch (error) {
       throw new SubmissionError({
         ...error.errors,

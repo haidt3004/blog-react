@@ -8,7 +8,6 @@ import { compose } from 'redux'
 import { login } from '../actions'
 import LoginForm from './LoginForm'
 import BlankLayout from '../../hoc/BlankLayout'
-import Alert from '../../../common/widgets/Alert'
 
 class LoginPage extends Component {
   state = {

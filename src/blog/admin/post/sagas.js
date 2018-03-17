@@ -1,8 +1,9 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
+import { push } from 'react-router-redux'
 
 import { request } from '../../../common/helpers'
 import { setSuccess } from '../../../common/actions'
-import { LOAD_POSTS, DELETE_POST, LOAD_POST } from './constants/actionTypes'
+import { LOAD_POSTS, DELETE_POST, LOAD_POST, SAVE_POST } from './constants/actionTypes'
 import { setPosts } from './actions'
 
 function* loadPosts(action) {
@@ -40,8 +41,24 @@ function* loadPost(action) {
     var response = yield call(request, {
       url: `admin/posts/${id}`,
       method: 'get',
-      loadingState: 'loadPost'
+      requestName: 'loadPost'
     })
+    resolve(response)
+  } catch (error) {
+    reject(error)
+  }
+}
+
+function* savePost(action) {
+  const { resolve, reject, payload: { id, ...data } } = action
+  try {
+    var response = yield call(request, {
+      url: id ? `admin/posts/${id}` : 'admin/posts',
+      method: id ? 'put' : 'post',
+      data
+    })
+    yield put(setSuccess('Data has been saved successfully'))
+    yield put(push('/admin/posts'))
     resolve(response)
   } catch (error) {
     reject(error)
@@ -52,4 +69,5 @@ export default function* postSaga() {
   yield takeLatest(LOAD_POSTS, loadPosts)
   yield takeLatest(DELETE_POST, deletePost)
   yield takeLatest(LOAD_POST, loadPost)
+  yield takeLatest(SAVE_POST, savePost)
 }

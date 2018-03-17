@@ -28,7 +28,7 @@ class PostListPage extends Component {
     const { posts, postsLoaded } = this.props
     return (
       <div>
-        <p><Link to="/admin/post/add" className="btn btn-success">Add</Link></p>
+        <p><Link to="/admin/posts/add" className="btn btn-success">Add</Link></p>
         {postsLoaded ? (
           <div className="x_panel">
             <div className="x_content">
@@ -46,13 +46,13 @@ class PostListPage extends Component {
                       <th scope="row">{index + 1}</th>
                       <td>{post.title}</td>
                       <td>
+                        <Link to={`/admin/posts/edit/${post._id}`} className="btn btn-info btn-sm" title="Edit">
+                          <i className="fa fa-edit"></i>
+                        </Link>
                         <button className="btn btn-danger btn-sm" title="Delete"
                           onClick={() => this.onDelete(post)}>
                           <i className="fa fa-trash"></i>
                         </button>
-                        <Link to={`/admin/posts/${post._id}`} className="btn btn-info btn-sm" title="Edit">
-                          <i className="fa fa-edit"></i>
-                        </Link>
                       </td>
                     </tr>
                   ))}
@@ -69,6 +69,9 @@ class PostListPage extends Component {
 PostListPage.propTypes = {
   loadPosts: PropTypes.func,
   deletePost: PropTypes.func,
+  setTitle: PropTypes.func,
+  posts: PropTypes.array,
+  postsLoaded: PropTypes.bool,
 }
 
 export default compose(

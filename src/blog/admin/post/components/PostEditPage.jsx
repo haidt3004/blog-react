@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
+import { SubmissionError } from 'redux-form'
 import PropTypes from 'prop-types'
 
-import actions from '../actions'
+import { loadPost, savePost } from '../actions'
 import { setTitle } from '../../../../common/actions'
 import AdminLayout from '../../../../admin/hoc/AdminLayout'
 import Spinner from '../../../../common/widgets/Spinner'
@@ -16,7 +17,7 @@ class PostEditPage extends Component {
   }
 
   async componentDidMount() {
-    const { setTitle, loadPost, match, setPost } = this.props
+    const { setTitle, loadPost, match } = this.props
     var postId = match.params.id
     if (postId) {
       setTitle('Edit Post')
@@ -31,18 +32,26 @@ class PostEditPage extends Component {
     }
   }
 
-  onSubmit = data => {
+  onSubmit = async data => {
     const { savePost, match } = this.props
     var postId = match.params.id
-    savePost(data, postId)
+    try {
+      await savePost(data, postId)
+    } catch (error) {
+      throw new SubmissionError({
+        ...error.errors,
+        _error: error.message
+      })
+    }
+
   }
 
   render() {
-    const { post, errors, postLoaded, setPost } = this.props
+    const { postLoaded } = this.props
     return (
       <div>
         {postLoaded ?
-          <PostForm onSubmit={this.onSubmit} initialValues={this.state.initialValues} /> :
+          <PostForm onSubmit={this.onSubmit} initialValues={this.state.initialFormValues} /> :
           <Spinner />
         }
       </div>
@@ -53,8 +62,7 @@ class PostEditPage extends Component {
 PostEditPage.propTypes = {
   postLoaded: PropTypes.bool,
   loadPost: PropTypes.func,
-  // setPost: PropTypes.func,
-  // savePost: PropTypes.func,
+  savePost: PropTypes.func,
   match: PropTypes.object,
 }
 
@@ -63,13 +71,19 @@ export default compose(
   connect(
     state => ({
       postLoaded: state.common.request.loadPost,
-      // post: state.blog.admin.postEdit.post,
     }),
     dispatch => ({
-      loadPost: id => dispatch(actions.loadPost(id)),
+      loadPost: id => {
+        var action = loadPost(id)
+        dispatch(action)
+        return action.promise
+      },
+      savePost: (data, id) => {
+        var action = savePost({ id, ...data })
+        dispatch(action)
+        return action.promise
+      },
       setTitle: title => dispatch(setTitle(title)),
-      // setPost: data => dispatch(actions.setPost(data)),
-      // savePost: (data, id) => dispatch(actions.savePost(data, id)),
     })
   )
 )(PostEditPage)

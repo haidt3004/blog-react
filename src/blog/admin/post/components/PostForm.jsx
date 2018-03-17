@@ -1,22 +1,32 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
 
 import { Link } from 'react-router-dom'
 import { validatePostData as validate } from '../helpers'
 import InputField from '../../../../common/widgets/form/InputField'
+import TextAreaField from '../../../../common/widgets/form/TextAreaField'
 import SubmitButton from '../../../../common/widgets/form/SubmitButton'
 
 const PostForm = ({ handleSubmit, submitting }) => (
   <form onSubmit={handleSubmit}>
     <Field name="title" component={InputField} type="text" label="Title" />
-    <Field name="content" component={InputField} type="email" label="Content" />
+    <Field name="content" component={TextAreaField} type="email" label="Content" rows="8" />
     <div className="form-group">
       <SubmitButton type="submit" className="btn btn-primary" submitting={submitting} submitLabel="Saving...">Save</SubmitButton>
       &nbsp;
-      <Link to="/admin/posts" clasName="btn btn-default">Cancel</Link>
+      <Link to="/admin/posts" className="btn btn-default">Cancel</Link>
     </div>
   </form>
 )
 
-export default PostForm
+PostForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
+}
+
+export default reduxForm({
+  form: 'editPost',
+  validate,
+  enableReinitialize: true
+})(PostForm)

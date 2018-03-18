@@ -12,7 +12,7 @@ import ErrorBoundary from '../../common/hoc/ErrorBoundary'
 import ErrorPage from '../components/ErrorPage'
 import Sidebar from './AdminLayout/Sidebar'
 import TopNav from './AdminLayout/TopNav'
-import Alert from '../../common/widgets/Alert'
+import Alert from '../../common/components/Alert'
 
 function AdminLayout(WrappedComponent) {
 

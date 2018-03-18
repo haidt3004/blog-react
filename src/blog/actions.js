@@ -1,25 +1,5 @@
-import * as common from '../common/actions'
+import { createAsyncAction, createAction } from '../common/helpers'
+import { LOAD_POSTS, SET_POSTS } from './constants/actionTypes'
 
-export const setPosts = createAction('BLG/SET_POSTS')
-export const loadPosts = () => {
-  return dispatch => {
-    return dispatch(common.request({
-      url: 'posts',
-      method: 'get',
-    })).then(response => {
-      dispatch(setPosts(response.data))
-    }).catch(() => null)
-  }
-}
-
-export const setPost = createAction('BLG/SET_POST')
-export const loadPost = id => {
-  return dispatch => {
-    return dispatch(common.request({
-      url: `posts/${id}`,
-      method: 'get',
-    })).then(response => {
-      dispatch(setPost(response.data))
-    }).catch(() => null)
-  }
-}
+export const loadPosts = createAsyncAction(LOAD_POSTS)
+export const setPosts = createAction(SET_POSTS)

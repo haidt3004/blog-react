@@ -8,8 +8,8 @@ import { compose } from 'redux'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import MuiTheme from './mui-theme'
-import withErrorBoundary from '../../common/widgets/withErrorBoundary'
-import Alert from '../../common/widgets/Alert'
+import withErrorBoundary from '../../common/components/withErrorBoundary'
+import Alert from '../../common/components/Alert'
 import ErrorPage from '../pages/ErrorPage'
 
 function withPublicLayout(WrappedComponent) {
@@ -41,14 +41,14 @@ function withPublicLayout(WrappedComponent) {
             <header className={styles.header}>
               <div className="container">
                 <a href="#" className={styles.logo}>
-                  <img src={logo} alt=""/>
+                  <img src={logo} alt="" />
                   <span>React blog</span>
                 </a>
               </div>
             </header>
             <div className={styles.content}>
               <div className="container">
-                <Alert/>
+                <Alert />
                 <WrappedComponent layout={this} {...this.props} />
               </div>
             </div>

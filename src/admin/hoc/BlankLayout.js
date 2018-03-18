@@ -7,7 +7,7 @@ import 'bootstrap/dist/js/bootstrap.min.js'
 import 'font-awesome/css/font-awesome.min.css'
 import 'gentelella/build/css/custom.min.css'
 import './BlankLayout.css'
-import Alert from '../../common/widgets/Alert'
+import Alert from '../../common/components/Alert'
 import ErrorBoundary from '../../common/hoc/ErrorBoundary'
 import ErrorPage from '../components/ErrorPage'
 
@@ -16,11 +16,11 @@ function BlankLayout(WrappedComponent) {
   class Wrapper extends Component {
 
     componentDidMount() {
-      $('body').addClass('login')
+      $('body').addClass('login blank-layout')
     }
 
     componentWillUnmount() {
-      $('body').removeClass('login')
+      $('body').removeClass('login blank-layout')
     }
 
     render() {

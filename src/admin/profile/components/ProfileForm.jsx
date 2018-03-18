@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
 
 import { validateProfileData as validate } from '../helpers'
-import InputField from '../../../common/widgets/form/InputField'
-import SubmitButton from '../../../common/widgets/form/SubmitButton'
+import InputField from '../../../common/components/form/InputField'
+import SubmitButton from '../../../common/components/form/SubmitButton'
 
 const ProfileForm = ({ handleSubmit, submitting }) => (
   <form onSubmit={handleSubmit}>

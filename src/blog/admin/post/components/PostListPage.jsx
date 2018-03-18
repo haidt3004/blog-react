@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 import { loadPosts, deletePost } from '../actions'
 import { setTitle } from '../../../../common/actions'
 import AdminLayout from '../../../../admin/hoc/AdminLayout'
-import Spinner from '../../../../common/widgets/Spinner'
+import Spinner from '../../../../common/components/Spinner'
 
 class PostListPage extends Component {
 

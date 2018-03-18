@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 import * as actions from '../actions'
 import PublicLayout from '../widgets/PublicLayout'
-import Spinner from '../../common/widgets/Spinner'
+import Spinner from '../../common/components/Spinner'
 
 class PostDetailPage extends Component {
 
@@ -19,8 +19,8 @@ class PostDetailPage extends Component {
     const { post, isLoading } = this.props
     return (
       <div>
-        { isLoading ?
-          <Spinner/> : (
+        {isLoading ?
+          <Spinner /> : (
             <div>
               <h1>{post.title}</h1>
               <div>{post.content}</div>

@@ -6,7 +6,7 @@ import { compose } from 'redux'
 
 import { setTitle } from '../../../common/actions'
 import { saveProfile, loadProfile } from '../actions'
-import Spinner from '../../../common/widgets/Spinner'
+import Spinner from '../../../common/components/Spinner'
 import ProfileForm from './ProfileForm'
 import AdminLayout from '../../hoc/AdminLayout'
 

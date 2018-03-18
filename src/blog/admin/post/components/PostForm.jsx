@@ -4,9 +4,9 @@ import { Field, reduxForm } from 'redux-form'
 
 import { Link } from 'react-router-dom'
 import { validatePostData as validate } from '../helpers'
-import InputField from '../../../../common/widgets/form/InputField'
-import TextAreaField from '../../../../common/widgets/form/TextAreaField'
-import SubmitButton from '../../../../common/widgets/form/SubmitButton'
+import InputField from '../../../../common/components/form/InputField'
+import TextAreaField from '../../../../common/components/form/TextAreaField'
+import SubmitButton from '../../../../common/components/form/SubmitButton'
 
 const PostForm = ({ handleSubmit, submitting }) => (
   <form onSubmit={handleSubmit}>

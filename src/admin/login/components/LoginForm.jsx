@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
 import { validateLoginData as validate } from '../helpers'
-import InputField from '../../../common/widgets/form/InputField'
-import CheckboxField from '../../../common/widgets/form/CheckboxField'
-import SubmitButton from '../../../common/widgets/form/SubmitButton'
+import InputField from '../../../common/components/form/InputField'
+import CheckboxField from '../../../common/components/form/CheckboxField'
+import SubmitButton from '../../../common/components/form/SubmitButton'
 
 const LoginForm = ({ handleSubmit, submitting }) => (
   <form onSubmit={handleSubmit}>
